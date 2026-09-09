@@ -1,18 +1,42 @@
 using UnityEngine;
 
+
+[System.Serializable]
+public class Wheel
+{
+    public WheelCollider collider;
+    public Transform transform;
+    public bool isMotor; //駆動輪かどうか
+    public bool isSteer;// ステアリング輪かどうか
+}
+[RequireComponent(typeof(Rigidbody))]
 public class WheelsController : MonoBehaviour
 {
     [Header("ホイール設定")]
     [SerializeField] private Wheel _flontLeft;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Wheel _flontRight;
+    [SerializeField] private Wheel _rearLeft;
+    [SerializeField] private Wheel _rearRight;
+    [Header("走行設定")]
+    [SerializeField] private float _moreTorque = 1500f;//最大トルク
+    [SerializeField] private float _breakeTorque = 3000f;//ブレーキ力
+    [SerializeField] private float _maxSteerAngle = 30f;//最大ステアリング角度
 
-    // Update is called once per frame
-    void Update()
+    private Rigidbody _rb;
+    private Wheel[] wheels;
+
+    private void Awake()
     {
-        
+        _rb = GetComponent<Rigidbody>();
+        wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };
+    }
+    private void FixedUpdate()
+    {
+        float moveInput = Input.GetAxis("Vertical");
+        float steerInput = Input.GetAxis("Horizontal");
+        bool isBraking = Input.GetKey(KeyCode.Space);
+        float currentMotor = isBraking ? 0f : moveInput * _moreTorque;
+        float currentBreake = isBraking ? _breakeTorque : 0f;
+        float currentSteer = steerInput * _maxSteerAngle;
     }
 }
