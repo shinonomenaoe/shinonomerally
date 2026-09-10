@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CarEngenAndGearBox : MonoBehaviour
 {
+    GameObject _car;
+    Rigidbody _rb;
     [Header("エンジン")]
     [SerializeField] public float _idelRPM = 1000f;
     [SerializeField] public float _maxRPM = 6800;
@@ -10,6 +12,8 @@ public class CarEngenAndGearBox : MonoBehaviour
     [SerializeField] float _engenRespons = 10;
     [SerializeField] WheelCollider _driveWheel;
     [SerializeField] public float _fRR = 3.266f;
+    [SerializeField] public float _tireRadius = 0.32f;
+    public bool _isHightEngenRoal = false;
     [Header("ギアボックス")]
     [SerializeField] public float[] _gearPow = { 3.226f, 0, 3.724f, 2.246f, 1.541f, 1.205f, 1.000f, 0.818f };
     [SerializeField] public float[] _maxGearSpeed = { 77, 0, 67, 111, 162, 207, 250, 305 };
@@ -21,6 +25,8 @@ public class CarEngenAndGearBox : MonoBehaviour
     private void Start()
     {
         _maxGear = _gearPow.Length - 1;
+        _car = GameObject.FindWithTag("PlayerCar");
+        _rb = _car.GetComponent<Rigidbody>();
     }
     void Update()
     {
@@ -42,7 +48,7 @@ public class CarEngenAndGearBox : MonoBehaviour
         _nowGearMaxSpeed = _maxGearSpeed[_nowGearNam];
     }
 
-    void CalculateRPM()
+    void CalculateRPM()//実車のタイヤのサイズと移動している速度を使ってRPMを求める
     {
         if (_isClutch || _nowGearNam == 1)
         {
@@ -51,13 +57,21 @@ public class CarEngenAndGearBox : MonoBehaviour
             _nowRPM = Mathf.Lerp(_nowRPM, targetRPM , _engenRespons * Time.deltaTime);
             return;
         }
-        float wheelRPM = Mathf.Abs(_driveWheel.rpm);
-        float nowRPM = wheelRPM * _gearPow[_nowGearNam] * _fRR;
-        _nowRPM = Mathf.Clamp(nowRPM, _idelRPM, _maxRPM);
+        float targetEngineRPM = _idelRPM;
+        float nowSpeed = Mathf.Abs(_rb.linearVelocity.magnitude);
+        float tireCircumference = 2f * Mathf.PI * _tireRadius;
+        float calcuatedWeelRPM = (nowSpeed * 60) / tireCircumference;
+        targetEngineRPM = calcuatedWeelRPM * _gearPow[_nowGearNam] * _fRR;
+        targetEngineRPM = Mathf.Max(targetEngineRPM, _idelRPM);
+        _nowRPM = Mathf.Lerp(_nowRPM, targetEngineRPM, _engenRespons * Time.deltaTime);
+        _nowRPM = Mathf.Clamp(_nowRPM, _idelRPM, _maxRPM);
         if (_nowRPM >= _maxRPM - 50f && Input.GetAxis("Vertical") > 0.1)
         {
             _nowRPM += Random.Range(-100, 100);
         }
+
+        if(_nowRPM >= _maxRPM - 1000f) _isHightEngenRoal = true;
+        else _isHightEngenRoal = false;
     }
 
     void Clutch()
