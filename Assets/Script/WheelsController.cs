@@ -50,7 +50,6 @@ public class WheelsController : MonoBehaviour
     private void UpdateWheelVisual(Wheel wheel)
     {
         if(wheel.collider == null || wheel.transform == null) return;
-
         wheel.collider.GetWorldPose(out Vector3 pos, out Quaternion rot);
         wheel.transform.position = pos;
         wheel.transform.rotation = rot;
