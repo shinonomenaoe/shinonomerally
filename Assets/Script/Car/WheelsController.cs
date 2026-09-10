@@ -35,7 +35,7 @@ public class WheelsController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _carMass = _rb.mass;
-        wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };
+        wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
     }
     private void FixedUpdate()
     {
@@ -43,7 +43,7 @@ public class WheelsController : MonoBehaviour
         float steerInput = Input.GetAxis("Horizontal");
         bool isBraking = Input.GetKey(KeyCode.Space);
         float nowSpeedKM = _rb.linearVelocity.magnitude * 3.6f;
-        if (isBraking || _engenAndGearBox._isClutch)
+        if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
             _nowMotor = 0f;
         }
@@ -55,7 +55,7 @@ public class WheelsController : MonoBehaviour
 
         float currentBreake = isBraking ? _breakeTorque : 0f;
         float currentSteer = steerInput * _maxSteerAngle;
-        foreach(Wheel wheel in wheels)
+        foreach(Wheel wheel in wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
         {
             if (wheel.isMotor && nowSpeedKM <= _engenAndGearBox._nowGearMaxSpeed) wheel.collider.motorTorque = _nowMotor;
             else wheel.collider.motorTorque = 0f;
@@ -65,7 +65,7 @@ public class WheelsController : MonoBehaviour
         }
     }
 
-    private void UpdateWheelVisual(Wheel wheel)
+    private void UpdateWheelVisual(Wheel wheel)//コライダーの向きや角度を見た目用のオブジェクトの各値にいれることで同期している
     {
         if(wheel.collider == null || wheel.transform == null) return;
         wheel.collider.GetWorldPose(out Vector3 pos, out Quaternion rot);
