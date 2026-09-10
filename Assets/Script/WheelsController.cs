@@ -38,5 +38,21 @@ public class WheelsController : MonoBehaviour
         float currentMotor = isBraking ? 0f : moveInput * _moreTorque;
         float currentBreake = isBraking ? _breakeTorque : 0f;
         float currentSteer = steerInput * _maxSteerAngle;
+        foreach(Wheel wheel in wheels)
+        {
+            if (wheel.isMotor) wheel.collider.motorTorque = currentMotor;
+            wheel.collider.brakeTorque = currentBreake;
+            if (wheel.isSteer) wheel.collider.steerAngle = currentSteer;
+            UpdateWheelVisual(wheel);
+        }
+    }
+
+    private void UpdateWheelVisual(Wheel wheel)
+    {
+        if(wheel.collider == null || wheel.transform == null) return;
+
+        wheel.collider.GetWorldPose(out Vector3 pos, out Quaternion rot);
+        wheel.transform.position = pos;
+        wheel.transform.rotation = rot;
     }
 }
