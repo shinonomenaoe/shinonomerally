@@ -26,6 +26,8 @@ public class WheelsController : MonoBehaviour
     [Header("エンジンとギアボックス")]
     [SerializeField] private CarEngenAndGearBox _engenAndGearBox;
 
+    private float _nowMotor;
+
     private Rigidbody _rb;
     private Wheel[] wheels;
 
@@ -41,12 +43,21 @@ public class WheelsController : MonoBehaviour
         float steerInput = Input.GetAxis("Horizontal");
         bool isBraking = Input.GetKey(KeyCode.Space);
         float nowSpeedKM = _rb.linearVelocity.magnitude * 3.6f;
-        float currentMotor = isBraking ? 0f : moveInput * _moreTorque * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR ;
+        if (isBraking || _engenAndGearBox._isClutch)
+        {
+            _nowMotor = 0f;
+        }
+        else if (!isBraking && _engenAndGearBox._nowGearNam == 0)
+        {
+            _nowMotor = moveInput * _moreTorque * -_engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR;
+        }
+        else if(!isBraking) _nowMotor = moveInput * _moreTorque * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR;
+
         float currentBreake = isBraking ? _breakeTorque : 0f;
         float currentSteer = steerInput * _maxSteerAngle;
         foreach(Wheel wheel in wheels)
         {
-            if (wheel.isMotor && nowSpeedKM <= _engenAndGearBox._nowGearMaxSpeed) wheel.collider.motorTorque = currentMotor;
+            if (wheel.isMotor && nowSpeedKM <= _engenAndGearBox._nowGearMaxSpeed) wheel.collider.motorTorque = _nowMotor;
             else wheel.collider.motorTorque = 0f;
             wheel.collider.brakeTorque = currentBreake;
             if (wheel.isSteer) wheel.collider.steerAngle = currentSteer;

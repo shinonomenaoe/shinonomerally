@@ -6,19 +6,17 @@ public class CarEngenAndGearBox : MonoBehaviour
     [SerializeField] public float _idelRPM = 1000f;
     [SerializeField] public float _maxRPM = 6800;
     [SerializeField] public float _meterMAXRPM = 8000;
-    private float _nowRPM;
+    public float _nowRPM;
     [SerializeField] float _engenRespons = 10;
     [SerializeField] WheelCollider _driveWheel;
     [SerializeField] public float _fRR = 3.266f;
     [Header("ギアボックス")]
-    [SerializeField] public float[] _gearPow = { 0, 3.724f, 2.246f, 1.541f, 1.205f, 1.000f, 0.818f };
-    [SerializeField] public float[] _maxGearSpeed = { 0, 67, 111, 162, 207, 250, 305 };
-    [SerializeField] public float _backGeraPow = 3.226f;
-    [SerializeField] public float _maxBaxkSpeed = 77;
-    public int _nowGearNam = 0;
+    [SerializeField] public float[] _gearPow = { 3.226f, 0, 3.724f, 2.246f, 1.541f, 1.205f, 1.000f, 0.818f };
+    [SerializeField] public float[] _maxGearSpeed = { 77, 0, 67, 111, 162, 207, 250, 305 };
+    public int _nowGearNam = 2;
     [SerializeField] public int _maxGear;
     public float _nowGearMaxSpeed;
-    bool _isClutch = false;
+    public bool _isClutch = false;
 
     private void Start()
     {
@@ -26,8 +24,7 @@ public class CarEngenAndGearBox : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift)) _isClutch = true;
-        else _isClutch = false;
+        Clutch();
         NowMaxSpeed();
         ChengeGear();
         CalculateRPM();
@@ -35,33 +32,38 @@ public class CarEngenAndGearBox : MonoBehaviour
 
     void ChengeGear()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && _nowGearNam > -1 && _isClutch) _nowGearNam--;
+        if (Input.GetKeyDown(KeyCode.Q) && _nowGearNam > 0 && _isClutch) _nowGearNam--;
         if (Input.GetKeyDown(KeyCode.E) && _nowGearNam < _maxGear && _isClutch) _nowGearNam++;
     }
 
 
     void NowMaxSpeed()
     {
-        if (_nowGearNam == -1) _nowGearMaxSpeed = _maxBaxkSpeed;
-        else _nowGearMaxSpeed = _maxGearSpeed[_nowGearNam];
+        _nowGearMaxSpeed = _maxGearSpeed[_nowGearNam];
     }
 
     void CalculateRPM()
     {
-        if (_isClutch || _nowGearNam == 0)
+        if (_isClutch || _nowGearNam == 1)
         {
             float throttle = Mathf.Clamp01(Input.GetAxis("Vertical"));
             float targetRPM = Mathf.Lerp(_idelRPM, _meterMAXRPM, throttle);
-            _nowRPM = Mathf.Lerp(_nowRPM, _meterMAXRPM, _engenRespons * Time.deltaTime);
+            _nowRPM = Mathf.Lerp(_nowRPM, targetRPM , _engenRespons * Time.deltaTime);
             return;
         }
         float wheelRPM = Mathf.Abs(_driveWheel.rpm);
         float nowRPM = wheelRPM * _gearPow[_nowGearNam] * _fRR;
-        nowRPM = Mathf.Clamp(_nowRPM, _idelRPM, _maxRPM);
-        if(_nowRPM >= _maxRPM - 50f)
+        _nowRPM = Mathf.Clamp(nowRPM, _idelRPM, _maxRPM);
+        if (_nowRPM >= _maxRPM - 50f)
         {
             _nowRPM += Random.Range(-100, 100);
         }
+    }
+
+    void Clutch()
+    {
+        if (Input.GetKey(KeyCode.LeftShift)) _isClutch = true;
+        else _isClutch = false;
     }
 
 }
