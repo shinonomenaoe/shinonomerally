@@ -24,6 +24,7 @@ public class WheelsController : MonoBehaviour
     [SerializeField] private float _breakeTorque = 600f;//ブレーキ力
     [SerializeField] private float _maxSteerAngle = 30f;//最大ステアリング角度
     [SerializeField] private Vector3 __centerOfMassOffset = new Vector3(0, -0.5f, 0); // Yを少し下げる
+    [SerializeField] private float _downForce = 50;
     [Header("エンジンとギアボックス")]
     [SerializeField] private CarEngenAndGearBox _engenAndGearBox;
 
@@ -44,6 +45,7 @@ public class WheelsController : MonoBehaviour
         float moveInput = Input.GetAxis("Vertical");
         float steerInput = Input.GetAxis("Horizontal");
         bool isBraking = Input.GetKey(KeyCode.Space);
+        _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
         float nowSpeedKM = _rb.linearVelocity.magnitude * 3.6f;
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
@@ -68,7 +70,7 @@ public class WheelsController : MonoBehaviour
             {
                 wheel.collider.motorTorque = 0f;
                 //wheel.collider.brakeTorque = Mathf.Max(currentBreake, 800f);
-                wheel.collider.brakeTorque = 400f;
+                wheel.collider.brakeTorque = currentBreake;
             }
             if (wheel.isSteer) wheel.collider.steerAngle = currentSteer;
             UpdateWheelVisual(wheel);
