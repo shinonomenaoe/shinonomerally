@@ -54,7 +54,7 @@ public class CarEngenAndGearBox : MonoBehaviour
         float wheelRPM = Mathf.Abs(_driveWheel.rpm);
         float nowRPM = wheelRPM * _gearPow[_nowGearNam] * _fRR;
         _nowRPM = Mathf.Clamp(nowRPM, _idelRPM, _maxRPM);
-        if (_nowRPM >= _maxRPM - 50f)
+        if (_nowRPM >= _maxRPM - 50f && Input.GetAxis("Vertical") > 0.1)
         {
             _nowRPM += Random.Range(-100, 100);
         }
