@@ -956,6 +956,7 @@ GameObject:
   - component: {fileID: 1966549972237905901}
   - component: {fileID: 7413120123923877787}
   - component: {fileID: 7413120123923877788}
+  - component: {fileID: 7413120123923877789}
   m_Layer: 0
   m_Name: Samurai_BlueDark_B
   m_TagString: Untagged
@@ -1300,6 +1301,46 @@ MonoBehaviour:
   _moreTorque: 1500
   _breakeTorque: 3000
   _maxSteerAngle: 30
+  _engenAndGearBox: {fileID: 7413120123923877789}
+--- !u!114 &7413120123923877789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3161574219451504696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da07d07bce0212428f58996ab0c16ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idelRPM: 1000
+  _maxRPM: 6800
+  _meterMAXRPM: 8000
+  _engenRespons: 10
+  _driveWheel: {fileID: 6512786530845872947}
+  _fRR: 3.266
+  _gearPow:
+  - 0
+  - 3.724
+  - 2.246
+  - 1.541
+  - 1.205
+  - 1
+  - 0.818
+  _maxGearSpeed:
+  - 0
+  - 67
+  - 111
+  - 162
+  - 207
+  - 250
+  - 305
+  _backGeraPow: 3.226
+  _maxBaxkSpeed: 77
+  _nowGearNam: 0
+  _maxGear: 0
+  _nowGearMaxSpeed: 0
 --- !u!1 &7435059123887243403
 GameObject:
   m_ObjectHideFlags: 0

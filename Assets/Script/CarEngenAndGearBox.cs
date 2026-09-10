@@ -9,14 +9,15 @@ public class CarEngenAndGearBox : MonoBehaviour
     private float _nowRPM;
     [SerializeField] float _engenRespons = 10;
     [SerializeField] WheelCollider _driveWheel;
-    [SerializeField] float _fRR = 3.266f;
+    [SerializeField] public float _fRR = 3.266f;
     [Header("ギアボックス")]
     [SerializeField] public float[] _gearPow = { 0, 3.724f, 2.246f, 1.541f, 1.205f, 1.000f, 0.818f };
     [SerializeField] public float[] _maxGearSpeed = { 0, 67, 111, 162, 207, 250, 305 };
+    [SerializeField] public float _backGeraPow = 3.226f;
     [SerializeField] public float _maxBaxkSpeed = 77;
-    int _nowGearNam = 0;
+    public int _nowGearNam = 0;
     [SerializeField] public int _maxGear;
-    float _nowGearMaxSpeed;
+    public float _nowGearMaxSpeed;
     bool _isClutch = false;
 
     private void Start()
