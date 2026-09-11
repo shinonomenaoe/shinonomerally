@@ -226,6 +226,27 @@ MonoBehaviour:
   _asymptoteValue: 0.3
   _stiffness: 0.5
   _flontStiffness: 2
+--- !u!65 &190410420
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190410406}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.01, y: 0.01, z: 0.01}
+  m_Center: {x: 0, y: 0.87, z: 0}
 --- !u!1 &257079723
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +764,7 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 4294967295
+  m_RenderingLayerMask: 0
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -1177,13 +1198,13 @@ Transform:
   m_GameObject: {fileID: 1316075936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.975342, y: -3.1866837, z: -14.255005}
+  m_LocalPosition: {x: -993.5769, y: -275.4156, z: -58.7948}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 727625069}
   - {fileID: 1665300491}
-  m_Father: {fileID: 1634698014}
+  m_Father: {fileID: 1900637373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1498287358
 GameObject:
@@ -3456,8 +3477,7 @@ Transform:
   m_LocalPosition: {x: -1476.3, y: 98.8, z: -587.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1316075937}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1634698015
@@ -3648,7 +3668,7 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 4294967295
+  m_RenderingLayerMask: 0
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -3745,6 +3765,7 @@ Transform:
   - {fileID: 1498287359}
   - {fileID: 916312247}
   - {fileID: 602495167}
+  - {fileID: 1316075937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930245654
@@ -4049,6 +4070,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 973330801251808008, guid: b47ab2484e673d1489af9d0e7e354715, type: 3}
       insertIndex: -1
       addedObject: {fileID: 190410413}
+    - targetCorrespondingSourceObject: {fileID: 973330801251808008, guid: b47ab2484e673d1489af9d0e7e354715, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 190410420}
   m_SourcePrefab: {fileID: 100100000, guid: b47ab2484e673d1489af9d0e7e354715, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -75,7 +75,7 @@ public class WheelsController : MonoBehaviour
             if (wheel.isSteer) wheel.collider.steerAngle = currentSteer;
             UpdateWheelVisual(wheel);
         }
-        Debug.Log($"現在のギア番号: {_engenAndGearBox._nowGearNam} | 見ている最高速: {_engenAndGearBox._nowGearMaxSpeed} | 車速: {nowSpeedKM:F1}");
+        //Debug.Log($"現在のギア番号: {_engenAndGearBox._nowGearNam} | 見ている最高速: {_engenAndGearBox._nowGearMaxSpeed} | 車速: {nowSpeedKM:F1}");
     }
 
     private void UpdateWheelVisual(Wheel wheel)//コライダーの向きや角度を見た目用のオブジェクトの各値にいれることで同期している

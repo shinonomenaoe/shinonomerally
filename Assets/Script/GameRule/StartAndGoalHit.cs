@@ -15,6 +15,7 @@ public class StartAndGoalHit : MonoBehaviour
         _collider = GetComponent<Collider>();
         _gameManager = GameObject.FindWithTag("GameManager");
         _playInf = _gameManager.GetComponent<PlayINF>();
+        Debug.Log($"_start‚Í{_start}‚Å_goal‚Í{_goal}‚Å‚·");
     }
 
     // Update is called once per frame
@@ -24,10 +25,11 @@ public class StartAndGoalHit : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    { 
         if (other.CompareTag("PlayerCar") && _isMyturn)
         {
-           if(_start)_playInf._isStart = true;
+            
+            if (_start)_playInf._isStart = true;
            if(_goal)_playInf._isGoal = true;
         }
     }
