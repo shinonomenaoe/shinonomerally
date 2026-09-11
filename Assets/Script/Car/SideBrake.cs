@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class SideBrake : MonoBehaviour
 {
+    [Header("ホイール")]
     WheelsController _wheelsController;
+    [SerializeField] WheelCollider _flontLeft;
+    [SerializeField] WheelCollider _flontRight;
     [SerializeField] WheelCollider _rearLeft;
     [SerializeField] WheelCollider _rearReft;
     [Header("各種サイドブレーキ設定")]
@@ -12,18 +15,24 @@ public class SideBrake : MonoBehaviour
     [SerializeField] float _asymptoteSlip = 0.8f;
     [SerializeField] float _asymptoteValue = 0.4f;
     [SerializeField] float _stiffness = 0.3f;
-    private WheelFrictionCurve _wheelDifoltFrictionCurve;
+    [Header("前輪タイヤの滑り具合")]
+    [SerializeField] float _flontStiffness = 1.5f;
+    private WheelFrictionCurve _wheelDifoltRearFrictionCurve;
+    private WheelFrictionCurve _wheelDifoltFlontFrictionCurve;
 
 
 
 
 
     private WheelCollider[] _sideBrakewheels;
+    private WheelCollider[] _flontWheels;
     private void Awake()
     {
         _sideBrakewheels = new WheelCollider[] { _rearLeft, _rearReft };
+        _flontWheels = new WheelCollider[] { _flontLeft, _flontRight };
         _wheelsController = GetComponent<WheelsController>();
-        _wheelDifoltFrictionCurve = _rearLeft.sidewaysFriction;
+        _wheelDifoltRearFrictionCurve = _rearLeft.sidewaysFriction;
+        _wheelDifoltFlontFrictionCurve = _flontLeft.sidewaysFriction;
     }
     void Update()
     {
@@ -45,14 +54,25 @@ public class SideBrake : MonoBehaviour
                 sfriction.stiffness = _stiffness;
                 wheel.sidewaysFriction = sfriction;
             }
+            foreach(WheelCollider wheel in _flontWheels)
+            {
+                WheelFrictionCurve sfriction = wheel.sidewaysFriction;
+                sfriction.stiffness = _flontStiffness;
+                wheel.sidewaysFriction = sfriction;
+            }
         }
         else
         {
-            foreach(WheelCollider wheel in _sideBrakewheels)
+            foreach (WheelCollider wheel in _sideBrakewheels)
             {
-                wheel.sidewaysFriction = _wheelDifoltFrictionCurve;
+                wheel.sidewaysFriction = _wheelDifoltRearFrictionCurve;
                 wheel.brakeTorque = 0f;
             }
+            foreach(WheelCollider wheel in _flontWheels)
+            {
+                wheel.sidewaysFriction = _wheelDifoltFlontFrictionCurve;
+            }
+
         }
     }
 }
