@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - PlayerCar
+  - StartLine
+  - GoalLine
+  - GameManager
   layers:
   - Default
   - TransparentFX
