@@ -332,8 +332,8 @@ MonoBehaviour:
   _extremumValue: 0.5
   _asymptoteSlip: 0.8
   _asymptoteValue: 0.3
-  _stiffness: 0.3
-  _flontStiffness: 1.5
+  _stiffness: 0.5
+  _flontStiffness: 2
 --- !u!1 &257079723
 GameObject:
   m_ObjectHideFlags: 0
@@ -3522,7 +3522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3083831121322667459, guid: b47ab2484e673d1489af9d0e7e354715, type: 3}
       propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1.8
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 3083831121322667459, guid: b47ab2484e673d1489af9d0e7e354715, type: 3}
       propertyPath: m_SidewaysFriction.m_Stiffness
@@ -3546,7 +3546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4240822109676740715, guid: b47ab2484e673d1489af9d0e7e354715, type: 3}
       propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1.8
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 4240822109676740715, guid: b47ab2484e673d1489af9d0e7e354715, type: 3}
       propertyPath: m_SidewaysFriction.m_Stiffness

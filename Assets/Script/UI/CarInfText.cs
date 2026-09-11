@@ -9,6 +9,9 @@ public class CarInfText : MonoBehaviour
     [SerializeField] private Text _rPM;
     [SerializeField] private Text _gear;
     [SerializeField] private Text _perHour;
+    [SerializeField] private Text _time;
+    private float _second;
+    private int _minutes;
     void Start()
     {
         _playercar = GameObject.FindWithTag("PlayerCar");
@@ -22,6 +25,7 @@ public class CarInfText : MonoBehaviour
         UpdateRPM();
         UpdateGear();
         UpdatePerHour();
+        UpdateTime();
     }
 
     void UpdateRPM()
@@ -41,5 +45,19 @@ public class CarInfText : MonoBehaviour
     {
         int perHour = Mathf.RoundToInt(_rb.linearVelocity.magnitude * 3.6f);
         _perHour.text = perHour.ToString();
+    }
+
+    void UpdateTime()
+    {
+        if (_second < 60)
+        {
+            _second += Time.deltaTime;
+        }
+        else
+        {
+            _second = 0f;
+            _minutes++;
+        }
+        _time.text = $"{_minutes:D2}M {_second:D2}S";
     }
 }
