@@ -6,12 +6,12 @@ public class SideBrake : MonoBehaviour
     [SerializeField] WheelCollider _rearLeft;
     [SerializeField] WheelCollider _rearReft;
     [Header("各種サイドブレーキ設定")]
-    [SerializeField] float _sideBrakeTorque = 8000f;
-    [SerializeField] float _extremumSlip = 0.2f;
-    [SerializeField] float _extremumValue = 0.8f;
-    [SerializeField] float _asymptoteSlip = 0.6f;
-    [SerializeField] float _asymptoteValue = 0.8f;
-    [SerializeField] float _stiffness = 0.8f;
+    [SerializeField] float _sideBrakeTorque = 4000f;
+    [SerializeField] float _extremumSlip = 0.3f;
+    [SerializeField] float _extremumValue = 0.5f;
+    [SerializeField] float _asymptoteSlip = 0.8f;
+    [SerializeField] float _asymptoteValue = 0.4f;
+    [SerializeField] float _stiffness = 0.3f;
     private WheelFrictionCurve _wheelDifoltFrictionCurve;
 
 
