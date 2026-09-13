@@ -16,7 +16,7 @@ public class CarInfText : MonoBehaviour
     private int _minutes;
     void Start()
     {
-        _gameManager = GameObject.FindWithTag("GameManager");
+        _gameManager = GameObject.FindWithTag("MainGameManager");
         _playInf = _gameManager.GetComponent<PlayINF>();
         _playercar = GameObject.FindWithTag("PlayerCar");
         _carEngen = _playercar.GetComponent<CarEngenAndGearBox>();

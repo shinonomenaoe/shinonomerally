@@ -13,7 +13,7 @@ public class StartAndGoalHit : MonoBehaviour
         if (gameObject.CompareTag("StartLine"))_start = true;
         else _goal = true;
         _collider = GetComponent<Collider>();
-        _gameManager = GameObject.FindWithTag("GameManager");
+        _gameManager = GameObject.FindWithTag("MainGameManager");
         _playInf = _gameManager.GetComponent<PlayINF>();
         Debug.Log($"_start‚Í{_start}‚Å_goal‚Í{_goal}‚Å‚·");
     }
