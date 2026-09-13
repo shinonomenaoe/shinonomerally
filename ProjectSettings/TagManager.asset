@@ -8,6 +8,8 @@ TagManager:
   - StartLine
   - GoalLine
   - GameManager
+  - MainGameManager
+  - PlayerStartPos
   layers:
   - Default
   - TransparentFX
