@@ -10,6 +10,7 @@ TagManager:
   - GameManager
   - MainGameManager
   - PlayerStartPos
+  - ResultPos
   layers:
   - Default
   - TransparentFX
