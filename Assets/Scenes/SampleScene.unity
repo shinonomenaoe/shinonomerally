@@ -333,7 +333,6 @@ MonoBehaviour:
   _asymptoteSlip: 0.8
   _asymptoteValue: 0.45
   _stiffness: 0.6
-  _onTime: 0.5
   _flontStiffness: 2
 --- !u!65 &190410420
 BoxCollider:
@@ -6438,7 +6437,8 @@ MonoBehaviour:
   _volMag: 0.5
   _pichMag: 1.5
   _turbo: {fileID: 8300000, guid: 2885e2220340d124b92f7513c2ebe904, type: 3}
-  _isBackTurbin: 0
+  _turboCar: 1
+  _maxGus: 0
 --- !u!1 &4200041825408925569
 GameObject:
   m_ObjectHideFlags: 0
@@ -6983,7 +6983,7 @@ MonoBehaviour:
     collider: {fileID: 930787158816071159}
     transform: {fileID: 4741585994370000704}
     isMotor: 0
-    isSteer: 1
+    isSteer: 0
   _flontRight:
     collider: {fileID: 2088338515680481375}
     transform: {fileID: 5099593739516307253}
