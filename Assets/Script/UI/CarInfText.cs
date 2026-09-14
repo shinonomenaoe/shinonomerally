@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class CarInfText : MonoBehaviour
 {
+    GameObject _PlayUies;
     GameObject _playercar;
     GameObject _gameManager;
     CarEngenAndGearBox _carEngen;
@@ -16,6 +17,7 @@ public class CarInfText : MonoBehaviour
     private int _minutes;
     void Start()
     {
+        _PlayUies = GameObject.FindWithTag("PlayUI");
         _gameManager = GameObject.FindWithTag("MainGameManager");
         _playInf = _gameManager.GetComponent<PlayINF>();
         _playercar = GameObject.FindWithTag("PlayerCar");
@@ -26,10 +28,18 @@ public class CarInfText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateRPM();
-        UpdateGear();
-        UpdatePerHour();
-        UpdateTime();
+        if (!_playInf._isGoal)
+        {
+            UpdateRPM();
+            UpdateGear();
+            UpdatePerHour();
+            UpdateTime();
+        }
+        else
+        {
+            _PlayUies.SetActive(false);
+        }
+
     }
 
     void UpdateRPM()
