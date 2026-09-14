@@ -37,6 +37,7 @@ public class CarInfText : MonoBehaviour
         }
         else
         {
+            _playInf._goalTime = _time.text;
             _PlayUies.SetActive(false);
         }
 

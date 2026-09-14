@@ -11,6 +11,8 @@ TagManager:
   - MainGameManager
   - PlayerStartPos
   - ResultPos
+  - PlayUI
+  - ResultUI
   layers:
   - Default
   - TransparentFX
