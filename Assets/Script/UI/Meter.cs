@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Meter : MonoBehaviour
 {
-    [SerializeField] private RectTransform _meterTransfrom;
-    [SerializeField] private MeterName _meterName;
-    [SerializeField] private float _meterFirstAngle;
-    [SerializeField] public float _meterEndAngle;
+    [SerializeField] private RectTransform _RPMmeterTransfrom;
+    [SerializeField] private RectTransform _HourmeterTransfrom;
+    [SerializeField] private float _RPMMeterFirstAngle;
+    [SerializeField] public float _RPMMeterEndAngle;
+    [SerializeField] private float _HourMeterFirstAngle;
+    [SerializeField] public float _HourMeterEndAngle;
     [SerializeField] public float _meterMaxSpeed;
     GameObject _playercar;
     CarEngenAndGearBox _carEngen;
@@ -20,8 +22,8 @@ public class Meter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_meterName == MeterName.RPM) RPMMeter();
-        if (_meterName == MeterName.Hour) HourMeter();
+         RPMMeter();
+         HourMeter();
     }
 
     void RPMMeter()
@@ -29,20 +31,14 @@ public class Meter : MonoBehaviour
         float nowRPM = _carEngen._nowRPM;
         float rPMRate = Mathf.InverseLerp(_carEngen._idelRPM, _carEngen._maxRPM, nowRPM);
         if (rPMRate > 0.95) rPMRate += Random.Range(-0.1f, 0.1f);
-        float nowAngle = Mathf.Lerp(_meterFirstAngle, _meterEndAngle, rPMRate);
-        _meterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
+        float nowAngle = Mathf.Lerp(_RPMMeterFirstAngle, _RPMMeterEndAngle, rPMRate);
+        _RPMmeterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
     }
 
     void HourMeter()
     {
         float speedRate = Mathf.InverseLerp(0f, _meterMaxSpeed, _carEngen._nowSpeed);
-        float nowAngle = Mathf.Lerp(_meterFirstAngle, _meterEndAngle, speedRate);
-        _meterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
-    }
-
-    public enum MeterName
-    {
-        RPM,
-        Hour,
+        float nowAngle = Mathf.Lerp(_HourMeterFirstAngle, _HourMeterEndAngle, speedRate);
+        _HourmeterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
     }
 }
