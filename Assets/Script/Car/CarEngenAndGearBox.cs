@@ -70,7 +70,7 @@ public class CarEngenAndGearBox : MonoBehaviour
             _nowRPM += Random.Range(-100, 100);
         }
 
-        if(_nowRPM >= _maxRPM - 1000f) _isHightEngenRoal = true;
+        if(_nowRPM >= _maxRPM - 1500f) _isHightEngenRoal = true;
         else _isHightEngenRoal = false;
     }
 

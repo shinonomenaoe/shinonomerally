@@ -8,7 +8,8 @@ public class CarSoundSys : MonoBehaviour
     [SerializeField] float _volMag = 0.5f;
     [SerializeField] float _pichMag = 1.5f;
     [SerializeField] AudioClip _turbo;
-    public bool _isBackTurbin = false;
+    public bool _turboCar = true;
+    public bool _maxGus = false;
     void Start()
     {
         _carEngenAndGearBox = GetComponent<CarEngenAndGearBox>();
@@ -31,12 +32,12 @@ public class CarSoundSys : MonoBehaviour
 
     IEnumerator BackTurbineSound()
     {
-        if (_carEngenAndGearBox._isHightEngenRoal && Input.GetAxis("Vertical") < 0.1f && !_isBackTurbin)
+        if (_carEngenAndGearBox._isHightEngenRoal && Input.GetAxis("Vertical") < 0.1f && !_maxGus)
         {
-            _isBackTurbin = true;
+            _maxGus = true;
             _audioSource.PlayOneShot(_turbo, _volMag);
             yield return new WaitForSeconds(8f);
-            _isBackTurbin = false;
+            _maxGus = false;
 
         }
     }

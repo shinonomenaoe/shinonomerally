@@ -17,7 +17,6 @@ public class SideBrake : MonoBehaviour
     [SerializeField] float _asymptoteSlip = 0.8f;
     [SerializeField] float _asymptoteValue = 0.4f;
     [SerializeField] float _stiffness = 0.3f;
-    [SerializeField] float _onTime = 0.5f;
     [Header("‘O—Öƒ^ƒCƒ„‚ÌŠŠ‚è‹ï‡")]
     [SerializeField] float _flontStiffness = 1.5f;
     private WheelFrictionCurve _wheelDifoltRearFrictionCurve;
