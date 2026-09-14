@@ -27,7 +27,8 @@ public class Meter : MonoBehaviour
     void RPMMeter()
     {
         float nowRPM = _carEngen._nowRPM;
-        float rPMRate = Mathf.InverseLerp(_carEngen._idelRPM, _carEngen._meterMAXRPM, nowRPM);
+        float rPMRate = Mathf.InverseLerp(_carEngen._idelRPM, _carEngen._maxRPM, nowRPM);
+        if (rPMRate > 0.95) rPMRate += Random.Range(-0.1f, 0.1f);
         float nowAngle = Mathf.Lerp(_meterFirstAngle, _meterEndAngle, rPMRate);
         _meterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
     }
