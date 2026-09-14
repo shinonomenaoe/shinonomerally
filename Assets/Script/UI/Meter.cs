@@ -37,7 +37,7 @@ public class Meter : MonoBehaviour
 
     void HourMeter()
     {
-        float speedRate = Mathf.InverseLerp(0f, _meterMaxSpeed, _carEngen._nowSpeed);
+        float speedRate = Mathf.InverseLerp(0f, _meterMaxSpeed, _carEngen._nowSpeed * 3.6f);
         float nowAngle = Mathf.Lerp(_HourMeterFirstAngle, _HourMeterEndAngle, speedRate);
         _HourmeterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
     }
