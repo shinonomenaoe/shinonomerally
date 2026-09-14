@@ -32,7 +32,7 @@ public class CarSoundSys : MonoBehaviour
 
     IEnumerator BackTurbineSound()
     {
-        if (_carEngenAndGearBox._isHightEngenRoal && Input.GetAxis("Vertical") < 0.1f && !_maxGus)
+        if (_carEngenAndGearBox._isHightEngenRoal && Input.GetAxis("Vertical") < 0.1f && !_maxGus && _turboCar)
         {
             _maxGus = true;
             _audioSource.PlayOneShot(_turbo, _volMag);

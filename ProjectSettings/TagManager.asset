@@ -13,6 +13,7 @@ TagManager:
   - ResultPos
   - PlayUI
   - ResultUI
+  - InGameUI
   layers:
   - Default
   - TransparentFX

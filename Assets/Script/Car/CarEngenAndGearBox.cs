@@ -7,8 +7,9 @@ public class CarEngenAndGearBox : MonoBehaviour
     [Header("ƒGƒ“ƒWƒ“")]
     [SerializeField] public float _idelRPM = 1000f;
     [SerializeField] public float _maxRPM = 6800;
-    [SerializeField] public float _meterMAXRPM = 8000;
+    [SerializeField]public float _meterMAXRPM = 8000;
     public float _nowRPM;
+    public float _nowSpeed;
     [SerializeField] float _engenRespons = 10;
     [SerializeField] WheelCollider _driveWheel;
     [SerializeField] public float _fRR = 3.266f;
@@ -58,9 +59,9 @@ public class CarEngenAndGearBox : MonoBehaviour
             return;
         }
         float targetEngineRPM = _idelRPM;
-        float nowSpeed = Mathf.Abs(_rb.linearVelocity.magnitude);
+         _nowSpeed = Mathf.Abs(_rb.linearVelocity.magnitude);
         float tireCircumference = 2f * Mathf.PI * _tireRadius;
-        float calcuatedWeelRPM = (nowSpeed * 60) / tireCircumference;
+        float calcuatedWeelRPM = (_nowSpeed * 60) / tireCircumference;
         targetEngineRPM = calcuatedWeelRPM * _gearPow[_nowGearNam] * _fRR;
         targetEngineRPM = Mathf.Max(targetEngineRPM, _idelRPM);
         _nowRPM = Mathf.Lerp(_nowRPM, targetEngineRPM, _engenRespons * Time.deltaTime);
