@@ -754,7 +754,7 @@ MonoBehaviour:
   _resultRotaion: {x: 0, y: 0.8660254, z: 0, w: -0.50000006}
   _resultPosPuls:
   - 0
-  - 0.66
+  - 0.6
   - -2
 --- !u!1 &567399618
 GameObject:
@@ -6983,7 +6983,7 @@ MonoBehaviour:
     collider: {fileID: 930787158816071159}
     transform: {fileID: 4741585994370000704}
     isMotor: 0
-    isSteer: 0
+    isSteer: 1
   _flontRight:
     collider: {fileID: 2088338515680481375}
     transform: {fileID: 5099593739516307253}
