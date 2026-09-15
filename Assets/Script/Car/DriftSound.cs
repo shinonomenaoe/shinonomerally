@@ -33,8 +33,8 @@ public class DriftSound : MonoBehaviour
                     _audioSource.Play();
                 }
             }
-            else _audioSource.Stop();
         }
+        else _audioSource.Stop();
     }
 
     void MakeDriftSound()

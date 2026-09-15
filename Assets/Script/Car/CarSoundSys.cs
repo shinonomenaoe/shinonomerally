@@ -8,12 +8,13 @@ public class CarSoundSys : MonoBehaviour
     [SerializeField] private AudioSource _backTurbineAudioSource;
     [SerializeField] float _volMag = 0.5f;
     [SerializeField] float _pichMag = 1.5f;
-    [SerializeField] AudioClip _turbo;
+    [SerializeField] float _turbineSoundVol = 0.3f;
     public bool _turboCar = true;
     public bool _maxGus = false;
     void Start()
     {
         _carEngenAndGearBox = GetComponent<CarEngenAndGearBox>();
+        _backTurbineAudioSource.volume = _turbineSoundVol;
     }
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class CarSoundSys : MonoBehaviour
         if (_carEngenAndGearBox._isHightEngenRoal && Input.GetAxis("Vertical") < 0.1f && !_maxGus && _turboCar)
         {
             _maxGus = true;
-            _backTurbineAudioSource.PlayOneShot(_turbo, _volMag);
+            _backTurbineAudioSource.Play();
             yield return new WaitForSeconds(8f);
             _maxGus = false;
 
