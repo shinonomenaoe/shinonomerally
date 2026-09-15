@@ -28,8 +28,8 @@ public class ChengeCamera : MonoBehaviour
             {
                 case ActiveCamera._1thCam:
                     _1thPCam.Priority = 0;
-                    _3thPCam.Priority = 10;
-                    _3thPMoveCam.Priority = 0;
+                    _3thPCam.Priority = 0;
+                    _3thPMoveCam.Priority = 10;
                     _activeCamera = ActiveCamera._3thPMoveCam;
                     break;
 
@@ -43,7 +43,7 @@ public class ChengeCamera : MonoBehaviour
                 case ActiveCamera._3thPCam:
                     _3thPCam.Priority = 0;
                     _1thPCam.Priority = 10;
-                    _1thPCam.Priority = 0;
+                    _3thPMoveCam.Priority = 0;
                     _activeCamera = ActiveCamera._1thCam;
                     break;
             }
