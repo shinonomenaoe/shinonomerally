@@ -3244,8 +3244,8 @@ MonoBehaviour:
   _rearRight: {fileID: 2150936562220135007}
   _audioSource: {fileID: 7747192356811592094}
   _driftSound: {fileID: 8300000, guid: e42f540b3d1f72640be3f9874d29f6cb, type: 3}
-  _sideWaysSlipLimit: 0.35
-  _addVol: 0.3
+  _sideWaysSlipLimit: 0.3
+  _addVol: 0.2
 --- !u!1 &8146789036086531148
 GameObject:
   m_ObjectHideFlags: 0
