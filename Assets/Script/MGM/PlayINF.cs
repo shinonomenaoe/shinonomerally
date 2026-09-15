@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class PlayINF : MonoBehaviour
@@ -11,6 +12,22 @@ public class PlayINF : MonoBehaviour
     [SerializeField] Transform[] _goalPos;
 
     private void Awake()
+    {
+        _isStart = false;
+        _isGoal = false;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += ResetState;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= ResetState;
+    }
+
+    private void ResetState(Scene scene,LoadSceneMode mode)
     {
         _isStart = false;
         _isGoal = false;

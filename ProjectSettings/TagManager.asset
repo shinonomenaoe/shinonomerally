@@ -15,7 +15,7 @@ TagManager:
   - ResultUI
   - InGameUI
   - VirtualCamera
-  - MainManu
+  - MainMenu
   layers:
   - Default
   - TransparentFX
