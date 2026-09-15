@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CarInfText : MonoBehaviour
 {
-    GameObject _PlayUies;
+    GameObject _playUies;
     GameObject _playercar;
     GameObject _gameManager;
     CarEngenAndGearBox _carEngen;
@@ -17,7 +18,7 @@ public class CarInfText : MonoBehaviour
     private int _minutes;
     void Start()
     {
-        _PlayUies = GameObject.FindWithTag("PlayUI");
+        _playUies = GameObject.FindWithTag("PlayUI");
         _gameManager = GameObject.FindWithTag("MainGameManager");
         _playInf = _gameManager.GetComponent<PlayINF>();
         _playercar = GameObject.FindWithTag("PlayerCar");
@@ -38,7 +39,6 @@ public class CarInfText : MonoBehaviour
         else
         {
             _playInf._goalTime = _time.text;
-            _PlayUies.SetActive(false);
         }
 
     }
@@ -64,7 +64,7 @@ public class CarInfText : MonoBehaviour
 
     void UpdateTime()
     {
-        if(_playInf._isStart && !_playInf._isGoal)
+        if (_playInf._isStart && !_playInf._isGoal)
         {
             if (_second < 60)
             {
@@ -76,6 +76,23 @@ public class CarInfText : MonoBehaviour
                 _minutes++;
             }
             _time.text = $"{_minutes:D2}m {Mathf.FloorToInt(_second):D2}s";
-        } 
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += ResetState;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= ResetState;
+    }
+
+    private void ResetState(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Home") return;
+        _playUies.SetActive(true);
+        _playInf._goalTime = "00m00s";
     }
 }

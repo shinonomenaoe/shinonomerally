@@ -7,7 +7,7 @@ public class SerectNextScene : MonoBehaviour
     [SerializeField] private string _serectSceneName;
 
     public void ChengeScene()
-    { 
+    {   
         SceneManager.LoadScene(_serectSceneName);
     }
 

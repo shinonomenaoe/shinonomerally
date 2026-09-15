@@ -4,21 +4,20 @@ using UnityEngine;
 public class HomeChecker : MonoBehaviour
 {
     string _nowSceneName;
-    GameObject _inGameUi;
+    public bool _isHome;
     void Start()
     {
         _nowSceneName = SceneManager.GetActiveScene().name;
-        _inGameUi = GameObject.FindGameObjectWithTag("InGameUI");
     }
     void Update()
     {
         if (_nowSceneName == "Home")
         {
-            _inGameUi.SetActive(false);
+            _isHome = true;
         }
         else
         {
-            _inGameUi.SetActive(true);
+            _isHome = false;
         }
     }
     private void OnEnable()
