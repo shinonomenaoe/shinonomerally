@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NextScene : MonoBehaviour
+public class SerectNextScene : MonoBehaviour
 {
     //[SerializeField] string[] _sceneName;
     [SerializeField] private string _serectSceneName;
