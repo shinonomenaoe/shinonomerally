@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class ChengeToResultPos : MonoBehaviour
 {
     GameObject _playerCar;
+    GameObject _mGM;
     Rigidbody _carRb;
     PlayINF _playINF;
     GameObject _resultPosOBJ;
@@ -12,9 +13,10 @@ public class ChengeToResultPos : MonoBehaviour
     [SerializeField] float[] _resultPosPuls = new float[3];
     void Start()
     {
+        _mGM = GameObject.FindWithTag("MainGameManager");
         _playerCar = GameObject.FindGameObjectWithTag("PlayerCar");
         _carRb = _playerCar.GetComponent<Rigidbody>();
-        _playINF = GetComponent<PlayINF>();
+        _playINF = _mGM.GetComponent<PlayINF>();
         _resultPosOBJ = GameObject.FindGameObjectWithTag("ResultPos");
         _resultPos = _resultPosOBJ.GetComponent<Transform>();
     }
