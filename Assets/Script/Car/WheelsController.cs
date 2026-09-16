@@ -8,6 +8,7 @@ public class Wheel
     public Transform transform;
     public bool isMotor; //駆動輪かどうか
     public bool isSteer;// ステアリング輪かどうか
+    public WheelFrictionCurve defaultforwardWheelFrictionCurve;//LSD用の初期カーブ設定
 }
 [RequireComponent(typeof(Rigidbody))]
 public class WheelsController : MonoBehaviour
@@ -20,11 +21,14 @@ public class WheelsController : MonoBehaviour
     [Header("走行設定")]
     public float _carMass;
     [SerializeField] private float _moveWheelSam = 2f;//駆動するタイヤの数
-    [SerializeField] private float _moreTorque = 451f;//最大トルク
-    [SerializeField] private float _breakeTorque = 600f;//ブレーキ力
-    [SerializeField] private float _maxSteerAngle = 30f;//最大ステアリング角度
+    [SerializeField] public float _moreTorque = 451f;//最大トルク
+    [SerializeField] public float _breakeTorque = 600f;//ブレーキ力
+    [SerializeField] public bool _isLSD = false;//LSDを装備しているかどうか
+    [SerializeField] public float _iSDStartRPM　= 50;//LSDを有効化する回転の差
+    [SerializeField][Range(0, 1)] public float _lSDLockLate = 0.5f;//LSDの補正率
+    [SerializeField] public float _maxSteerAngle = 30f;//最大ステアリング角度
     [SerializeField] private Vector3 __centerOfMassOffset = new Vector3(0, -0.5f, 0); // Yを少し下げる
-    [SerializeField] private float _downForce = 50;
+    [SerializeField] public float _downForce = 50;
     [Header("エンジンとギアボックス")]
     [SerializeField] private CarEngenAndGearBox _engenAndGearBox;
 
@@ -39,6 +43,11 @@ public class WheelsController : MonoBehaviour
         _rb.centerOfMass = __centerOfMassOffset;
         _carMass = _rb.mass;
         wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
+        foreach(var wheel in wheels)
+        {
+            wheel.defaultforwardWheelFrictionCurve = wheel.collider.forwardFriction;
+        }
+
     }
     private void FixedUpdate()
     {
@@ -66,7 +75,7 @@ public class WheelsController : MonoBehaviour
                 wheel.collider.motorTorque = _nowMotor;//最高速以上出ないようにしている
                 wheel.collider.brakeTorque = currentBreake;
             }
-            else if(wheel.isMotor)
+            else if (wheel.isMotor)
             {
                 wheel.collider.motorTorque = 0f;
                 //wheel.collider.brakeTorque = Mathf.Max(currentBreake, 800f);
@@ -75,14 +84,48 @@ public class WheelsController : MonoBehaviour
             if (wheel.isSteer) wheel.collider.steerAngle = currentSteer;
             UpdateWheelVisual(wheel);
         }
-        //Debug.Log($"現在のギア番号: {_engenAndGearBox._nowGearNam} | 見ている最高速: {_engenAndGearBox._nowGearMaxSpeed} | 車速: {nowSpeedKM:F1}");
+        LSD();
     }
 
     private void UpdateWheelVisual(Wheel wheel)//コライダーの向きや角度を見た目用のオブジェクトの各値にいれることで同期している
     {
-        if(wheel.collider == null || wheel.transform == null) return;
+        if (wheel.collider == null || wheel.transform == null) return;
         wheel.collider.GetWorldPose(out Vector3 pos, out Quaternion rot);
         wheel.transform.position = pos;
         wheel.transform.rotation = rot;
+    }
+
+    private void LSD()
+    {
+        if(!_isLSD) return;
+        bool nowLSD = false;
+        if(_moveWheelSam == 2)
+        {
+            float leftRPM = _rearLeft.collider.rpm;
+            float rearRPM = _rearRight.collider.rpm;
+            float RPMDifference = leftRPM - rearRPM;
+            if (RPMDifference > _iSDStartRPM && !nowLSD)
+            {
+                nowLSD = true;
+                WheelFrictionCurve leftWFC = _rearLeft.collider.forwardFriction;
+                leftWFC.stiffness = leftWFC.stiffness + _lSDLockLate;
+                _rearLeft.collider.forwardFriction = leftWFC;
+                _rearRight.collider.forwardFriction = _rearRight.defaultforwardWheelFrictionCurve;
+            }
+            else if (RPMDifference < -_iSDStartRPM)
+            {
+                nowLSD = true;
+                WheelFrictionCurve rearWFC = _rearRight.collider.forwardFriction;
+                rearWFC.stiffness = rearWFC.stiffness + _lSDLockLate;
+                _rearRight.collider.forwardFriction = rearWFC;
+                _rearLeft.collider.forwardFriction = _rearLeft.defaultforwardWheelFrictionCurve;
+            }
+            else
+            {
+                nowLSD = false;
+                _rearLeft.collider.forwardFriction = _rearLeft.defaultforwardWheelFrictionCurve;
+                _rearRight.collider.forwardFriction = _rearRight.defaultforwardWheelFrictionCurve;
+            }
+        }
     }
 }
