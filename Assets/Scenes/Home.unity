@@ -3164,6 +3164,9 @@ MonoBehaviour:
   _moveWheelSam: 2
   _moreTorque: 451
   _breakeTorque: 2000
+  _isLSD: 1
+  _iSDStartRPM: 30
+  _lSDLockLate: 0.5
   _maxSteerAngle: 35
   __centerOfMassOffset: {x: 0, y: -0.5, z: -0.5}
   _downForce: 10000

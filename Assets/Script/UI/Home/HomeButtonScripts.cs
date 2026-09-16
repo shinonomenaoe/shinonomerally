@@ -3,10 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class HomeButtonScripts : MonoBehaviour
 {
+    [SerializeField] GameObject _selectRaceModeView;
+    [SerializeField] GameObject _selectRaceCourseView;
+    private void Start()
+    {
+        _selectRaceModeView.SetActive(false);
+        _selectRaceCourseView.SetActive(false);
+    }
     string _serectSceneName;
     public void RaceButton()
     {
-        Debug.Log("‚±‚Ì‹@”\‚Í‚Ü‚¾‰ð•ú‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+        _selectRaceModeView.SetActive(true);
+    }
+    public void TimeAttack()
+    {
+        _selectRaceCourseView.SetActive(true);
     }
 
     public void GarageButton()
