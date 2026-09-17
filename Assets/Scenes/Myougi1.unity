@@ -1926,7 +1926,7 @@ MonoBehaviour:
   m_Sides: 8
   m_SegmentsPerUnit: 4
   m_Capped: 0
-  m_Radius: 10.02
+  m_Radius: 9
   m_Range: {x: 0, y: 1}
   m_FlipNormals: 0
   m_Shape:
@@ -4103,11 +4103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 1498287366}
-  m_ItemsToInstantiate:
-  - prefab: {fileID: 0}
-    Prefab: {fileID: 1603778969}
-    probability: 0
-    Probability: 0
+  m_ItemsToInstantiate: []
   m_Method: 1
   m_Space: 0
   m_Spacing: {x: 1, y: 1}
@@ -4153,11 +4149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Container: {fileID: 1498287366}
-  m_ItemsToInstantiate:
-  - prefab: {fileID: 0}
-    Prefab: {fileID: 1603778969}
-    probability: 0
-    Probability: 0
+  m_ItemsToInstantiate: []
   m_Method: 1
   m_Space: 0
   m_Spacing: {x: 1, y: 1}
