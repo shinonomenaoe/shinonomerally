@@ -11,7 +11,7 @@ public class SelectMugic : MonoBehaviour
     int _playMugicNam = 0;
     void Start()
     {
-        _mGM = GameObject.FindGameObjectWithTag("MainGameManeger");
+        _mGM = GameObject.FindGameObjectWithTag("MainGameManager");
         _playerAudioSouce = _mGM.GetComponent<AudioSource>();
         _playerAudioSouce.loop = true;
         _nowPlayMugic.text = _playMugicName[0];
