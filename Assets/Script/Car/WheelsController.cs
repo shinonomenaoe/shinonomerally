@@ -21,6 +21,7 @@ public class WheelsController : MonoBehaviour
     [Header("走行設定")]
     public float _carMass;
     [SerializeField] private float _moveWheelSam = 2f;//駆動するタイヤの数
+    [SerializeField] AnimationCurve _torqueCurve;//トルク曲線
     [SerializeField] public float _moreTorque = 451f;//最大トルク
     [SerializeField] public float _breakeTorque = 600f;//ブレーキ力
     [SerializeField] public bool _isLSD = false;//LSDを装備しているかどうか
@@ -33,6 +34,7 @@ public class WheelsController : MonoBehaviour
     [SerializeField] private CarEngenAndGearBox _engenAndGearBox;
 
     private float _nowMotor;
+    private float _nowTorqueRate;
 
     private Rigidbody _rb;
     private Wheel[] wheels;
@@ -51,6 +53,13 @@ public class WheelsController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        CalculationTorque();
+        GivePow();
+        LSD();
+    }
+
+    private void GivePow()
+    {
         float moveInput = Input.GetAxis("Vertical");
         float steerInput = Input.GetAxis("Horizontal");
         bool isBraking = Input.GetKey(KeyCode.Space);
@@ -62,9 +71,9 @@ public class WheelsController : MonoBehaviour
         }
         else if (!isBraking && _engenAndGearBox._nowGearNam == 0)
         {
-            _nowMotor = moveInput * _moreTorque * -_engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
+            _nowMotor = moveInput * _moreTorque * _nowTorqueRate * -_engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
         }
-        else if (!isBraking) _nowMotor = moveInput * _moreTorque * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR / _moveWheelSam;
+        else if (!isBraking) _nowMotor = moveInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR  / _moveWheelSam;
 
         float currentBreake = isBraking ? _breakeTorque : 0f;
         float currentSteer = steerInput * _maxSteerAngle;
@@ -78,13 +87,11 @@ public class WheelsController : MonoBehaviour
             else if (wheel.isMotor)
             {
                 wheel.collider.motorTorque = 0f;
-                //wheel.collider.brakeTorque = Mathf.Max(currentBreake, 800f);
                 wheel.collider.brakeTorque = currentBreake;
             }
             if (wheel.isSteer) wheel.collider.steerAngle = currentSteer;
             UpdateWheelVisual(wheel);
         }
-        LSD();
     }
 
     private void UpdateWheelVisual(Wheel wheel)//コライダーの向きや角度を見た目用のオブジェクトの各値にいれることで同期している
@@ -97,35 +104,45 @@ public class WheelsController : MonoBehaviour
 
     private void LSD()
     {
-        if(!_isLSD) return;
-        bool nowLSD = false;
+        if (!_isLSD) return;
         if(_moveWheelSam == 2)
         {
             float leftRPM = _rearLeft.collider.rpm;
             float rearRPM = _rearRight.collider.rpm;
             float RPMDifference = leftRPM - rearRPM;
-            if (RPMDifference > _iSDStartRPM && !nowLSD)
+            if (RPMDifference > _iSDStartRPM)
             {
-                nowLSD = true;
                 WheelFrictionCurve leftWFC = _rearLeft.collider.forwardFriction;
-                leftWFC.stiffness = leftWFC.stiffness + _lSDLockLate;
+                leftWFC.stiffness = _rearLeft.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
                 _rearLeft.collider.forwardFriction = leftWFC;
                 _rearRight.collider.forwardFriction = _rearRight.defaultforwardWheelFrictionCurve;
             }
             else if (RPMDifference < -_iSDStartRPM)
             {
-                nowLSD = true;
                 WheelFrictionCurve rearWFC = _rearRight.collider.forwardFriction;
-                rearWFC.stiffness = rearWFC.stiffness + _lSDLockLate;
+                rearWFC.stiffness = _rearRight.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
                 _rearRight.collider.forwardFriction = rearWFC;
                 _rearLeft.collider.forwardFriction = _rearLeft.defaultforwardWheelFrictionCurve;
             }
             else
             {
-                nowLSD = false;
                 _rearLeft.collider.forwardFriction = _rearLeft.defaultforwardWheelFrictionCurve;
                 _rearRight.collider.forwardFriction = _rearRight.defaultforwardWheelFrictionCurve;
             }
         }
+    }
+
+    private void CalculationTorque()
+    {
+        float nowRPM = Mathf.Max(_engenAndGearBox._nowRPM, _engenAndGearBox._idelRPM);
+        float _nowRPMRate = Mathf.InverseLerp(_engenAndGearBox._idelRPM, _engenAndGearBox._maxRPM, nowRPM);
+        _nowTorqueRate = _torqueCurve.Evaluate(_nowRPMRate);
+        float speedKM = _rb.linearVelocity.magnitude * 3.6f;
+        float inputMove = Mathf.Abs(Input.GetAxis("Vertical"));
+        if (speedKM > 15 && inputMove > 0.01f)
+        { 
+            _nowTorqueRate = Mathf.Max(_nowTorqueRate, inputMove * 0.5f);
+        }
+            
     }
 }
