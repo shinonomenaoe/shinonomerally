@@ -5347,7 +5347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _RPMmeterTransfrom: {fileID: 8210965835536925627}
   _HourmeterTransfrom: {fileID: 4308027181765396924}
-  _RPMMeterFirstAngle: 0
+  _RPMMeterFirstAngle: -16
   _RPMMeterEndAngle: -220
   _HourMeterFirstAngle: 290
   _HourMeterEndAngle: -20
@@ -6838,13 +6838,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4852706688678038777}
-  m_LocalRotation: {x: -0, y: 0, z: -0.9421453, w: -0.3352049}
+  m_LocalRotation: {x: 0, y: 0, z: -0.13917309, w: 0.9902681}
   m_LocalPosition: {x: 0, y: 0, z: -0.00011142885}
   m_LocalScale: {x: 0.035714284, y: 0.035714284, z: 0.035714284}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2463672116264474441}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -219.17}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.18118331, y: 1.1414772}
