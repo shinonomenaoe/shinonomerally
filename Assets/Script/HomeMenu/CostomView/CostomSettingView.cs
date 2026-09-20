@@ -22,6 +22,7 @@ public class CostomSettingView : MonoBehaviour
         _fRRSlider.onValueChanged.AddListener(ChangeFRR);
         _sasSlider.onValueChanged.AddListener(ChengeSas);
         _lSDLateSlider.onValueChanged.AddListener(ChengeLSDRate);
+        _wheelAngleSlider.onValueChanged.AddListener(ChengeWheelAngle);
     }
     private void OnEnable()
     {
@@ -53,6 +54,12 @@ public class CostomSettingView : MonoBehaviour
         _lSDLateText.text = $"{rate:F2}";
     }
 
+    void ChengeWheelAngle(float rate)
+    {
+        _wheelsController._maxSteerAngle = rate;
+        _wheelAngleText.text = $"{rate:F2}";
+    }
+
     void SetUpSliders()
     {
         _fRRSlider.maxValue = 1.2f;
@@ -72,6 +79,8 @@ public class CostomSettingView : MonoBehaviour
         ChengeSas(_sasSlider.value);
         _lSDLateSlider.value = _wheelsController._lSDLockLate;
         ChengeLSDRate(_lSDLateSlider.value);
+        _wheelAngleSlider.value = _wheelsController._maxSteerAngle;
+        ChengeWheelAngle(_wheelAngleSlider.value);
     }
 
     public void ChengeLSDMode(bool isOn)
