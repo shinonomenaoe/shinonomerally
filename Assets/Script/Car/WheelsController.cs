@@ -37,15 +37,15 @@ public class WheelsController : MonoBehaviour
     private float _nowTorqueRate;
 
     private Rigidbody _rb;
-    public Wheel[] wheels;
+    public Wheel[] _wheels;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _rb.centerOfMass = __centerOfMassOffset;
         _carMass = _rb.mass;
-        wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
-        foreach(var wheel in wheels)
+        _wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
+        foreach(var wheel in _wheels)
         {
             wheel.defaultforwardWheelFrictionCurve = wheel.collider.forwardFriction;
         }
@@ -76,7 +76,7 @@ public class WheelsController : MonoBehaviour
 
         float currentBreake = isBraking ? _breakeTorque : 0f;
         float currentSteer = steerInput * _maxSteerAngle;
-        foreach (Wheel wheel in wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
+        foreach (Wheel wheel in _wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
         {
             if (wheel.isMotor && _engenAndGearBox._nowRPM < _engenAndGearBox._maxRPM)
             {
