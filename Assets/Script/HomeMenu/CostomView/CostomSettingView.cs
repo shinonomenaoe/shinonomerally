@@ -13,6 +13,8 @@ public class CostomSettingView : MonoBehaviour
     [SerializeField] Text _sasText;
     [SerializeField] Slider _lSDLateSlider;
     [SerializeField] Text _lSDLateText;
+    [SerializeField] Slider _wheelAngleSlider;
+    [SerializeField] Text _wheelAngleText;
 
     private void Awake()
     {
@@ -61,6 +63,8 @@ public class CostomSettingView : MonoBehaviour
         _sasSlider.maxValue = 1.5f;
         _sasSlider.minValue = 0.5f;
         _sasSlider.value = 1f;
+        _wheelAngleSlider.maxValue = 45f;
+        _wheelAngleSlider.minValue = 20f;
     }
     void StartSliderSetUp()
     {
@@ -68,5 +72,10 @@ public class CostomSettingView : MonoBehaviour
         ChengeSas(_sasSlider.value);
         _lSDLateSlider.value = _wheelsController._lSDLockLate;
         ChengeLSDRate(_lSDLateSlider.value);
+    }
+
+    public void ChengeLSDMode(bool isOn)
+    {
+        _wheelsController._isLSD = isOn;
     }
 }
