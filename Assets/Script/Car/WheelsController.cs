@@ -37,7 +37,7 @@ public class WheelsController : MonoBehaviour
     private float _nowTorqueRate;
 
     private Rigidbody _rb;
-    private Wheel[] wheels;
+    public Wheel[] wheels;
 
     private void Awake()
     {
@@ -64,7 +64,6 @@ public class WheelsController : MonoBehaviour
         float steerInput = Input.GetAxis("Horizontal");
         bool isBraking = Input.GetKey(KeyCode.Space);
         _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
-        float nowSpeedKM = _rb.linearVelocity.magnitude * 3.6f;
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
             _nowMotor = 0f;
@@ -79,7 +78,7 @@ public class WheelsController : MonoBehaviour
         float currentSteer = steerInput * _maxSteerAngle;
         foreach (Wheel wheel in wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
         {
-            if (wheel.isMotor && nowSpeedKM <= _engenAndGearBox._nowGearMaxSpeed)
+            if (wheel.isMotor && _engenAndGearBox._nowRPM < _engenAndGearBox._maxRPM)
             {
                 wheel.collider.motorTorque = _nowMotor;//最高速以上出ないようにしている
                 wheel.collider.brakeTorque = currentBreake;

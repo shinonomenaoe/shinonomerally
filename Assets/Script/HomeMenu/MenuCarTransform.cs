@@ -38,11 +38,11 @@ public class MenuCarTransform : MonoBehaviour
             _transform.position = _playerCarPosHome.position;
             _transform.rotation = _playerCarPosHome.rotation;
         }
-        if (_pos == NowPos.Costom)
+        if (_pos == NowPos.Garage)
         {
 
         }
-        if(_pos == NowPos.Garage)
+        if(_pos == NowPos.Costom)
         {
             _transform.position = _playerCarPosCostom.position;
             _transform.rotation = _playerCarPosCostom.rotation;

@@ -3,39 +3,27 @@ using UnityEngine.SceneManagement;
 
 public class HomeButtonScripts : MonoBehaviour
 {
-    [SerializeField] GameObject _selectRaceModeView;
-    [SerializeField] GameObject _selectRaceCourseView;
-    [SerializeField] GameObject _selectMugicViwe;
+    [SerializeField] GameObject UnderSelectVelt;
+    [SerializeField] GameObject[] _views;
+    GameObject _gameManager;
+    MenuCarTransform _menuCarTransform;
+    string _serectSceneName;
     private void Start()
     {
-        _selectRaceModeView.SetActive(false);
-        _selectRaceCourseView.SetActive(false);
-        _selectMugicViwe.SetActive(false);
+        _gameManager = GameObject.FindWithTag("GameManager");
+        _menuCarTransform = _gameManager.GetComponent<MenuCarTransform>();
+        foreach (var view in _views)
+        {
+            view.SetActive(false);
+        }
     }
-    string _serectSceneName;
-    public void RaceButton()
+     
+    public void ChengeView(GameObject SelectView)
     {
-        _selectRaceModeView.SetActive(true);
-    }
-    public void TimeAttack()
-    {
-        _selectRaceCourseView.SetActive(true);
+        foreach (var view in _views)view.SetActive(false);
+        SelectView.SetActive(true);
     }
 
-    public void SelectMagic()
-    {
-        _selectMugicViwe.SetActive(true);
-    }
-
-    public void GarageButton()
-    {
-        Debug.Log("この機能はまだ解放されていません");
-    }
-
-    public void CoostomButton()
-    {
-        Debug.Log("この機能はまだ解放されていません");
-    }
     public void SelectScene(string serectSceneName)
     {
         Debug.Log("シーン名が記録された");

@@ -12,7 +12,8 @@ public class CarEngenAndGearBox : MonoBehaviour
     public float _nowSpeed;
     [SerializeField] float _engenRespons = 10;
     [SerializeField] WheelCollider _driveWheel;
-    [SerializeField] public float _fRR = 3.266f;
+    [SerializeField] public float _fRRDefault = 3.266f;
+    public float _fRR;
     [SerializeField] public float _tireRadius = 0.32f;
     public bool _isHightEngenRoal = false;
     [Header("ギアボックス")]
