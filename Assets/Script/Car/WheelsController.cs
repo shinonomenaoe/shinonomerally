@@ -18,8 +18,9 @@ public class WheelsController : MonoBehaviour
     [SerializeField] private Wheel _flontRight;
     [SerializeField] private Wheel _rearLeft;
     [SerializeField] private Wheel _rearRight;
+    public Wheel[] _wheels;
+    public JointSpring _defaultSpring;//サスペンションの初期設定
     [Header("走行設定")]
-    public float _carMass;
     [SerializeField] private float _moveWheelSam = 2f;//駆動するタイヤの数
     [SerializeField] AnimationCurve _torqueCurve;//トルク曲線
     [SerializeField] public float _moreTorque = 451f;//最大トルク
@@ -30,14 +31,13 @@ public class WheelsController : MonoBehaviour
     [SerializeField] public float _maxSteerAngle = 30f;//最大ステアリング角度
     [SerializeField] private Vector3 __centerOfMassOffset = new Vector3(0, -0.5f, 0); // Yを少し下げる
     [SerializeField] public float _downForce = 50;
+    public float _carMass;
+    private Rigidbody _rb;
     [Header("エンジンとギアボックス")]
     [SerializeField] private CarEngenAndGearBox _engenAndGearBox;
 
     private float _nowMotor;
     private float _nowTorqueRate;
-
-    private Rigidbody _rb;
-    public Wheel[] _wheels;
 
     private void Awake()
     {
@@ -45,10 +45,11 @@ public class WheelsController : MonoBehaviour
         _rb.centerOfMass = __centerOfMassOffset;
         _carMass = _rb.mass;
         _wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
-        foreach(var wheel in _wheels)
+        foreach (var wheel in _wheels)
         {
             wheel.defaultforwardWheelFrictionCurve = wheel.collider.forwardFriction;
         }
+        _defaultSpring = _wheels[0].collider.suspensionSpring; 
 
     }
     private void FixedUpdate()
