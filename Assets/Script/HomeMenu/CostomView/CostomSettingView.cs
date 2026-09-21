@@ -34,7 +34,7 @@ public class CostomSettingView : MonoBehaviour
 
     void ChangeFRR(float rate)
     {
-        _carEngenAndGearBox._fRR = _carEngenAndGearBox._fRRDefault * rate;
+        _carEngenAndGearBox._fRR = rate;
         _fRRText.text = $"{rate:F2}";
     }
     void ChengeSas(float rate)
@@ -62,9 +62,6 @@ public class CostomSettingView : MonoBehaviour
 
     void SetUpSliders()
     {
-        _fRRSlider.maxValue = 1.2f;
-        _fRRSlider.minValue = 0.8f;
-        _fRRSlider.value = 1f;
         _lSDLateSlider.maxValue = 1f;
         _lSDLateSlider.minValue = 0.1f;
         _sasSlider.maxValue = 1.5f;
@@ -75,7 +72,12 @@ public class CostomSettingView : MonoBehaviour
     }
     void StartSliderSetUp()
     {
+        float nowFRR = _carEngenAndGearBox._fRR;
+        _fRRSlider.maxValue = _carEngenAndGearBox._fRRDefault + 1f;
+        _fRRSlider.minValue = _carEngenAndGearBox._fRRDefault - 1f;
+        _fRRSlider.SetValueWithoutNotify(nowFRR);
         ChangeFRR(_fRRSlider.value);
+        _sasSlider.SetValueWithoutNotify(_wheelsController._wheels[0].collider.suspensionSpring.spring / _wheelsController._defaultSpring.spring);
         ChengeSas(_sasSlider.value);
         _lSDLateSlider.value = _wheelsController._lSDLockLate;
         ChengeLSDRate(_lSDLateSlider.value);

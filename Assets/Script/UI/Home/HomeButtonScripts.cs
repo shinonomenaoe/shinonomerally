@@ -17,11 +17,17 @@ public class HomeButtonScripts : MonoBehaviour
             view.SetActive(false);
         }
     }
-     
+
     public void ChengeView(GameObject SelectView)
     {
-        foreach (var view in _views)view.SetActive(false);
+        foreach (var view in _views) view.SetActive(false);
         SelectView.SetActive(true);
+    }
+
+    public void BackView(GameObject nowView)
+    {
+        //var BackView = transform.parent.gameObject;
+        nowView.SetActive(false);
     }
 
     public void SelectScene(string serectSceneName)
