@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CarEngenAndGearBox : MonoBehaviour
 {
-    GameObject _car;
     Rigidbody _rb;
+    [SerializeField] bool _isPlayer;
     [Header("エンジン")]
     [SerializeField] public float _idelRPM = 1000f;
     [SerializeField] public float _maxRPM = 6800;
@@ -17,6 +17,7 @@ public class CarEngenAndGearBox : MonoBehaviour
     [SerializeField] public float _tireRadius = 0.32f;
     public bool _isHightEngenRoal = false;
     [Header("ギアボックス")]
+    [SerializeField] Mission _mission = Mission.MT;
     [SerializeField] public float[] _gearPow = { 3.226f, 0, 3.724f, 2.246f, 1.541f, 1.205f, 1.000f, 0.818f };
     [SerializeField] public float[] _maxGearSpeed = { 77, 0, 67, 111, 162, 207, 250, 305 };
     public int _nowGearNam = 2;
@@ -26,13 +27,16 @@ public class CarEngenAndGearBox : MonoBehaviour
 
     private void Start()
     {
+        _isPlayer = CompareTag("PlayerCar");
         _maxGear = _gearPow.Length - 1;
-        _car = GameObject.FindWithTag("PlayerCar");
-        _rb = _car.GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
     void Update()
     {
-        Clutch();
+        if (_isPlayer)
+        {
+            Clutch();
+        }
         NowMaxSpeed();
         ChengeGear();
         CalculateRPM();
@@ -40,8 +44,30 @@ public class CarEngenAndGearBox : MonoBehaviour
 
     void ChengeGear()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && _nowGearNam > 0 && _isClutch) _nowGearNam--;
-        if (Input.GetKeyDown(KeyCode.E) && _nowGearNam < _maxGear && _isClutch) _nowGearNam++;
+        float vertical = Input.GetAxis("Vertical");
+        if (_mission == Mission.MT)
+        {
+            if (Input.GetKeyDown(KeyCode.Q) && _nowGearNam > 0 && _isClutch) _nowGearNam--;
+            if (Input.GetKeyDown(KeyCode.E) && _nowGearNam < _maxGear && _isClutch) _nowGearNam++;
+            return;
+        }
+        if(_mission == Mission.AT)
+        {
+            float speedKmh = _rb.linearVelocity.magnitude * 3.6f;
+            if(_nowGearNam == 0)
+            {
+                if(vertical < 0.1f && speedKmh < 2.0f)_nowGearNam = 2;
+
+                return;
+            }
+            if (vertical < 0.1f && speedKmh < 2.0f) _nowGearNam = 0;
+
+            if (_nowGearNam == 1 && vertical > 0.1f) _nowGearNam = 2;
+
+            if(_nowGearNam > 1 && _nowGearNam < _maxGear && _nowRPM > _maxRPM - 500) _nowGearNam++;
+
+            if(_nowGearNam > 2 && _nowRPM < _idelRPM + 3000)_nowGearNam--;
+        }
     }
 
 
@@ -80,6 +106,12 @@ public class CarEngenAndGearBox : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift)) _isClutch = true;
         else _isClutch = false;
+    }
+
+    enum Mission
+    {
+        AT,
+        MT,
     }
 
 }

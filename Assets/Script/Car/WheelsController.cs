@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 [System.Serializable]
@@ -63,7 +64,7 @@ public class WheelsController : MonoBehaviour
     {
         float moveInput = Input.GetAxis("Vertical");
         float steerInput = Input.GetAxis("Horizontal");
-        bool isBraking = Input.GetKey(KeyCode.Space);
+        bool isBraking =  Input.GetAxis("Vertical") < -0.1f || Input.GetKey(KeyCode.Space);
         _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
@@ -71,7 +72,7 @@ public class WheelsController : MonoBehaviour
         }
         else if (!isBraking && _engenAndGearBox._nowGearNam == 0)
         {
-            _nowMotor = moveInput * _moreTorque * _nowTorqueRate * -_engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
+            _nowMotor = -moveInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
         }
         else if (!isBraking) _nowMotor = moveInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR  / _moveWheelSam;
 

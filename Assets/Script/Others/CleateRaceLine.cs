@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static RacingLineReCorder;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
-[RequireComponent(typeof(Rigidbody))]
-public class RacingLineReCorder : MonoBehaviour
+public class CleateRaceLine : MonoBehaviour
 {
     [System.Serializable]
     public struct PointData
@@ -14,17 +11,13 @@ public class RacingLineReCorder : MonoBehaviour
         public Vector3 position;
         public Quaternion rotation;
         public float speedKmh;
-        public  PointData(Vector3 pos, Quaternion rot, float speed)
+        public PointData(Vector3 pos, Quaternion rot, float speed)
         {
             position = pos;
             rotation = rot;
             speedKmh = speed;
         }
     }
-}
-
-public class CleateRaceLine : MonoBehaviour
-{
     [Header("記録設定")]
     [Tooltip("何秒ごとにポイントを作成するか")]
     [SerializeField] private float _roadLinePointTime = 0.5f;
@@ -48,7 +41,9 @@ public class CleateRaceLine : MonoBehaviour
         {
             StartRecord();
         }
-        else if (_isRecordingNow)
+        else if(!_isRecord && _isRecordingNow) StopRecord();
+
+        if (_isRecordingNow)
         {
             _timer += Time.deltaTime;
             if (_timer > _roadLinePointTime)
@@ -57,13 +52,13 @@ public class CleateRaceLine : MonoBehaviour
                 AddPoints();
             }
         }
-        else StopRecord();
     }
     private void StartRecord()//記録を開始・既存のポイントを削除
     {
         _recordedPoints.Clear();
         _timer = 0f;
         _isRecordingNow = true;
+        AddPoints();
 
     }
     private void StopRecord()//記録を停止・オブジェクト群を作成
@@ -98,5 +93,16 @@ public class CleateRaceLine : MonoBehaviour
     private void AddPoints()//ポイントの情報を追加
     {
         _recordedPoints.Add(new PointData(transform.position, transform.rotation, _nowSpeedKmh));
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(_recordedPoints.Count == 0) return;
+        Gizmos.color = Color.yellow;
+        for(int i = 0;i < _recordedPoints.Count; i++)
+        {
+            Gizmos.DrawLine(_recordedPoints[i].position, _recordedPoints[i + 1].position);
+            Gizmos.DrawSphere(_recordedPoints[i].position, 0.2f);
+        }
     }
 }

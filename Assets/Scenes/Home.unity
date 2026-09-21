@@ -11021,6 +11021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da07d07bce0212428f58996ab0c16ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPlayer: 0
   _idelRPM: 800
   _maxRPM: 6800
   _meterMAXRPM: 8000
@@ -11032,6 +11033,7 @@ MonoBehaviour:
   _fRR: 3.266
   _tireRadius: 0.32
   _isHightEngenRoal: 0
+  _mission: 1
   _gearPow:
   - 3.226
   - 0
@@ -12576,7 +12578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b661b8067f4bf4e804a31aba12b40f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roadLinePointTime: 0.5
+  _roadLinePointTime: 1
   _isRecord: 0
   _saveFolderPath: Assets/RacingLines
 --- !u!114 &9126811195842425475
