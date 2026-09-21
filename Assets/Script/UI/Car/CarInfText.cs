@@ -39,9 +39,18 @@ public class CarInfText : MonoBehaviour
 
     void UpdateGear()
     {
-        if (_carEngen._nowGearNam == 0) _gear.text = "R";
-        if (_carEngen._nowGearNam == 1) _gear.text = "N";
-        if (_carEngen._nowGearNam >= 2) _gear.text = $"{_carEngen._nowGearNam - 1}";
+        if(_carEngen._isMT == true)
+        {
+            if (_carEngen._nowGearNam == 0) _gear.text = "R";
+            if (_carEngen._nowGearNam == 1) _gear.text = "N";
+            if (_carEngen._nowGearNam >= 2) _gear.text = $"{_carEngen._nowGearNam - 1}";
+            return;
+        }
+        else
+        {
+            if(_carEngen._isRevers) _gear.text = "R";
+            else _gear.text = "D";
+        }
     }
 
     void UpdatePerHour()

@@ -18,18 +18,22 @@ public class CarEngenAndGearBox : MonoBehaviour
     public bool _isHightEngenRoal = false;
     [Header("ギアボックス")]
     [SerializeField] Mission _mission = Mission.MT;
+    [SerializeField] public bool _isRevers = false;
     [SerializeField] public float[] _gearPow = { 3.226f, 0, 3.724f, 2.246f, 1.541f, 1.205f, 1.000f, 0.818f };
     [SerializeField] public float[] _maxGearSpeed = { 77, 0, 67, 111, 162, 207, 250, 305 };
     public int _nowGearNam = 2;
     [SerializeField] public int _maxGear;
     public float _nowGearMaxSpeed;
     public bool _isClutch = false;
+    public bool _isMT = true;
 
     private void Start()
     {
         _isPlayer = CompareTag("PlayerCar");
         _maxGear = _gearPow.Length - 1;
         _rb = GetComponent<Rigidbody>();
+        if (_mission == Mission.MT) _isMT = true;
+        else _isMT = false;
     }
     void Update()
     {
@@ -53,20 +57,22 @@ public class CarEngenAndGearBox : MonoBehaviour
         }
         if(_mission == Mission.AT)
         {
+            if(Input.GetKeyDown(KeyCode.Q))_isRevers = true;
+            if(Input.GetKeyDown(KeyCode.E))_isRevers = false;
             float speedKmh = _rb.linearVelocity.magnitude * 3.6f;
-            if(_nowGearNam == 0)
+            if(_isRevers)
             {
-                if(vertical < 0.1f && speedKmh < 2.0f)_nowGearNam = 2;
-
+                _nowGearNam = 0;
                 return;
             }
-            if (vertical < 0.1f && speedKmh < 2.0f) _nowGearNam = 0;
+            if (_isRevers == false)
+            {
+                if (_nowGearNam <= 1 && vertical > 0.1f) _nowGearNam = 2;
+                if (_nowGearNam > 1 && _nowGearNam < _maxGear && _nowRPM > _maxRPM - 800) _nowGearNam++;
+                if (_nowGearNam > 2 && _nowRPM < _idelRPM + 2000) _nowGearNam--;
+                Debug.Log("現在のギアは"+_nowGearNam);
 
-            if (_nowGearNam == 1 && vertical > 0.1f) _nowGearNam = 2;
-
-            if(_nowGearNam > 1 && _nowGearNam < _maxGear && _nowRPM > _maxRPM - 500) _nowGearNam++;
-
-            if(_nowGearNam > 2 && _nowRPM < _idelRPM + 3000)_nowGearNam--;
+            }
         }
     }
 
@@ -114,4 +120,9 @@ public class CarEngenAndGearBox : MonoBehaviour
         MT,
     }
 
+    private void OnEnable()
+    {
+        if(_mission == Mission.MT)_isMT = true;
+        else _isMT = false;
+    }
 }

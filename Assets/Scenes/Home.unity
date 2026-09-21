@@ -11033,7 +11033,8 @@ MonoBehaviour:
   _fRR: 3.266
   _tireRadius: 0.32
   _isHightEngenRoal: 0
-  _mission: 1
+  _mission: 0
+  _isRevers: 0
   _gearPow:
   - 3.226
   - 0
@@ -11056,6 +11057,7 @@ MonoBehaviour:
   _maxGear: 0
   _nowGearMaxSpeed: 0
   _isClutch: 0
+  _isMT: 1
 --- !u!1 &3828224879600199710
 GameObject:
   m_ObjectHideFlags: 0
