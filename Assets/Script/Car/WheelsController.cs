@@ -39,8 +39,8 @@ public class WheelsController : MonoBehaviour
 
     private float _nowMotor;
     private float _nowTorqueRate;
-    [Range(-1f,1f)]private float _verticalInput;
-    [Range(-1f, 1f)] private float _horizontalInput;
+    [Range(-1f,1f)]public float _verticalInput;
+    [Range(-1f, 1f)] public float _horizontalInput;
 
     private void Awake()
     {

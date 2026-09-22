@@ -16,6 +16,7 @@ TagManager:
   - InGameUI
   - VirtualCamera
   - MainMenu
+  - AICar
   layers:
   - Default
   - TransparentFX

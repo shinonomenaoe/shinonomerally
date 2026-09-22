@@ -4,8 +4,8 @@ public class CarEngenAndGearBox : MonoBehaviour
 {
     Rigidbody _rb;
     [SerializeField] bool _isPlayer;
-    [Range(-1f, 1f)] private float _verticalInput;
-    [Range(-1f, 1f)] private float _horizontalInput;
+    [Range(-1f, 1f)] public float _verticalInput;
+    [Range(-1f, 1f)] public float _horizontalInput;
     [Header("ƒGƒ“ƒWƒ“")]
     [SerializeField] public float _idelRPM = 1000f;
     [SerializeField] public float _maxRPM = 6800;

@@ -6,11 +6,15 @@ public class HomeButtonScripts : MonoBehaviour
     [SerializeField] GameObject UnderSelectVelt;
     [SerializeField] GameObject[] _views;
     GameObject _gameManager;
+    GameObject _mainGameManager;
+    RaceINF _raceINF;
     MenuCarTransform _menuCarTransform;
     string _serectSceneName;
     private void Start()
     {
+        _mainGameManager = GameObject.FindWithTag("MainGameManager");
         _gameManager = GameObject.FindWithTag("GameManager");
+        _raceINF = _mainGameManager.GetComponent<RaceINF>();
         _menuCarTransform = _gameManager.GetComponent<MenuCarTransform>();
         foreach (var view in _views)
         {
@@ -28,6 +32,12 @@ public class HomeButtonScripts : MonoBehaviour
     {
         //var BackView = transform.parent.gameObject;
         nowView.SetActive(false);
+    }
+
+    public void SelectRaceMode(int raceModeIndexs)
+    {
+        _raceINF._raceType = (RaceINF.RaceType)raceModeIndexs;
+        Debug.Log($"RaceModeÇ™{_raceINF._raceType}Ç…ïœçXÇ≥ÇÍÇ‹ÇµÇΩ");
     }
 
     public void SelectScene(string serectSceneName)
