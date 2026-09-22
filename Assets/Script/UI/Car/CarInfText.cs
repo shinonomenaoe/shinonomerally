@@ -39,7 +39,7 @@ public class CarInfText : MonoBehaviour
 
     void UpdateGear()
     {
-        if(_carEngen._isMT == true)
+        if(_carEngen._mission == CarEngenAndGearBox.Mission.MT)
         {
             if (_carEngen._nowGearNam == 0) _gear.text = "R";
             if (_carEngen._nowGearNam == 1) _gear.text = "N";
