@@ -2539,6 +2539,10 @@ PrefabInstance:
       value: AISupra
       objectReference: {fileID: 0}
     - target: {fileID: 6159934461898689173, guid: 05b0cbfce0d5fc446b88f0c930e9015b, type: 3}
+      propertyPath: _brakePow
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159934461898689173, guid: 05b0cbfce0d5fc446b88f0c930e9015b, type: 3}
       propertyPath: _raicingLine
       value: 
       objectReference: {fileID: 1159568360}

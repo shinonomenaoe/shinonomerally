@@ -77,7 +77,7 @@ public class EnemyAI : MonoBehaviour
         //ブレーキアクセル操作
         float throttle;
         float steerAds = Mathf.Abs(steer);
-        if(nowAngle > _brakeAngle ||  steerAds < 0.75)
+        if(nowAngle > _brakeAngle ||  steerAds < 0.5f)
         {
             throttle = _brakePow;
         }
