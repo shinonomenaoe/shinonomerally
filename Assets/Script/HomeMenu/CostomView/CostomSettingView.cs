@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class CostomSettingView : MonoBehaviour
 {
@@ -15,14 +17,12 @@ public class CostomSettingView : MonoBehaviour
     [SerializeField] Text _lSDLateText;
     [SerializeField] Slider _wheelAngleSlider;
     [SerializeField] Text _wheelAngleText;
+    [SerializeField] Dropdown _missionDropDown;
 
     private void Awake()
     {
         SetUpSliders();
-        _fRRSlider.onValueChanged.AddListener(ChangeFRR);
-        _sasSlider.onValueChanged.AddListener(ChengeSas);
-        _lSDLateSlider.onValueChanged.AddListener(ChengeLSDRate);
-        _wheelAngleSlider.onValueChanged.AddListener(ChengeWheelAngle);
+        AddUIMesod();
     }
     private void OnEnable()
     {
@@ -30,6 +30,7 @@ public class CostomSettingView : MonoBehaviour
         _carEngenAndGearBox = _playerCar.GetComponent<CarEngenAndGearBox>();
         _wheelsController = _playerCar.GetComponent<WheelsController>();
         StartSliderSetUp();
+        StartSetUpDropDown();
     }
 
     void ChangeFRR(float rate)
@@ -60,6 +61,11 @@ public class CostomSettingView : MonoBehaviour
         _wheelAngleText.text = $"{rate:F2}";
     }
 
+    void ChengeMission(int index)
+    {
+        _carEngenAndGearBox._mission = (CarEngenAndGearBox.Mission)index;
+    }
+
     void SetUpSliders()
     {
         _lSDLateSlider.maxValue = 1f;
@@ -69,6 +75,13 @@ public class CostomSettingView : MonoBehaviour
         _sasSlider.value = 1f;
         _wheelAngleSlider.maxValue = 45f;
         _wheelAngleSlider.minValue = 20f;
+    }
+    void StartSetUpDropDown()
+    {
+        _missionDropDown.ClearOptions();
+        string[] missionName = Enum.GetNames(typeof(CarEngenAndGearBox.Mission));
+        _missionDropDown.AddOptions(new List<string>(missionName));
+        _missionDropDown.value = (int)_carEngenAndGearBox._mission;
     }
     void StartSliderSetUp()
     {
@@ -83,6 +96,15 @@ public class CostomSettingView : MonoBehaviour
         ChengeLSDRate(_lSDLateSlider.value);
         _wheelAngleSlider.value = _wheelsController._maxSteerAngle;
         ChengeWheelAngle(_wheelAngleSlider.value);
+    }
+
+    private void AddUIMesod()
+    {
+        _fRRSlider.onValueChanged.AddListener(ChangeFRR);
+        _sasSlider.onValueChanged.AddListener(ChengeSas);
+        _lSDLateSlider.onValueChanged.AddListener(ChengeLSDRate);
+        _wheelAngleSlider.onValueChanged.AddListener(ChengeWheelAngle);
+        _missionDropDown.onValueChanged.AddListener(ChengeMission);
     }
 
     public void ChengeLSDMode(bool isOn)

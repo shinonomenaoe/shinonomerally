@@ -11033,7 +11033,7 @@ MonoBehaviour:
   _fRR: 3.266
   _tireRadius: 0.32
   _isHightEngenRoal: 0
-  _mission: 0
+  _mission: 1
   _isRevers: 0
   _gearPow:
   - 3.226

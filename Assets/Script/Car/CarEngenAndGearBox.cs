@@ -4,6 +4,8 @@ public class CarEngenAndGearBox : MonoBehaviour
 {
     Rigidbody _rb;
     [SerializeField] bool _isPlayer;
+    [Range(-1f, 1f)] private float _verticalInput;
+    [Range(-1f, 1f)] private float _horizontalInput;
     [Header("エンジン")]
     [SerializeField] public float _idelRPM = 1000f;
     [SerializeField] public float _maxRPM = 6800;
@@ -17,7 +19,7 @@ public class CarEngenAndGearBox : MonoBehaviour
     [SerializeField] public float _tireRadius = 0.32f;
     public bool _isHightEngenRoal = false;
     [Header("ギアボックス")]
-    [SerializeField] Mission _mission = Mission.MT;
+    [SerializeField]  public Mission _mission = Mission.MT;
     [SerializeField] public bool _isRevers = false;
     [SerializeField] public float[] _gearPow = { 3.226f, 0, 3.724f, 2.246f, 1.541f, 1.205f, 1.000f, 0.818f };
     [SerializeField] public float[] _maxGearSpeed = { 77, 0, 67, 111, 162, 207, 250, 305 };
@@ -37,6 +39,8 @@ public class CarEngenAndGearBox : MonoBehaviour
     }
     void Update()
     {
+        _verticalInput = Input.GetAxis("Vertical");
+        _horizontalInput = Input.GetAxis("Horizontal");
         if (_isPlayer)
         {
             Clutch();
@@ -48,7 +52,6 @@ public class CarEngenAndGearBox : MonoBehaviour
 
     void ChengeGear()
     {
-        float vertical = Input.GetAxis("Vertical");
         if (_mission == Mission.MT)
         {
             if (Input.GetKeyDown(KeyCode.Q) && _nowGearNam > 0 && _isClutch) _nowGearNam--;
@@ -67,7 +70,7 @@ public class CarEngenAndGearBox : MonoBehaviour
             }
             if (_isRevers == false)
             {
-                if (_nowGearNam <= 1 && vertical > 0.1f) _nowGearNam = 2;
+                if (_nowGearNam <= 1 && _verticalInput > 0.1f) _nowGearNam = 2;
                 if (_nowGearNam > 1 && _nowGearNam < _maxGear && _nowRPM > _maxRPM - 800) _nowGearNam++;
                 if (_nowGearNam > 2 && _nowRPM < _idelRPM + 2000) _nowGearNam--;
                 Debug.Log("現在のギアは"+_nowGearNam);
@@ -86,7 +89,7 @@ public class CarEngenAndGearBox : MonoBehaviour
     {
         if (_isClutch || _nowGearNam == 1)
         {
-            float throttle = Mathf.Clamp01(Input.GetAxis("Vertical"));
+            float throttle = Mathf.Clamp01(_verticalInput);
             float targetRPM = Mathf.Lerp(_idelRPM, _meterMAXRPM, throttle);
             _nowRPM = Mathf.Lerp(_nowRPM, targetRPM , _engenRespons * Time.deltaTime);
             return;
@@ -99,7 +102,7 @@ public class CarEngenAndGearBox : MonoBehaviour
         targetEngineRPM = Mathf.Max(targetEngineRPM, _idelRPM);
         _nowRPM = Mathf.Lerp(_nowRPM, targetEngineRPM, _engenRespons * Time.deltaTime);
         _nowRPM = Mathf.Clamp(_nowRPM, _idelRPM, _maxRPM);
-        if (_nowRPM >= _maxRPM - 50f && Input.GetAxis("Vertical") > 0.1)
+        if (_nowRPM >= _maxRPM - 50f && _verticalInput > 0.1)
         {
             _nowRPM += Random.Range(-100, 100);
         }
@@ -114,7 +117,7 @@ public class CarEngenAndGearBox : MonoBehaviour
         else _isClutch = false;
     }
 
-    enum Mission
+    public enum Mission
     {
         AT,
         MT,

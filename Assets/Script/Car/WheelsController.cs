@@ -39,6 +39,8 @@ public class WheelsController : MonoBehaviour
 
     private float _nowMotor;
     private float _nowTorqueRate;
+    [Range(-1f,1f)]private float _verticalInput;
+    [Range(-1f, 1f)] private float _horizontalInput;
 
     private void Awake()
     {
@@ -55,6 +57,8 @@ public class WheelsController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        _verticalInput = Input.GetAxis("Vertical");
+        _horizontalInput = Input.GetAxis("Horizontal");
         CalculationTorque();
         GivePow();
         LSD();
@@ -62,8 +66,6 @@ public class WheelsController : MonoBehaviour
 
     private void GivePow()
     {
-        float moveInput = Input.GetAxis("Vertical");
-        float steerInput = Input.GetAxis("Horizontal");
         bool isBraking = Input.GetKey(KeyCode.Space);
         _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
@@ -72,12 +74,12 @@ public class WheelsController : MonoBehaviour
         }
         else if (!isBraking && _engenAndGearBox._nowGearNam == 0)
         {
-            _nowMotor = -moveInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
+            _nowMotor = -_verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
         }
-        else if (!isBraking) _nowMotor = moveInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR  / _moveWheelSam;
+        else if (!isBraking) _nowMotor = _verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR  / _moveWheelSam;
 
         float currentBreake = isBraking ? _breakeTorque : 0f;
-        float currentSteer = steerInput * _maxSteerAngle;
+        float currentSteer = _horizontalInput * _maxSteerAngle;
         foreach (Wheel wheel in _wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
         {
             if (wheel.isMotor && _engenAndGearBox._nowRPM < _engenAndGearBox._maxRPM)
@@ -139,7 +141,7 @@ public class WheelsController : MonoBehaviour
         float _nowRPMRate = Mathf.InverseLerp(_engenAndGearBox._idelRPM, _engenAndGearBox._maxRPM, nowRPM);
         _nowTorqueRate = _torqueCurve.Evaluate(_nowRPMRate);
         float speedKM = _rb.linearVelocity.magnitude * 3.6f;
-        float inputMove = Mathf.Abs(Input.GetAxis("Vertical"));
+        float inputMove = Mathf.Abs(_verticalInput);
         if (speedKM > 15 && inputMove > 0.01f)
         { 
             _nowTorqueRate = Mathf.Max(_nowTorqueRate, inputMove * 0.5f);
