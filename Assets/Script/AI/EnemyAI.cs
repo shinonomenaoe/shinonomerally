@@ -11,25 +11,26 @@ public class EnemyAI : MonoBehaviour
     Rigidbody _rb;
 
     [Header("AI設定")]
-    [SerializeField]  float _reachTherShold = 5f;//到着したと認識するまでの距離
-    [SerializeField]  int _lookPointIndex = 3;//どんなコーナーかを認識する現在位置からどれくらい先のポイント
+    [SerializeField] float _reachTherShold = 5f;//到着したと認識するまでの距離
+    [SerializeField] int _lookPointIndex = 3;//どんなコーナーかを認識する現在位置からどれくらい先のポイント
     [SerializeField, Range(-1, 0)] float _brakePow = -0.4f;
     [SerializeField, Range(0, 1)] float _lowThrottolePow = 0.4f;
-    [SerializeField]  float _fullThrottleSteerLimit = 0.25f;//全開で踏んでいける基準のステアの割合
-    [SerializeField]  float _brakeAngle = 35;//ブレーキを踏む角度
-    [SerializeField]  float _steerPow = 1.8f;//ステアリングを切るサイン値にかける倍率
+    [SerializeField] float _fullThrottleSteerLimit = 0.25f;//全開で踏んでいける基準のステアの割合
+    [SerializeField] float _brakeAngle = 35;//ブレーキを踏む角度
+    [SerializeField] float _steerPow = 1.8f;//ステアリングを切るサイン値にかける倍率
 
     [Header("スタックチェック")]
     [SerializeField] private float _stuckCheckTime = 0.25f;//これ以上動けなかった場合スタック判定に入る
     float _stuckTimer = 0f;
-    bool  _isRecover = false;
+    bool _isRecover = false;
     float _recoverTime = 0;
 
     private readonly List<Transform> _wayPoints = new List<Transform>();
     int _nowWayPointNam = 0;
-    int _maxWayPointNam => _wayPoints.Count -1;
+    int _maxWayPointNam => _wayPoints.Count - 1;
     void Start()
     {
+        CheckRaceMode();
         _carEngenAndGearBox = GetComponent<CarEngenAndGearBox>();
         _wheelsController = GetComponent<WheelsController>();
         _rb = GetComponent<Rigidbody>();
@@ -61,12 +62,12 @@ public class EnemyAI : MonoBehaviour
             _nowWayPointNam++;
             nowTargetWayPoint = _wayPoints[_nowWayPointNam];
         }
-        
+
         //ステアリング操作
         Vector3 localtarget = transform.InverseTransformPoint(nowTargetWayPoint.position);
         float targetAngle = localtarget.x / localtarget.magnitude;
         float steer = Mathf.Clamp(targetAngle * _steerPow, -1, 1);
-        
+
         //コーナー角度の計算
         int lookAheadIdx = Mathf.Min(_lookPointIndex + _nowWayPointNam, _maxWayPointNam);
         Transform farTarget = _wayPoints[_lookPointIndex];
@@ -77,11 +78,11 @@ public class EnemyAI : MonoBehaviour
         //ブレーキアクセル操作
         float throttle;
         float steerAds = Mathf.Abs(steer);
-        if(nowAngle > _brakeAngle ||  steerAds < 0.5f)
+        if (nowAngle > _brakeAngle || steerAds < 0.5f)
         {
             throttle = _brakePow;
         }
-        else if(_fullThrottleSteerLimit < steerAds)
+        else if (_fullThrottleSteerLimit < steerAds)
         {
             throttle = _lowThrottolePow;
         }
@@ -97,11 +98,11 @@ public class EnemyAI : MonoBehaviour
 
     void CheckStuck()
     {
-        float speedKmh = _rb.linearVelocity.magnitude *3.6f;
-        if(speedKmh < 3.0 && _wheelsController._verticalInput > 0.3f)
+        float speedKmh = _rb.linearVelocity.magnitude * 3.6f;
+        if (speedKmh < 3.0 && _wheelsController._verticalInput > 0.3f)
         {
             _stuckTimer += Time.deltaTime;
-            if(_stuckTimer >= _stuckCheckTime)
+            if (_stuckTimer >= _stuckCheckTime)
             {
                 _isRecover = true;
                 _stuckTimer = 0f;
@@ -116,15 +117,30 @@ public class EnemyAI : MonoBehaviour
 
     void ExecuteRecovery()
     {
-        _recoverTime -= Time.deltaTime;
-        _carEngenAndGearBox._isRevers = true;
-        _carEngenAndGearBox._verticalInput = 0.8f;
-        _wheelsController._verticalInput = 0.8f;
-        _wheelsController._horizontalInput = -_wheelsController._horizontalInput;
-        if(_recoverTime <= 0f)
+        //_recoverTime -= Time.deltaTime;
+        //_carEngenAndGearBox._isRevers = true;
+        //_carEngenAndGearBox._verticalInput = 0.8f;
+        //_wheelsController._verticalInput = 0.8f;
+        //_wheelsController._horizontalInput = -_wheelsController._horizontalInput;
+        //if (_recoverTime <= 0f)
+        //{
+        //    _isRecover = false;
+        //    _carEngenAndGearBox._isRevers = false;
+        //}
+        _recoverTime = 0f;
+        transform.position = _wayPoints[_nowWayPointNam].transform.position;
+        transform.rotation = _wayPoints[_nowWayPointNam].transform.rotation;
+        _carEngenAndGearBox._isRevers = false;
+        _isRecover = false;
+    }
+
+    void CheckRaceMode()
+    {
+        GameObject mainGameManager = GameObject.FindGameObjectWithTag("MainGameManager");
+        RaceINF raceINF = mainGameManager.GetComponent<RaceINF>();
+        if(raceINF._raceType == RaceINF.RaceType.TimeAttack)
         {
-            _isRecover = false;
-            _carEngenAndGearBox._isRevers = false;
+            gameObject.SetActive(false);
         }
     }
 }
