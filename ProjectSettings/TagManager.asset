@@ -17,6 +17,7 @@ TagManager:
   - VirtualCamera
   - MainMenu
   - AICar
+  - CourseLine
   layers:
   - Default
   - TransparentFX

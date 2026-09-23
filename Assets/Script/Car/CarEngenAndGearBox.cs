@@ -12,7 +12,7 @@ public class CarEngenAndGearBox : MonoBehaviour
     [SerializeField]public float _meterMAXRPM = 8000;
     public float _nowRPM;
     public float _nowSpeed;
-    [SerializeField] float _engenRespons = 10;
+    [SerializeField] public float _engenRespons = 10;
     [SerializeField] WheelCollider _driveWheel;
     [SerializeField] public float _fRRDefault = 3.266f;//FRR‚Ì‰Šú’l
     public float _fRR;

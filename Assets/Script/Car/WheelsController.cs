@@ -23,7 +23,7 @@ public class WheelsController : MonoBehaviour
     public JointSpring _defaultSpring;//サスペンションの初期設定
     [Header("走行設定")]
     [SerializeField] private float _moveWheelSam = 2f;//駆動するタイヤの数
-    [SerializeField] AnimationCurve _torqueCurve;//トルク曲線
+    [SerializeField] public AnimationCurve _torqueCurve;//トルク曲線
     [SerializeField] public float _moreTorque = 451f;//最大トルク
     [SerializeField] public float _breakeTorque = 600f;//ブレーキ力
     [SerializeField] public bool _isLSD = false;//LSDを装備しているかどうか

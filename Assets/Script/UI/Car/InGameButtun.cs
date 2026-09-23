@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InGameButtun : MonoBehaviour
 {
+    GameObject _resetPos;
     void Start()
     {
         
@@ -16,7 +17,15 @@ public class InGameButtun : MonoBehaviour
     public void ResetPos()
     {
         GameObject inGameManager = GameObject.FindGameObjectWithTag("GameManager");
-        ReadySystem readySystem = inGameManager.GetComponent<ReadySystem>();
-        readySystem.ResetButton();
+        //ReadySystem readySystem = inGameManager.GetComponent<ReadySystem>();
+        //readySystem.ResetButton();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "CourseLine")
+        {
+            _resetPos = other.GetComponent<GameObject>();
+        }
     }
 }
