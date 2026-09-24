@@ -67,7 +67,7 @@ public class WheelsController : MonoBehaviour
 
     private void GivePow()
     {
-        isBraking = Input.GetKey(KeyCode.Space);
+        isBraking = ControlleINF.isBrake;
         _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {

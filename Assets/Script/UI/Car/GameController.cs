@@ -19,7 +19,16 @@ public class GameController : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private void Update()
     {
         if(controllerMode  == ControllerMode.Button)return;
-
+        if(controllerMode == ControllerMode.KeyBord)
+        {
+            if(Input.GetKey(KeyCode.W)) ControlleINF.varticalInput = 1;
+            else ControlleINF.varticalInput = 0;
+            if(Input.GetKey(KeyCode.A)) ControlleINF.horizontalInput = -1;
+            else if(Input.GetKey(KeyCode.D)) ControlleINF.horizontalInput = 1;
+            else ControlleINF.horizontalInput = 0;
+            if(Input.GetKey(KeyCode.Space))ControlleINF.isBrake = true;
+            else ControlleINF.isBrake = false;
+        }
     }
     public void OnPointerDown(PointerEventData eventData)
     {
