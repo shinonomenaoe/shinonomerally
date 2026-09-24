@@ -39,6 +39,7 @@ public class WheelsController : MonoBehaviour
 
     private float _nowMotor;
     private float _nowTorqueRate;
+    public bool isBraking;
     [Range(-1f,1f)]public float _verticalInput;
     [Range(-1f, 1f)] public float _horizontalInput;
 
@@ -66,7 +67,7 @@ public class WheelsController : MonoBehaviour
 
     private void GivePow()
     {
-        bool isBraking = Input.GetKey(KeyCode.Space);
+        isBraking = Input.GetKey(KeyCode.Space);
         _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {

@@ -41,7 +41,7 @@ public class SideBrake : MonoBehaviour
         OnBrales();
     }
 
-    void OnBrales()
+    public void OnBrales()
     {
         if (Input.GetMouseButton(0))
         {
