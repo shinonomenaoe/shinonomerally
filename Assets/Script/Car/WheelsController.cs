@@ -40,13 +40,13 @@ public class WheelsController : MonoBehaviour
     private float _nowMotor;
     private float _nowTorqueRate;
     public bool isBraking;
-    [Range(-1f,1f)]public float _verticalInput;
-    [Range(-1f, 1f)] public float _horizontalInput;
+    [Range(-1f,1f)]public float verticalInput;
+    [Range(-1f, 1f)] public float horizontalInput;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.centerOfMass = __centerOfMassOffset;
+        _rb.centerOfMass = __centerOfMassOffset;  
         _carMass = _rb.mass;
         _wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
         foreach (var wheel in _wheels)
@@ -58,8 +58,8 @@ public class WheelsController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _verticalInput = Input.GetAxis("Vertical");
-        _horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = ControlleINF.varticalInput;
+        horizontalInput = ControlleINF.horizontalInput;
         CalculationTorque();
         GivePow();
         LSD();
@@ -75,12 +75,12 @@ public class WheelsController : MonoBehaviour
         }
         else if (!isBraking && _engenAndGearBox._nowGearNam == 0)
         {
-            _nowMotor = -_verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
+            _nowMotor = -verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
         }
-        else if (!isBraking) _nowMotor = _verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR  / _moveWheelSam;
+        else if (!isBraking) _nowMotor = verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR  / _moveWheelSam;
 
         float currentBreake = isBraking ? _breakeTorque : 0f;
-        float currentSteer = _horizontalInput * _maxSteerAngle;
+        float currentSteer = horizontalInput * _maxSteerAngle;
         foreach (Wheel wheel in _wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
         {
             if (wheel.isMotor && _engenAndGearBox._nowRPM < _engenAndGearBox._maxRPM)
@@ -142,7 +142,7 @@ public class WheelsController : MonoBehaviour
         float _nowRPMRate = Mathf.InverseLerp(_engenAndGearBox._idelRPM, _engenAndGearBox._maxRPM, nowRPM);
         _nowTorqueRate = _torqueCurve.Evaluate(_nowRPMRate);
         float speedKM = _rb.linearVelocity.magnitude * 3.6f;
-        float inputMove = Mathf.Abs(_verticalInput);
+        float inputMove = Mathf.Abs(verticalInput);
         if (speedKM > 15 && inputMove > 0.01f)
         { 
             _nowTorqueRate = Mathf.Max(_nowTorqueRate, inputMove * 0.5f);

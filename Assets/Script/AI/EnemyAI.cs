@@ -90,8 +90,8 @@ public class EnemyAI : MonoBehaviour
         {
             throttle = 1f;
         }
-        _wheelsController._verticalInput = throttle;
-        _wheelsController._horizontalInput = steer;
+        _wheelsController.verticalInput = throttle;
+        _wheelsController.horizontalInput = steer;
         _carEngenAndGearBox._verticalInput = throttle;
         _carEngenAndGearBox._horizontalInput = steer;
     }
@@ -99,7 +99,7 @@ public class EnemyAI : MonoBehaviour
     void CheckStuck()
     {
         float speedKmh = _rb.linearVelocity.magnitude * 3.6f;
-        if (speedKmh < 3.0 && _wheelsController._verticalInput > 0.3f)
+        if (speedKmh < 3.0 && _wheelsController.verticalInput > 0.3f)
         {
             _stuckTimer += Time.deltaTime;
             if (_stuckTimer >= _stuckCheckTime)
