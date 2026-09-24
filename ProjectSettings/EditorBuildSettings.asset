@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 2f04795e867224f4b9d42935ac1699be
+  - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: 3c2a7358265d2f94c824bb9a7c9585d4
+  - enabled: 1
     path: Assets/Scenes/Myougi1.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

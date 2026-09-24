@@ -18,7 +18,6 @@ public class CostomSettingView : MonoBehaviour
     [SerializeField] Slider _wheelAngleSlider;
     [SerializeField] Text _wheelAngleText;
     [SerializeField] Dropdown _missionDropDown;
-    [SerializeField] Dropdown _bodyColorDropDown;
 
     private void Awake()
     {
@@ -83,8 +82,6 @@ public class CostomSettingView : MonoBehaviour
         string[] missionName = Enum.GetNames(typeof(CarEngenAndGearBox.Mission));
         _missionDropDown.AddOptions(new List<string>(missionName));
         _missionDropDown.value = (int)_carEngenAndGearBox._mission;
-        _bodyColorDropDown.ClearOptions();
-
     }
     void StartSliderSetUp()
     {
