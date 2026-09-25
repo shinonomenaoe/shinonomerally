@@ -39,8 +39,8 @@ public class CarEngenAndGearBox : MonoBehaviour
     }
     void Update()
     {
-        _verticalInput = Input.GetAxis("Vertical");
-        _horizontalInput = Input.GetAxis("Horizontal");
+        _verticalInput = ControllerINF.varticalInput;
+        _horizontalInput = ControllerINF.horizontalInput;
         if (_isPlayer)
         {
             Clutch();

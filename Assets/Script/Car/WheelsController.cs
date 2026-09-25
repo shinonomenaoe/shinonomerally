@@ -58,8 +58,8 @@ public class WheelsController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        verticalInput = ControlleINF.varticalInput;
-        horizontalInput = ControlleINF.horizontalInput;
+        verticalInput = ControllerINF.varticalInput;
+        horizontalInput = ControllerINF.horizontalInput;
         CalculationTorque();
         GivePow();
         LSD();
@@ -67,7 +67,7 @@ public class WheelsController : MonoBehaviour
 
     private void GivePow()
     {
-        isBraking = ControlleINF.isBrake;
+        isBraking = ControllerINF.isBrake;
         _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {

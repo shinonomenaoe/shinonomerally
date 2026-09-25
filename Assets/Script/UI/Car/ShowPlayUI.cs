@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ShowPlayUI : MonoBehaviour
 {
-    [SerializeField]GameObject _playUi;
+    [SerializeField]GameObject[] _playUi;
     HomeChecker _homeChecker;
     PlayINF _playINF;
 
@@ -15,9 +15,19 @@ public class ShowPlayUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_homeChecker._isHome || _playINF._isGoal) _playUi.SetActive(false);
-        else _playUi.SetActive(true);
-
-
+        if (_homeChecker._isHome || _playINF._isGoal) 
+        {
+            foreach (GameObject ui in _playUi)
+            {
+                ui.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (GameObject ui in _playUi)
+            {
+                ui.SetActive(true);
+            }
+        }
     }
 }
