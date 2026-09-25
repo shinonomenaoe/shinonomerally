@@ -44,6 +44,17 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             }
         }
     }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        switch (_buttonMode)
+        {
+            case Button.Accelerator: ControllerINF.varticalInput = 0; break;
+            case Button.Brake: ControllerINF.isBrake = false; break;
+            case Button.RightSteer: ControllerINF.horizontalInput = 0; break;
+            case Button.LeftSteer: ControllerINF.horizontalInput = 0; break;
+        }
+    }
     public void ChengeGear(bool isUp)
     {
         if(ControllerINF.controllerMode == ControllerINF.ControllerMode.Button)
