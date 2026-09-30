@@ -4,7 +4,6 @@ public class CarSpecAttach : MonoBehaviour
 {
     [SerializeField]
     private CarSpecINF _carSpecINF;
-    [SerializeField]
     private CarSpec _carSpec;
     private Rigidbody _carRb;
     private CarEngenAndGearBox _carEngenAndGearBox;
