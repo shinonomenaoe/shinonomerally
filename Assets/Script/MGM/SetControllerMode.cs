@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SetCOntllerMode : MonoBehaviour
+public class SetControllerMode : MonoBehaviour
 {
     [SerializeField] public ControllerINF.ControllerMode setControllerMode;
     private void Awake()
