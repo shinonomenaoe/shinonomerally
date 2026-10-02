@@ -94,7 +94,7 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if (!nowAccele && _buttonMode == Button.Accelerator)
         {
             nowAccelePow = Mathf.MoveTowards(nowAccelePow, 0, vaticalInputChengeSpeed * Time.deltaTime);
-            ControllerINF.varticalInput = nowAccelePow;
+            ControllerINF.varticalInput = 0;
         }
     }
     private void InputSteer()
@@ -112,7 +112,7 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if (!nowLeftSteer && !nowRightSteer && (_buttonMode == Button.LeftSteer || _buttonMode == Button.RightSteer))
         {
             nowSteerPow = Mathf.MoveTowards(nowSteerPow, 0, steerChengeSpeed * Time.deltaTime);
-            ControllerINF.horizontalInput = nowSteerPow;
+            ControllerINF.horizontalInput = 0;
         }
     }
     public enum Button
