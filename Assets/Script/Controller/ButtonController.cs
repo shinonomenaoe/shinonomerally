@@ -10,35 +10,27 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     SideBrake _sideBrake;
     [SerializeField] Button _buttonMode;
     [SerializeField] float _originalSteerChengePow = 3.0f;
-    static float _steerChengeSpeed;
-    [Range(-1, 1)] static float _nowSteerPow;
-    static bool _nowRightSteer = false;
-    static bool _nowLeftSteer = false;
+    [SerializeField] float _originalVaticalInputPow = 3.0f;
+    static float steerChengeSpeed;
+    static float vaticalInputChengeSpeed;
+    [Range(-1, 1)] static float nowSteerPow;
+    [Range(0, 1)] static float nowAccelePow;
+    static bool nowRightSteer = false;
+    static bool nowLeftSteer = false;
+    static bool nowAccele = false;
     void Start()
     {
         _playerCar = GameObject.FindWithTag("PlayerCar");
         _carEngenBox = _playerCar.GetComponent<CarEngenAndGearBox>();
         _sideBrake = _playerCar.GetComponent<SideBrake>();
-        _steerChengeSpeed = _originalSteerChengePow;
+        steerChengeSpeed = _originalSteerChengePow;
+        vaticalInputChengeSpeed = _originalVaticalInputPow;
     }
     private void Update()
     {
         if(controllerMode != ControllerINF.ControllerMode.Button)return;
-        if (_nowRightSteer && _buttonMode == Button.RightSteer)
-        {
-            _nowSteerPow = Mathf.MoveTowards(_nowSteerPow, 1, _steerChengeSpeed * Time.deltaTime);
-            ControllerINF.horizontalInput = _nowSteerPow;
-        }
-        if (_nowLeftSteer && _buttonMode == Button.LeftSteer)
-        {
-            _nowSteerPow = Mathf.MoveTowards(_nowSteerPow, -1, _steerChengeSpeed * Time.deltaTime);
-            ControllerINF.horizontalInput = _nowSteerPow;
-        }
-        if(!_nowLeftSteer && !_nowRightSteer && (_buttonMode == Button.LeftSteer || _buttonMode == Button.RightSteer))
-        {
-            _nowSteerPow = Mathf.MoveTowards(_nowSteerPow, 0, _steerChengeSpeed * Time.deltaTime);
-            ControllerINF.horizontalInput = _nowSteerPow;
-        }
+        InputAccele();
+        InputSteer();
     }
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -46,10 +38,10 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             switch (_buttonMode)
             {
-                case Button.Accelerator :ControllerINF.varticalInput = 1; break;
+                case Button.Accelerator : nowAccele = true; break;
                 case Button.Brake : ControllerINF.isBrake = true; break;
-                case Button.RightSteer: _nowRightSteer = true; break;
-                case Button.LeftSteer: _nowLeftSteer = true; break;
+                case Button.RightSteer: nowRightSteer = true; break;
+                case Button.LeftSteer: nowLeftSteer = true; break;
             }
         }
     }
@@ -59,10 +51,10 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             switch (_buttonMode)
             {
-                case Button.Accelerator: ControllerINF.varticalInput = 0; break;
+                case Button.Accelerator: nowAccele = false; break;
                 case Button.Brake: ControllerINF.isBrake = false; break;
-                case Button.RightSteer: _nowRightSteer = false; break;
-                case Button.LeftSteer: _nowLeftSteer = false; break;
+                case Button.RightSteer: nowRightSteer = false; break;
+                case Button.LeftSteer: nowLeftSteer = false; break;
             }
         }
     }
@@ -71,10 +63,10 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         switch (_buttonMode)
         {
-            case Button.Accelerator: ControllerINF.varticalInput = 0; break;
+            case Button.Accelerator: nowAccele = false; break;
             case Button.Brake: ControllerINF.isBrake = false; break;
-            case Button.RightSteer: _nowRightSteer = false; break;
-            case Button.LeftSteer: _nowLeftSteer = false; ; break;
+            case Button.RightSteer: nowRightSteer = false; break;
+            case Button.LeftSteer: nowLeftSteer = false; ; break;
         }
     }
     public void ChengeGear(bool isUp)
@@ -91,6 +83,38 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         _sideBrake.OnBrales();
     }
+
+    private void InputAccele()
+    {
+        if (nowAccele && _buttonMode == Button.Accelerator)
+        {
+            nowAccelePow = Mathf.MoveTowards(nowAccelePow, 1, vaticalInputChengeSpeed * Time.deltaTime);
+            ControllerINF.varticalInput = nowAccelePow;
+        }
+        if (!nowAccele && _buttonMode == Button.Accelerator)
+        {
+            nowAccelePow = Mathf.MoveTowards(nowAccelePow, 0, vaticalInputChengeSpeed * Time.deltaTime);
+            ControllerINF.varticalInput = nowAccelePow;
+        }
+    }
+    private void InputSteer()
+    {
+        if (nowRightSteer && _buttonMode == Button.RightSteer)
+        {
+            nowSteerPow = Mathf.MoveTowards(nowSteerPow, 1, steerChengeSpeed * Time.deltaTime);
+            ControllerINF.horizontalInput = nowSteerPow;
+        }
+        if (nowLeftSteer && _buttonMode == Button.LeftSteer)
+        {
+            nowSteerPow = Mathf.MoveTowards(nowSteerPow, -1, steerChengeSpeed * Time.deltaTime);
+            ControllerINF.horizontalInput = nowSteerPow;
+        }
+        if (!nowLeftSteer && !nowRightSteer && (_buttonMode == Button.LeftSteer || _buttonMode == Button.RightSteer))
+        {
+            nowSteerPow = Mathf.MoveTowards(nowSteerPow, 0, steerChengeSpeed * Time.deltaTime);
+            ControllerINF.horizontalInput = nowSteerPow;
+        }
+    }
     public enum Button
     {
         Accelerator,
@@ -106,7 +130,8 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         _playerCar = GameObject.FindWithTag("PlayerCar");
         _carEngenBox = _playerCar.GetComponent<CarEngenAndGearBox>();
         _sideBrake = _playerCar.GetComponent<SideBrake>();
-        _steerChengeSpeed = _originalSteerChengePow;
+        steerChengeSpeed = _originalSteerChengePow;
+        vaticalInputChengeSpeed = _originalVaticalInputPow;
     }
     void OnDestroy()
     {

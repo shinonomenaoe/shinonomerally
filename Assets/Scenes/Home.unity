@@ -3601,6 +3601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buttonMode: 2
   _originalSteerChengePow: 3
+  _originalVaticalInputPow: 3
 --- !u!114 &631746949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5469,6 +5470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buttonMode: 1
   _originalSteerChengePow: 0
+  _originalVaticalInputPow: 3
 --- !u!114 &874792683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6857,6 +6859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buttonMode: 0
   _originalSteerChengePow: 0
+  _originalVaticalInputPow: 3
 --- !u!114 &1058109308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16518,6 +16521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buttonMode: 3
   _originalSteerChengePow: 3
+  _originalVaticalInputPow: 3
 --- !u!114 &2136684499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17025,7 +17029,6 @@ GameObject:
   - component: {fileID: 2640140098448524753}
   - component: {fileID: 1600187565315925268}
   - component: {fileID: 2640140098448524754}
-  - component: {fileID: 2640140098448524755}
   m_Layer: 0
   m_Name: MainGameManager
   m_TagString: MainGameManager
@@ -17596,19 +17599,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178127703d00e4840b5289449ae7d3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2640140098448524755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819012792857439315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d342e56fa3979f4d84622eb03b6302f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  setControllerMode: 1
 --- !u!4 &2647755685394055938
 Transform:
   m_ObjectHideFlags: 0
@@ -18364,6 +18354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buttonMode: 0
   _originalSteerChengePow: 0
+  _originalVaticalInputPow: 3
 --- !u!114 &4359100423392205483
 MonoBehaviour:
   m_ObjectHideFlags: 0
