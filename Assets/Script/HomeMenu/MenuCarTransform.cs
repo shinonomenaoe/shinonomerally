@@ -35,8 +35,8 @@ public class MenuCarTransform : MonoBehaviour
     {
         if(_pos  == NowPos.Home)
         {
-            _transform.position = _playerCarPosHome.position;
-            _transform.rotation = _playerCarPosHome.rotation;
+            //_transform.position = _playerCarPosHome.position;
+            //_transform.rotation = _playerCarPosHome.rotation;
         }
         if (_pos == NowPos.Garage)
         {

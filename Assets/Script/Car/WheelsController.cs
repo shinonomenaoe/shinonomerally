@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -68,7 +69,8 @@ public class WheelsController : MonoBehaviour
     private void GivePow()
     {
         isBraking = ControllerINF.isBrake;
-        _rb.AddForce(-transform.up * _downForce * _rb.angularVelocity.magnitude);
+        float downforcePow = Mathf.Clamp(_downForce * _rb.linearVelocity.magnitude * _rb.linearVelocity.magnitude, 0f, _rb.mass * 5f);
+        _rb.AddForce(Vector3.down * downforcePow,ForceMode.Force);
         if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
             _nowMotor = 0f;
@@ -147,6 +149,5 @@ public class WheelsController : MonoBehaviour
         { 
             _nowTorqueRate = Mathf.Max(_nowTorqueRate, inputMove * 0.5f);
         }
-            
     }
 }

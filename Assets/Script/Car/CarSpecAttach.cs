@@ -23,6 +23,7 @@ public class CarSpecAttach : MonoBehaviour
         _carRb.mass = _carSpec.mass;
         _wheelsController._torqueCurve = _carSpec.torqueCurve;
         _wheelsController._moreTorque = _carSpec.moreTorque;
+        _wheelsController._downForce = _carSpec.downForce;
         _carEngenAndGearBox._idelRPM = _carSpec.idleRPM;
         _carEngenAndGearBox._maxRPM = _carSpec.maxRPM;
         _carEngenAndGearBox._engenRespons = _carSpec.enginqResponse;

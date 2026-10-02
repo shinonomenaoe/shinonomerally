@@ -3414,6 +3414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571591618}
   - component: {fileID: 571591619}
+  - component: {fileID: 571591620}
   m_Layer: 5
   m_Name: SumahoPlayUI
   m_TagString: Untagged
@@ -3459,6 +3460,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae8e90c2fa8db74dbcbaebc71250851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &571591620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571591617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66c5f61cd779b14b97c7424fbfa324d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonMode: 4
+  _originalSteerChengePow: 3
+  _originalVaticalInputPow: 3
 --- !u!4 &573639476 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 471828, guid: 19682540d8a014522a319b1cf788aee2, type: 3}
@@ -3600,8 +3616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonMode: 2
-  _originalSteerChengePow: 3
-  _originalVaticalInputPow: 3
+  _originalSteerChengePow: 5
+  _originalVaticalInputPow: 0
 --- !u!114 &631746949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4229,8 +4245,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4359100423392205482}
-        m_TargetAssemblyTypeName: InGameButtun, Assembly-CSharp
+      - m_Target: {fileID: 571591620}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
         m_MethodName: ChengeGear
         m_Mode: 6
         m_Arguments:
@@ -6135,8 +6151,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4359100423392205482}
-        m_TargetAssemblyTypeName: InGameButtun, Assembly-CSharp
+      - m_Target: {fileID: 571591620}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
         m_MethodName: HandBrake
         m_Mode: 1
         m_Arguments:
@@ -6457,7 +6473,7 @@ Transform:
   m_GameObject: {fileID: 1026442176}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9396927, z: -0, w: -0.3420201}
-  m_LocalPosition: {x: 108.995544, y: -66.45846, z: 127.62828}
+  m_LocalPosition: {x: 108.995544, y: -65.64, z: 127.62828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8639,8 +8655,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4359100423392205482}
-        m_TargetAssemblyTypeName: InGameButtun, Assembly-CSharp
+      - m_Target: {fileID: 571591620}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
         m_MethodName: ChengeGear
         m_Mode: 6
         m_Arguments:
@@ -16520,8 +16536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonMode: 3
-  _originalSteerChengePow: 3
-  _originalVaticalInputPow: 3
+  _originalSteerChengePow: 5
+  _originalVaticalInputPow: 0
 --- !u!114 &2136684499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16758,8 +16774,8 @@ MonoBehaviour:
   _iSDStartRPM: 30
   _lSDLockLate: 0.5
   _maxSteerAngle: 35
-  __centerOfMassOffset: {x: 0, y: -0.5, z: -0.5}
-  _downForce: 6000
+  __centerOfMassOffset: {x: 0, y: 0, z: 0}
+  _downForce: 0
   _carMass: 0
   _engenAndGearBox: {fileID: 6576649386425617409}
   isBraking: 0
@@ -16942,7 +16958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625c14eee3ad46c99df7c7c891ef668a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.5, y: 1, z: 0.5}
+  Damping: {x: 0.8, y: 1, z: 0.5}
   ShoulderOffset: {x: 0, y: 1.5, z: -5}
   VerticalArmLength: 0.4
   CameraSide: 1
@@ -16975,8 +16991,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.01, y: 0.01, z: 0.01}
-  m_Center: {x: 0, y: 0.87, z: 0}
+  m_Size: {x: 1, y: 0.24, z: 4.36}
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!114 &695454255405188028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18331,7 +18347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2828930077946166046}
   - component: {fileID: 3021992168325588289}
-  - component: {fileID: 4359100423392205482}
   - component: {fileID: 4359100423392205483}
   m_Layer: 0
   m_Name: 80su-puraSpecalMeter
@@ -18340,21 +18355,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4359100423392205482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4359100423392205481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e66c5f61cd779b14b97c7424fbfa324d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buttonMode: 0
-  _originalSteerChengePow: 0
-  _originalVaticalInputPow: 3
 --- !u!114 &4359100423392205483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19126,7 +19126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da07d07bce0212428f58996ab0c16ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPlayer: 0
+  _isPlayer: 1
   _verticalInput: 0
   _horizontalInput: 0
   _idelRPM: 800

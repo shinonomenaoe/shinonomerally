@@ -26,9 +26,10 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         steerChengeSpeed = _originalSteerChengePow;
         vaticalInputChengeSpeed = _originalVaticalInputPow;
     }
-    private void Update()
+
+    private void FixedUpdate()
     {
-        if(controllerMode != ControllerINF.ControllerMode.Button)return;
+        if (controllerMode != ControllerINF.ControllerMode.Button) return;
         InputAccele();
         InputSteer();
     }
@@ -75,8 +76,8 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             if (isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.MT) _carEngenBox._nowGearNam++;
             if (!isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.MT) _carEngenBox._nowGearNam--;
-            if (isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.AT) _carEngenBox._isRevers = true;
-            if (!isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.AT) _carEngenBox._isRevers = false;
+            if (!isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.AT) _carEngenBox._isRevers = true;
+            if (isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.AT) _carEngenBox._isRevers = false;
         }
     }
     public void HandBrake()
@@ -93,27 +94,41 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         }
         if (!nowAccele && _buttonMode == Button.Accelerator)
         {
-            nowAccelePow = Mathf.MoveTowards(nowAccelePow, 0, vaticalInputChengeSpeed * Time.deltaTime);
+            nowAccelePow = 0;
             ControllerINF.varticalInput = 0;
         }
     }
     private void InputSteer()
     {
-        if (nowRightSteer && _buttonMode == Button.RightSteer)
+        // ★ボタンのモードに関係なく、現在のフラグを見てキーボードと全く同じ三項条件で代入する
+        if (nowRightSteer && !nowLeftSteer)
         {
-            nowSteerPow = Mathf.MoveTowards(nowSteerPow, 1, steerChengeSpeed * Time.deltaTime);
-            ControllerINF.horizontalInput = nowSteerPow;
+            ControllerINF.horizontalInput = 1.0f;
         }
-        if (nowLeftSteer && _buttonMode == Button.LeftSteer)
+        else if (nowLeftSteer && !nowRightSteer)
         {
-            nowSteerPow = Mathf.MoveTowards(nowSteerPow, -1, steerChengeSpeed * Time.deltaTime);
-            ControllerINF.horizontalInput = nowSteerPow;
+            ControllerINF.horizontalInput = -1.0f;
         }
-        if (!nowLeftSteer && !nowRightSteer && (_buttonMode == Button.LeftSteer || _buttonMode == Button.RightSteer))
+        else
         {
-            nowSteerPow = Mathf.MoveTowards(nowSteerPow, 0, steerChengeSpeed * Time.deltaTime);
-            ControllerINF.horizontalInput = 0;
+            // どちらも押していない時は、どのボタンのUpdateであっても問答無用で 0 を叩き込む
+            ControllerINF.horizontalInput = 0f;
         }
+        //if (nowRightSteer && _buttonMode == Button.RightSteer)
+        //{
+        //    nowSteerPow = Mathf.MoveTowards(nowSteerPow, 1, steerChengeSpeed * Time.deltaTime);
+        //    ControllerINF.horizontalInput = nowSteerPow;
+        //}
+        //if (nowLeftSteer && _buttonMode == Button.LeftSteer)
+        //{
+        //    nowSteerPow = Mathf.MoveTowards(nowSteerPow, -1, steerChengeSpeed * Time.deltaTime);
+        //    ControllerINF.horizontalInput = nowSteerPow;
+        //}
+        //if (!nowLeftSteer && !nowRightSteer && (_buttonMode == Button.LeftSteer || _buttonMode == Button.RightSteer))
+        //{
+        //    nowSteerPow = 0;
+        //    ControllerINF.horizontalInput = 0;
+        //}
     }
     public enum Button
     {
@@ -121,6 +136,7 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         Brake,
         RightSteer,
         LeftSteer,
+        None
     }
     void OnEnable()
     {
