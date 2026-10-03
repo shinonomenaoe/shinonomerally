@@ -125,7 +125,10 @@ public class CarEngenAndGearBox : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_mission == Mission.MT)_isMT = true;
+        _isPlayer = CompareTag("PlayerCar");
+        _maxGear = _gearPow.Length - 1;
+        _rb = GetComponent<Rigidbody>();
+        if (_mission == Mission.MT)_isMT = true;
         else _isMT = false;
     }
 }
