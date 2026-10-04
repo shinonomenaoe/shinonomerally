@@ -16,10 +16,10 @@ public class Wheel
 public class WheelsController : MonoBehaviour
 {
     [Header("ホイール設定")]
-    [SerializeField] private Wheel _flontLeft;
-    [SerializeField] private Wheel _flontRight;
-    [SerializeField] private Wheel _rearLeft;
-    [SerializeField] private Wheel _rearRight;
+    [SerializeField] private Wheel flontLeft;
+    [SerializeField] private Wheel flontRight;
+    [SerializeField] private Wheel rearLeft;
+    [SerializeField] private Wheel rearRight;
     public Wheel[] _wheels;
     public JointSpring _defaultSpring;//サスペンションの初期設定
     [Header("走行設定")]
@@ -49,7 +49,7 @@ public class WheelsController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _rb.centerOfMass = __centerOfMassOffset;  
         _carMass = _rb.mass;
-        _wheels = new Wheel[] { _flontLeft, _flontRight, _rearLeft, _rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
+        _wheels = new Wheel[] { flontLeft, flontRight, rearLeft, rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
         foreach (var wheel in _wheels)
         {
             wheel.defaultforwardWheelFrictionCurve = wheel.collider.forwardFriction;
@@ -113,27 +113,27 @@ public class WheelsController : MonoBehaviour
         if (!_isLSD) return;
         if(_moveWheelSam == 2)
         {
-            float leftRPM = _rearLeft.collider.rpm;
-            float rearRPM = _rearRight.collider.rpm;
+            float leftRPM = rearLeft.collider.rpm;
+            float rearRPM = rearRight.collider.rpm;
             float RPMDifference = leftRPM - rearRPM;
             if (RPMDifference > _iSDStartRPM)
             {
-                WheelFrictionCurve leftWFC = _rearLeft.collider.forwardFriction;
-                leftWFC.stiffness = _rearLeft.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
-                _rearLeft.collider.forwardFriction = leftWFC;
-                _rearRight.collider.forwardFriction = _rearRight.defaultforwardWheelFrictionCurve;
+                WheelFrictionCurve leftWFC = rearLeft.collider.forwardFriction;
+                leftWFC.stiffness = rearLeft.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
+                rearLeft.collider.forwardFriction = leftWFC;
+                rearRight.collider.forwardFriction = rearRight.defaultforwardWheelFrictionCurve;
             }
             else if (RPMDifference < -_iSDStartRPM)
             {
-                WheelFrictionCurve rearWFC = _rearRight.collider.forwardFriction;
-                rearWFC.stiffness = _rearRight.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
-                _rearRight.collider.forwardFriction = rearWFC;
-                _rearLeft.collider.forwardFriction = _rearLeft.defaultforwardWheelFrictionCurve;
+                WheelFrictionCurve rearWFC = rearRight.collider.forwardFriction;
+                rearWFC.stiffness = rearRight.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
+                rearRight.collider.forwardFriction = rearWFC;
+                rearLeft.collider.forwardFriction = rearLeft.defaultforwardWheelFrictionCurve;
             }
             else
             {
-                _rearLeft.collider.forwardFriction = _rearLeft.defaultforwardWheelFrictionCurve;
-                _rearRight.collider.forwardFriction = _rearRight.defaultforwardWheelFrictionCurve;
+                rearLeft.collider.forwardFriction = rearLeft.defaultforwardWheelFrictionCurve;
+                rearRight.collider.forwardFriction = rearRight.defaultforwardWheelFrictionCurve;
             }
         }
     }
