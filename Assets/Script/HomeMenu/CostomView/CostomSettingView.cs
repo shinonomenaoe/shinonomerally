@@ -8,6 +8,7 @@ public class CostomSettingView : MonoBehaviour
     GameObject _playerCar;
     CarEngenAndGearBox _carEngenAndGearBox;
     WheelsController _wheelsController;
+    Stabilizer _stabilizer;
     [Header("UI")]
     [SerializeField] Slider _fRRSlider;
     [SerializeField] Text _fRRText;
@@ -18,6 +19,8 @@ public class CostomSettingView : MonoBehaviour
     [SerializeField] Slider _wheelAngleSlider;
     [SerializeField] Text _wheelAngleText;
     [SerializeField] Dropdown _missionDropDown;
+    [SerializeField] Text _stabilizerRatioText;
+    [SerializeField] Slider _stabilizerRatioSlider;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class CostomSettingView : MonoBehaviour
         _playerCar = GameObject.FindWithTag("PlayerCar");
         _carEngenAndGearBox = _playerCar.GetComponent<CarEngenAndGearBox>();
         _wheelsController = _playerCar.GetComponent<WheelsController>();
+        _stabilizer = _playerCar.GetComponent<Stabilizer>();
         StartSliderSetUp();
         StartSetUpDropDown();
     }
@@ -66,6 +70,12 @@ public class CostomSettingView : MonoBehaviour
         _carEngenAndGearBox._mission = (CarEngenAndGearBox.Mission)index;
     }
 
+    void ChengeStabilizer(float rate)
+    {
+        _stabilizer.stabilizerRate = rate;
+        _stabilizerRatioText.text = $"{rate:F2}";
+    }
+
     void SetUpSliders()
     {
         _lSDLateSlider.maxValue = 1f;
@@ -75,6 +85,8 @@ public class CostomSettingView : MonoBehaviour
         _sasSlider.value = 1f;
         _wheelAngleSlider.maxValue = 45f;
         _wheelAngleSlider.minValue = 20f;
+        _stabilizerRatioSlider.maxValue = 1f;
+        _stabilizerRatioSlider.minValue = 0f;
     }
     void StartSetUpDropDown()
     {
@@ -96,6 +108,8 @@ public class CostomSettingView : MonoBehaviour
         ChengeLSDRate(_lSDLateSlider.value);
         _wheelAngleSlider.value = _wheelsController._maxSteerAngle;
         ChengeWheelAngle(_wheelAngleSlider.value);
+        _stabilizerRatioSlider.value = _stabilizer.stabilizerRate;
+        ChengeStabilizer(_stabilizerRatioSlider.value);
     }
 
     private void AddUIMesod()
@@ -105,6 +119,7 @@ public class CostomSettingView : MonoBehaviour
         _lSDLateSlider.onValueChanged.AddListener(ChengeLSDRate);
         _wheelAngleSlider.onValueChanged.AddListener(ChengeWheelAngle);
         _missionDropDown.onValueChanged.AddListener(ChengeMission);
+        _stabilizerRatioSlider.onValueChanged.AddListener(ChengeStabilizer);
     }
 
     public void ChengeLSDMode(bool isOn)

@@ -12,7 +12,7 @@ public class Stabilizer : MonoBehaviour
     [SerializeField] public float yawDamping = 12;
 
     [Header("スタビライザー割合")]
-    [SerializeField,Range(0,1)] public float stabilizerRatio = 0.2f;
+    [SerializeField,Range(0,1)] public float stabilizerRate = 0.2f;
     StabilizerMode _flont = StabilizerMode.front;
     StabilizerMode _back = StabilizerMode.back;
 
@@ -38,7 +38,7 @@ public class Stabilizer : MonoBehaviour
 
     private void AntiRollBar(WheelCollider left, WheelCollider right, StabilizerMode mode)
     {
-        float ratio = (mode == _flont) ? stabilizerRatio : 1 - stabilizerRatio;
+        float rate = (mode == _flont) ? stabilizerRate : 1 - stabilizerRate;
         WheelHit hit;
         float travelL = 1.0f;
         float travelR = 1.0f;
@@ -55,11 +55,11 @@ public class Stabilizer : MonoBehaviour
         float localAntiRollForce = (travelL - travelR) * antiRollForce;
         if (groundedL)
         {
-            _rb.AddForceAtPosition(left.transform.up * -localAntiRollForce * ratio, left.transform.position);
+            _rb.AddForceAtPosition(left.transform.up * -localAntiRollForce * rate, left.transform.position);
         }
         if (groundedR)
         {
-            _rb.AddForceAtPosition(right.transform.up * localAntiRollForce * ratio, right.transform.position);
+            _rb.AddForceAtPosition(right.transform.up * localAntiRollForce * rate, right.transform.position);
         }
     }
 
