@@ -16686,22 +16686,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e76176733268c6f439f01b581591844c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flontLeft:
+  flontLeft:
     collider: {fileID: 8875766798068646895}
     transform: {fileID: 2647755685394055938}
     isMotor: 0
     isSteer: 1
-  _flontRight:
+  flontRight:
     collider: {fileID: 4060829864124114207}
     transform: {fileID: 1113912225725392234}
     isMotor: 0
     isSteer: 1
-  _rearLeft:
+  rearLeft:
     collider: {fileID: 8920802209384474872}
     transform: {fileID: 82133972469498870}
     isMotor: 1
     isSteer: 0
-  _rearRight:
+  rearRight:
     collider: {fileID: 4769678871228640690}
     transform: {fileID: 4250037654461086595}
     isMotor: 1
@@ -17590,7 +17590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d342e56fa3979f4d84622eb03b6302f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setControllerMode: 1
+  setControllerMode: 0
 --- !u!114 &2640140098448524753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18167,8 +18167,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.7150017, y: 1.0937681, z: 4.4122295}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1.7150017, y: 1.07, z: 4.4122295}
+  m_Center: {x: 0, y: 0.53, z: 0}
 --- !u!146 &4060829864124114207
 WheelCollider:
   m_ObjectHideFlags: 0
@@ -18835,8 +18835,8 @@ Rigidbody:
   m_GameObject: {fileID: 7314222191202987859}
   serializedVersion: 4
   m_Mass: 1510
-  m_Drag: 0.1
-  m_AngularDrag: 1.8
+  m_Drag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -19351,6 +19351,7 @@ GameObject:
   - component: {fileID: 189289431441168751}
   - component: {fileID: 6576649386425617409}
   - component: {fileID: 5378066219764726407}
+  - component: {fileID: 7759717359138912902}
   - component: {fileID: 207829376964011336}
   - component: {fileID: 3864741823342617249}
   - component: {fileID: 2999263441996722829}
@@ -19393,7 +19394,7 @@ Transform:
   m_GameObject: {fileID: 7314222191202987859}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9449203, z: -0, w: 0.32730055}
-  m_LocalPosition: {x: 1499.62, y: -83.97, z: 593.15}
+  m_LocalPosition: {x: 1499.62, y: -83.695, z: 593.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19427,6 +19428,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSpecINF: {fileID: 11400000, guid: 16188758afedb74478d66c6935b519c0, type: 2}
+--- !u!114 &7759717359138912902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7314222191202987859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d164d577784a1a240b93b4dcc1be65c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  antiRollForce: 2500
+  yawDamping: 12
+  stabilizerRatio: 0.2
+  _isStabilaize: 1
 --- !u!114 &7938842114980725627
 MonoBehaviour:
   m_ObjectHideFlags: 0

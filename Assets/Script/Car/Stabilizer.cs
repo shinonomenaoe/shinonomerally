@@ -11,6 +11,11 @@ public class Stabilizer : MonoBehaviour
     [Tooltip("ニュートラル時のスピン抑制力")]
     [SerializeField] public float yawDamping = 12;
 
+    [Header("スタビライザー割合")]
+    [SerializeField,Range(0,1)] public float stabilizerRatio = 0.2f;
+    StabilizerMode _flont = StabilizerMode.front;
+    StabilizerMode _back = StabilizerMode.back;
+
     Wheel[] _wheels;
     WheelsController _wheelsController;
     public bool _isStabilaize = true;
@@ -25,14 +30,15 @@ public class Stabilizer : MonoBehaviour
     {
         if (_isStabilaize)
         {
-            AntiRollBar(_wheels[0].collider, _wheels[1].collider);
-            AntiRollBar(_wheels[2].collider, _wheels[3].collider);
-            ApplyYawStabiizer();
+            AntiRollBar(_wheels[0].collider, _wheels[1].collider, _flont);
+            AntiRollBar(_wheels[2].collider, _wheels[3].collider, _back);
+            ApplyYawStabilizer();
         }
     }
 
-    private void AntiRollBar(WheelCollider left, WheelCollider right)
+    private void AntiRollBar(WheelCollider left, WheelCollider right, StabilizerMode mode)
     {
+        float ratio = (mode == _flont) ? stabilizerRatio : 1 - stabilizerRatio;
         WheelHit hit;
         float travelL = 1.0f;
         float travelR = 1.0f;
@@ -49,15 +55,15 @@ public class Stabilizer : MonoBehaviour
         float localAntiRollForce = (travelL - travelR) * antiRollForce;
         if (groundedL)
         {
-            _rb.AddForceAtPosition(left.transform.up * -localAntiRollForce, left.transform.position);
+            _rb.AddForceAtPosition(left.transform.up * -localAntiRollForce * ratio, left.transform.position);
         }
         if (groundedR)
         {
-            _rb.AddForceAtPosition(right.transform.up * localAntiRollForce, right.transform.position);
+            _rb.AddForceAtPosition(right.transform.up * localAntiRollForce * ratio, right.transform.position);
         }
     }
 
-    private void ApplyYawStabiizer()
+    private void ApplyYawStabilizer()
     {
         if(Mathf.Abs(ControllerINF.horizontalInput) < 0.05f)
         {
@@ -65,5 +71,11 @@ public class Stabilizer : MonoBehaviour
             av.y = Mathf.Lerp(av.y, 0, yawDamping * Time.fixedDeltaTime);
             _rb.angularVelocity = av;
         }
+    }
+
+    enum StabilizerMode
+    {
+        front,
+        back,
     }
 }

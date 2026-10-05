@@ -77,4 +77,4 @@ MonoBehaviour:
     suspensionDamper: 6000
     suspensionDistance: 0.2
     targetPosition: 0.4
-    downForce: 30
+    downForce: 1
