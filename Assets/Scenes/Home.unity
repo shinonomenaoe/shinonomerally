@@ -18140,7 +18140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d342e56fa3979f4d84622eb03b6302f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setControllerMode: 0
+  setControllerMode: 1
 --- !u!114 &2640140098448524753
 MonoBehaviour:
   m_ObjectHideFlags: 0
