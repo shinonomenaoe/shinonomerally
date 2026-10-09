@@ -21,15 +21,15 @@ public class CarSpecAttach : MonoBehaviour
     private void Attach()
     {
         _carRb.mass = _carSpec.mass;
-        _wheelsController._torqueCurve = _carSpec.torqueCurve;
-        _wheelsController._moreTorque = _carSpec.moreTorque;
-        _wheelsController._downForce = _carSpec.downForce;
+        _wheelsController.torqueCurve = _carSpec.torqueCurve;
+        _wheelsController.moreTorque = _carSpec.moreTorque;
+        _wheelsController.downForce = _carSpec.downForce;
         _carEngenAndGearBox.idelRPM = _carSpec.idleRPM;
         _carEngenAndGearBox.maxRPM = _carSpec.maxRPM;
         _carEngenAndGearBox.engenRespons = _carSpec.enginqResponse;
         _carEngenAndGearBox.fRRDefault = _carSpec.fRR;
         _carEngenAndGearBox.fRR = _carSpec.fRR;
-        Wheel[] wheels = _wheelsController._wheels;
+        Wheel[] wheels = _wheelsController.wheels;
         foreach (var wheel in wheels)
         {
             JointSpring spring = wheel.collider.suspensionSpring;

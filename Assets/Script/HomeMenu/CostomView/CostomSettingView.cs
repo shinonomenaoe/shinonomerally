@@ -44,7 +44,7 @@ public class CostomSettingView : MonoBehaviour
     }
     void ChengeSas(float rate)
     {
-        foreach (var wheel in _wheelsController._wheels)
+        foreach (var wheel in _wheelsController.wheels)
         {
             JointSpring spring = _wheelsController._defaultSpring;
             spring.spring = spring.spring * rate;
@@ -55,13 +55,13 @@ public class CostomSettingView : MonoBehaviour
     }
     void ChengeLSDRate(float rate)
     {
-        _wheelsController._lSDLockLate = rate;
+        _wheelsController.lSDLockLate = rate;
         _lSDLateText.text = $"{rate:F2}";
     }
 
     void ChengeWheelAngle(float rate)
     {
-        _wheelsController._maxSteerAngle = rate;
+        _wheelsController.maxSteerAngle = rate;
         _wheelAngleText.text = $"{rate:F2}";
     }
 
@@ -102,11 +102,11 @@ public class CostomSettingView : MonoBehaviour
         _fRRSlider.minValue = _carEngenAndGearBox.fRRDefault - 1f;
         _fRRSlider.SetValueWithoutNotify(nowFRR);
         ChangeFRR(_fRRSlider.value);
-        _sasSlider.SetValueWithoutNotify(_wheelsController._wheels[0].collider.suspensionSpring.spring / _wheelsController._defaultSpring.spring);
+        _sasSlider.SetValueWithoutNotify(_wheelsController.wheels[0].collider.suspensionSpring.spring / _wheelsController._defaultSpring.spring);
         ChengeSas(_sasSlider.value);
-        _lSDLateSlider.value = _wheelsController._lSDLockLate;
+        _lSDLateSlider.value = _wheelsController.lSDLockLate;
         ChengeLSDRate(_lSDLateSlider.value);
-        _wheelAngleSlider.value = _wheelsController._maxSteerAngle;
+        _wheelAngleSlider.value = _wheelsController.maxSteerAngle;
         ChengeWheelAngle(_wheelAngleSlider.value);
         _stabilizerRatioSlider.value = _stabilizer.stabilizerRate;
         ChengeStabilizer(_stabilizerRatioSlider.value);
@@ -124,6 +124,6 @@ public class CostomSettingView : MonoBehaviour
 
     public void ChengeLSDMode(bool isOn)
     {
-        _wheelsController._isLSD = isOn;
+        _wheelsController.isLSD = isOn;
     }
 }

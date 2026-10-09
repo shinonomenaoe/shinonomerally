@@ -20,19 +20,19 @@ public class WheelsController : MonoBehaviour
     [SerializeField] private Wheel flontRight;
     [SerializeField] private Wheel rearLeft;
     [SerializeField] private Wheel rearRight;
-    public Wheel[] _wheels;
+    public Wheel[] wheels;
     public JointSpring _defaultSpring;//サスペンションの初期設定
     [Header("走行設定")]
     [SerializeField] private float _moveWheelSam = 2f;//駆動するタイヤの数
-    [SerializeField] public AnimationCurve _torqueCurve;//トルク曲線
-    [SerializeField] public float _moreTorque = 451f;//最大トルク
-    [SerializeField] public float _breakeTorque = 600f;//ブレーキ力
-    [SerializeField] public bool _isLSD = false;//LSDを装備しているかどうか
-    [SerializeField] public float _iSDStartRPM　= 50;//LSDを有効化する回転の差
-    [SerializeField][Range(0, 1)] public float _lSDLockLate = 0.5f;//LSDの補正率
-    [SerializeField] public float _maxSteerAngle = 30f;//最大ステアリング角度
-    [SerializeField] private Vector3 __centerOfMassOffset = new Vector3(0, -0.5f, 0); // Yを少し下げる
-    [SerializeField] public float _downForce = 50;
+    [SerializeField] public AnimationCurve torqueCurve;//トルク曲線
+    [SerializeField] public float moreTorque = 451f;//最大トルク
+    [SerializeField] public float breakeTorque = 600f;//ブレーキ力
+    [SerializeField] public bool isLSD = false;//LSDを装備しているかどうか
+    [SerializeField] public float iSDStartRPM　= 50;//LSDを有効化する回転の差
+    [SerializeField][Range(0, 1)] public float lSDLockLate = 0.5f;//LSDの補正率
+    [SerializeField] public float maxSteerAngle = 30f;//最大ステアリング角度
+    [SerializeField] private Vector3 _centerOfMassOffset = new Vector3(0, -0.5f, 0); // Yを少し下げる
+    [SerializeField] public float downForce = 50;
     public float _carMass;
     private Rigidbody _rb;
     [Header("エンジンとギアボックス")]
@@ -47,14 +47,14 @@ public class WheelsController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _rb.centerOfMass = __centerOfMassOffset;  
+        _rb.centerOfMass = _centerOfMassOffset;  
         _carMass = _rb.mass;
-        _wheels = new Wheel[] { flontLeft, flontRight, rearLeft, rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
-        foreach (var wheel in _wheels)
+        wheels = new Wheel[] { flontLeft, flontRight, rearLeft, rearRight };//各タイヤの設定をまとめておくことでforeachで簡単に処理できるようにしている
+        foreach (var wheel in wheels)
         {
             wheel.defaultforwardWheelFrictionCurve = wheel.collider.forwardFriction;
         }
-        _defaultSpring = _wheels[0].collider.suspensionSpring; 
+        _defaultSpring = wheels[0].collider.suspensionSpring; 
 
     }
     private void FixedUpdate()
@@ -69,7 +69,7 @@ public class WheelsController : MonoBehaviour
     private void GivePow()
     {
         isBraking = ControllerINF.isBrake;
-        float downforcePow = Mathf.Clamp(_downForce * _rb.linearVelocity.magnitude * _rb.linearVelocity.magnitude, 0f, _rb.mass * 5f);
+        float downforcePow = Mathf.Clamp(downForce * _rb.linearVelocity.magnitude * _rb.linearVelocity.magnitude, 0f, _rb.mass * 5f);
         _rb.AddForce(Vector3.down * downforcePow,ForceMode.Force);
         if (isBraking || _engenAndGearBox.isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
@@ -77,13 +77,13 @@ public class WheelsController : MonoBehaviour
         }
         else if (!isBraking && _engenAndGearBox.nowGearNam == 0)
         {
-            _nowMotor = -verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox.gearPow[0] * _engenAndGearBox.fRR / _moveWheelSam;
+            _nowMotor = -verticalInput * moreTorque * _nowTorqueRate * _engenAndGearBox.gearPow[0] * _engenAndGearBox.fRR / _moveWheelSam;
         }
-        else if (!isBraking) _nowMotor = verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox.gearPow[_engenAndGearBox.nowGearNam] * _engenAndGearBox.fRR  / _moveWheelSam;
+        else if (!isBraking) _nowMotor = verticalInput * moreTorque * _nowTorqueRate * _engenAndGearBox.gearPow[_engenAndGearBox.nowGearNam] * _engenAndGearBox.fRR  / _moveWheelSam;
 
-        float currentBreake = isBraking ? _breakeTorque : 0f;
-        float currentSteer = horizontalInput * _maxSteerAngle;
-        foreach (Wheel wheel in _wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
+        float currentBreake = isBraking ? breakeTorque : 0f;
+        float currentSteer = horizontalInput * maxSteerAngle;
+        foreach (Wheel wheel in wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
         {
             if (wheel.isMotor && _engenAndGearBox.nowRPM < _engenAndGearBox.maxRPM)
             {
@@ -110,23 +110,23 @@ public class WheelsController : MonoBehaviour
 
     private void LSD()
     {
-        if (!_isLSD) return;
+        if (!isLSD) return;
         if(_moveWheelSam == 2)
         {
             float leftRPM = rearLeft.collider.rpm;
             float rearRPM = rearRight.collider.rpm;
             float RPMDifference = leftRPM - rearRPM;
-            if (RPMDifference > _iSDStartRPM)
+            if (RPMDifference > iSDStartRPM)
             {
                 WheelFrictionCurve leftWFC = rearLeft.collider.forwardFriction;
-                leftWFC.stiffness = rearLeft.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
+                leftWFC.stiffness = rearLeft.defaultforwardWheelFrictionCurve.stiffness + lSDLockLate;
                 rearLeft.collider.forwardFriction = leftWFC;
                 rearRight.collider.forwardFriction = rearRight.defaultforwardWheelFrictionCurve;
             }
-            else if (RPMDifference < -_iSDStartRPM)
+            else if (RPMDifference < -iSDStartRPM)
             {
                 WheelFrictionCurve rearWFC = rearRight.collider.forwardFriction;
-                rearWFC.stiffness = rearRight.defaultforwardWheelFrictionCurve.stiffness + _lSDLockLate;
+                rearWFC.stiffness = rearRight.defaultforwardWheelFrictionCurve.stiffness + lSDLockLate;
                 rearRight.collider.forwardFriction = rearWFC;
                 rearLeft.collider.forwardFriction = rearLeft.defaultforwardWheelFrictionCurve;
             }
@@ -142,12 +142,18 @@ public class WheelsController : MonoBehaviour
     {
         float nowRPM = Mathf.Max(_engenAndGearBox.nowRPM, _engenAndGearBox.idelRPM);
         float _nowRPMRate = Mathf.InverseLerp(_engenAndGearBox.idelRPM, _engenAndGearBox.maxRPM, nowRPM);
-        _nowTorqueRate = _torqueCurve.Evaluate(_nowRPMRate);
+        _nowTorqueRate = torqueCurve.Evaluate(_nowRPMRate);
         float speedKM = _rb.linearVelocity.magnitude * 3.6f;
         float inputMove = Mathf.Abs(verticalInput);
         if (speedKM > 15 && inputMove > 0.01f)
-        { 
+        {
             _nowTorqueRate = Mathf.Max(_nowTorqueRate, inputMove * 0.5f);
         }
+    }
+
+    private void OnEnable()
+    {
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
     }
 }

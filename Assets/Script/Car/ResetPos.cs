@@ -24,7 +24,7 @@ public class ResetPos : MonoBehaviour
         if(_resetPosOBJ == null)return;
         _rb.linearVelocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
-        Wheel[] wheels = _wheelsController._wheels;
+        Wheel[] wheels = _wheelsController.wheels;
         foreach (Wheel wheel in wheels)
         {
             wheel.collider.motorTorque = 0;

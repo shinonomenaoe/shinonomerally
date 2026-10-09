@@ -73,8 +73,8 @@ MonoBehaviour:
     fRR: 3.266
     brakeTorque: 400
     maxSteerAngle: 35
-    suspensionSpring: 60000
-    suspensionDamper: 6000
-    suspensionDistance: 0.2
-    targetPosition: 0.4
-    downForce: 1
+    suspensionSpring: 55000
+    suspensionDamper: 5500
+    suspensionDistance: 0.1
+    targetPosition: 0.5
+    downForce: 25

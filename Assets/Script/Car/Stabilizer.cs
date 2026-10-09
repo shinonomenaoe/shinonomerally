@@ -23,7 +23,7 @@ public class Stabilizer : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _wheelsController = GetComponent<WheelsController>();
-        _wheels = _wheelsController._wheels;
+        _wheels = _wheelsController.wheels;
     }
 
     private void FixedUpdate()
