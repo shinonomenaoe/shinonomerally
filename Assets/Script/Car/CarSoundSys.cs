@@ -26,14 +26,14 @@ public class CarSoundSys : MonoBehaviour
 
     void EngenSound()
     {
-        float rpmRatio = Mathf.InverseLerp(_carEngenAndGearBox._idelRPM, _carEngenAndGearBox._maxRPM, _carEngenAndGearBox._nowRPM);
+        float rpmRatio = Mathf.InverseLerp(_carEngenAndGearBox.idelRPM, _carEngenAndGearBox.maxRPM, _carEngenAndGearBox.nowRPM);
         _engenAudioSource.volume = rpmRatio * _volMag;
         _engenAudioSource.pitch = rpmRatio * _pichMag;
     }
 
     IEnumerator BackTurbineSound()
     {
-        if (_carEngenAndGearBox._isHightEngenRoal && Input.GetAxis("Vertical") < 0.1f && !_maxGus && _turboCar)
+        if (_carEngenAndGearBox.isHightEngenRoal && Input.GetAxis("Vertical") < 0.1f && !_maxGus && _turboCar)
         {
             _maxGus = true;
             _backTurbineAudioSource.Play();

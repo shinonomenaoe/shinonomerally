@@ -24,11 +24,11 @@ public class CarSpecAttach : MonoBehaviour
         _wheelsController._torqueCurve = _carSpec.torqueCurve;
         _wheelsController._moreTorque = _carSpec.moreTorque;
         _wheelsController._downForce = _carSpec.downForce;
-        _carEngenAndGearBox._idelRPM = _carSpec.idleRPM;
-        _carEngenAndGearBox._maxRPM = _carSpec.maxRPM;
-        _carEngenAndGearBox._engenRespons = _carSpec.enginqResponse;
-        _carEngenAndGearBox._fRRDefault = _carSpec.fRR;
-        _carEngenAndGearBox._fRR = _carSpec.fRR;
+        _carEngenAndGearBox.idelRPM = _carSpec.idleRPM;
+        _carEngenAndGearBox.maxRPM = _carSpec.maxRPM;
+        _carEngenAndGearBox.engenRespons = _carSpec.enginqResponse;
+        _carEngenAndGearBox.fRRDefault = _carSpec.fRR;
+        _carEngenAndGearBox.fRR = _carSpec.fRR;
         Wheel[] wheels = _wheelsController._wheels;
         foreach (var wheel in wheels)
         {

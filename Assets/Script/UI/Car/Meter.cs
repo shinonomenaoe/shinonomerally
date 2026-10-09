@@ -28,8 +28,8 @@ public class Meter : MonoBehaviour
 
     void RPMMeter()
     {
-        float nowRPM = _carEngen._nowRPM;
-        float rPMRate = Mathf.InverseLerp(_carEngen._idelRPM, _carEngen._maxRPM, nowRPM);
+        float nowRPM = _carEngen.nowRPM;
+        float rPMRate = Mathf.InverseLerp(_carEngen.idelRPM, _carEngen.maxRPM, nowRPM);
         if (rPMRate > 0.95) rPMRate += Random.Range(-0.1f, 0.1f);
         float nowAngle = Mathf.Lerp(_RPMMeterFirstAngle, _RPMMeterEndAngle, rPMRate);
         _RPMmeterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
@@ -37,7 +37,7 @@ public class Meter : MonoBehaviour
 
     void HourMeter()
     {
-        float speedRate = Mathf.InverseLerp(0f, _meterMaxSpeed, _carEngen._nowSpeed * 3.6f);
+        float speedRate = Mathf.InverseLerp(0f, _meterMaxSpeed, _carEngen.nowSpeed * 3.6f);
         float nowAngle = Mathf.Lerp(_HourMeterFirstAngle, _HourMeterEndAngle, speedRate);
         _HourmeterTransfrom.localEulerAngles = new Vector3(0, 0, nowAngle);
     }

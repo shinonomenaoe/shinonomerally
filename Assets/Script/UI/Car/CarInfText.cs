@@ -33,22 +33,22 @@ public class CarInfText : MonoBehaviour
 
     void UpdateRPM()
     {
-        int rpm = (int)_carEngen._nowRPM;
+        int rpm = (int)_carEngen.nowRPM;
         _rPM.text = rpm.ToString();
     }
 
     void UpdateGear()
     {
-        if(_carEngen._mission == CarEngenAndGearBox.Mission.MT)
+        if(_carEngen.mission == CarEngenAndGearBox.Mission.MT)
         {
-            if (_carEngen._nowGearNam == 0) _gear.text = "R";
-            if (_carEngen._nowGearNam == 1) _gear.text = "N";
-            if (_carEngen._nowGearNam >= 2) _gear.text = $"{_carEngen._nowGearNam - 1}";
+            if (_carEngen.nowGearNam == 0) _gear.text = "R";
+            if (_carEngen.nowGearNam == 1) _gear.text = "N";
+            if (_carEngen.nowGearNam >= 2) _gear.text = $"{_carEngen.nowGearNam - 1}";
             return;
         }
         else
         {
-            if(_carEngen._isRevers) _gear.text = "R";
+            if(_carEngen.isRevers) _gear.text = "R";
             else _gear.text = "D";
         }
     }

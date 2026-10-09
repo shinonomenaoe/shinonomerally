@@ -74,10 +74,10 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         if(ControllerINF.controllerMode == ControllerINF.ControllerMode.Button)
         {
-            if (isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.MT && _carEngenBox._nowGearNam < _carEngenBox._maxGear) _carEngenBox._nowGearNam++;
-            if (!isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.MT && _carEngenBox._nowGearNam > 0) _carEngenBox._nowGearNam--;
-            if (!isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.AT) _carEngenBox._isRevers = true;
-            if (isUp && _carEngenBox._mission == CarEngenAndGearBox.Mission.AT) _carEngenBox._isRevers = false;
+            if (isUp && _carEngenBox.mission == CarEngenAndGearBox.Mission.MT && _carEngenBox.nowGearNam < _carEngenBox.maxGear) _carEngenBox.nowGearNam++;
+            if (!isUp && _carEngenBox.mission == CarEngenAndGearBox.Mission.MT && _carEngenBox.nowGearNam > 0) _carEngenBox.nowGearNam--;
+            if (!isUp && _carEngenBox.mission == CarEngenAndGearBox.Mission.AT) _carEngenBox.isRevers = true;
+            if (isUp && _carEngenBox.mission == CarEngenAndGearBox.Mission.AT) _carEngenBox.isRevers = false;
         }
     }
     public void HandBrake()

@@ -39,7 +39,7 @@ public class CostomSettingView : MonoBehaviour
 
     void ChangeFRR(float rate)
     {
-        _carEngenAndGearBox._fRR = rate;
+        _carEngenAndGearBox.fRR = rate;
         _fRRText.text = $"{rate:F2}";
     }
     void ChengeSas(float rate)
@@ -67,7 +67,7 @@ public class CostomSettingView : MonoBehaviour
 
     void ChengeMission(int index)
     {
-        _carEngenAndGearBox._mission = (CarEngenAndGearBox.Mission)index;
+        _carEngenAndGearBox.mission = (CarEngenAndGearBox.Mission)index;
     }
 
     void ChengeStabilizer(float rate)
@@ -93,13 +93,13 @@ public class CostomSettingView : MonoBehaviour
         _missionDropDown.ClearOptions();
         string[] missionName = Enum.GetNames(typeof(CarEngenAndGearBox.Mission));
         _missionDropDown.AddOptions(new List<string>(missionName));
-        _missionDropDown.value = (int)_carEngenAndGearBox._mission;
+        _missionDropDown.value = (int)_carEngenAndGearBox.mission;
     }
     void StartSliderSetUp()
     {
-        float nowFRR = _carEngenAndGearBox._fRR;
-        _fRRSlider.maxValue = _carEngenAndGearBox._fRRDefault + 1f;
-        _fRRSlider.minValue = _carEngenAndGearBox._fRRDefault - 1f;
+        float nowFRR = _carEngenAndGearBox.fRR;
+        _fRRSlider.maxValue = _carEngenAndGearBox.fRRDefault + 1f;
+        _fRRSlider.minValue = _carEngenAndGearBox.fRRDefault - 1f;
         _fRRSlider.SetValueWithoutNotify(nowFRR);
         ChangeFRR(_fRRSlider.value);
         _sasSlider.SetValueWithoutNotify(_wheelsController._wheels[0].collider.suspensionSpring.spring / _wheelsController._defaultSpring.spring);

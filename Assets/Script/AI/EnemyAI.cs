@@ -92,8 +92,8 @@ public class EnemyAI : MonoBehaviour
         }
         _wheelsController.verticalInput = throttle;
         _wheelsController.horizontalInput = steer;
-        _carEngenAndGearBox._verticalInput = throttle;
-        _carEngenAndGearBox._horizontalInput = steer;
+        _carEngenAndGearBox.verticalInput = throttle;
+        _carEngenAndGearBox.horizontalInput = steer;
     }
 
     void CheckStuck()
@@ -118,19 +118,19 @@ public class EnemyAI : MonoBehaviour
     void ExecuteRecovery()
     {
         //_recoverTime -= Time.deltaTime;
-        //_carEngenAndGearBox._isRevers = true;
-        //_carEngenAndGearBox._verticalInput = 0.8f;
-        //_wheelsController._verticalInput = 0.8f;
-        //_wheelsController._horizontalInput = -_wheelsController._horizontalInput;
+        //_carEngenAndGearBox.isRevers = true;
+        //_carEngenAndGearBox.verticalInput = 0.8f;
+        //_wheelsController.verticalInput = 0.8f;
+        //_wheelsController.horizontalInput = -_wheelsController.horizontalInput;
         //if (_recoverTime <= 0f)
         //{
         //    _isRecover = false;
-        //    _carEngenAndGearBox._isRevers = false;
+        //    _carEngenAndGearBox.isRevers = false;
         //}
         _recoverTime = 0f;
         transform.position = _wayPoints[_nowWayPointNam].transform.position;
         transform.rotation = _wayPoints[_nowWayPointNam].transform.rotation;
-        _carEngenAndGearBox._isRevers = false;
+        _carEngenAndGearBox.isRevers = false;
         _isRecover = false;
     }
 

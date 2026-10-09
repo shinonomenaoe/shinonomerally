@@ -71,21 +71,21 @@ public class WheelsController : MonoBehaviour
         isBraking = ControllerINF.isBrake;
         float downforcePow = Mathf.Clamp(_downForce * _rb.linearVelocity.magnitude * _rb.linearVelocity.magnitude, 0f, _rb.mass * 5f);
         _rb.AddForce(Vector3.down * downforcePow,ForceMode.Force);
-        if (isBraking || _engenAndGearBox._isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
+        if (isBraking || _engenAndGearBox.isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
             _nowMotor = 0f;
         }
-        else if (!isBraking && _engenAndGearBox._nowGearNam == 0)
+        else if (!isBraking && _engenAndGearBox.nowGearNam == 0)
         {
-            _nowMotor = -verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[0] * _engenAndGearBox._fRR / _moveWheelSam;
+            _nowMotor = -verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox.gearPow[0] * _engenAndGearBox.fRR / _moveWheelSam;
         }
-        else if (!isBraking) _nowMotor = verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox._gearPow[_engenAndGearBox._nowGearNam] * _engenAndGearBox._fRR  / _moveWheelSam;
+        else if (!isBraking) _nowMotor = verticalInput * _moreTorque * _nowTorqueRate * _engenAndGearBox.gearPow[_engenAndGearBox.nowGearNam] * _engenAndGearBox.fRR  / _moveWheelSam;
 
         float currentBreake = isBraking ? _breakeTorque : 0f;
         float currentSteer = horizontalInput * _maxSteerAngle;
         foreach (Wheel wheel in _wheels)//各タイヤに力を与える処理をしている。ついでに見た目があうようにもしている
         {
-            if (wheel.isMotor && _engenAndGearBox._nowRPM < _engenAndGearBox._maxRPM)
+            if (wheel.isMotor && _engenAndGearBox.nowRPM < _engenAndGearBox.maxRPM)
             {
                 wheel.collider.motorTorque = _nowMotor;//最高速以上出ないようにしている
                 wheel.collider.brakeTorque = currentBreake;
@@ -140,8 +140,8 @@ public class WheelsController : MonoBehaviour
 
     private void CalculationTorque()
     {
-        float nowRPM = Mathf.Max(_engenAndGearBox._nowRPM, _engenAndGearBox._idelRPM);
-        float _nowRPMRate = Mathf.InverseLerp(_engenAndGearBox._idelRPM, _engenAndGearBox._maxRPM, nowRPM);
+        float nowRPM = Mathf.Max(_engenAndGearBox.nowRPM, _engenAndGearBox.idelRPM);
+        float _nowRPMRate = Mathf.InverseLerp(_engenAndGearBox.idelRPM, _engenAndGearBox.maxRPM, nowRPM);
         _nowTorqueRate = _torqueCurve.Evaluate(_nowRPMRate);
         float speedKM = _rb.linearVelocity.magnitude * 3.6f;
         float inputMove = Mathf.Abs(verticalInput);
