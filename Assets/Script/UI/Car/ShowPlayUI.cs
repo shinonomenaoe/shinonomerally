@@ -15,7 +15,7 @@ public class ShowPlayUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_homeChecker._isHome || _playINF._isGoal) 
+        if (_homeChecker.isHome || _playINF._isGoal) 
         {
             foreach (GameObject ui in _playUi)
             {

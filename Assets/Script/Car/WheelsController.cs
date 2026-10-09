@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -43,6 +45,8 @@ public class WheelsController : MonoBehaviour
     public bool isBraking;
     [Range(-1f,1f)]public float verticalInput;
     [Range(-1f, 1f)] public float horizontalInput;
+    GameObject _mGM;
+    HomeChecker _homeChecker;
 
     private void Awake()
     {
@@ -54,11 +58,13 @@ public class WheelsController : MonoBehaviour
         {
             wheel.defaultforwardWheelFrictionCurve = wheel.collider.forwardFriction;
         }
-        _defaultSpring = wheels[0].collider.suspensionSpring; 
-
+        _defaultSpring = wheels[0].collider.suspensionSpring;
+        _mGM = GameObject.FindGameObjectWithTag("MainGameManager");
+        _homeChecker = _mGM.GetComponent<HomeChecker>();
     }
     private void FixedUpdate()
     {
+        if (_homeChecker.isHome) return;
         verticalInput = ControllerINF.varticalInput;
         horizontalInput = ControllerINF.horizontalInput;
         CalculationTorque();
@@ -151,9 +157,11 @@ public class WheelsController : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        _rb.linearVelocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
-    }
+    //private void OnEnable()
+    //{
+    //    GameObject mGM = GameObject.FindGameObjectWithTag("MainGameManager");
+    //    HomeChecker homeChecker = mGM.GetComponent<HomeChecker>();
+    //    if (homeChecker.isHome) _rb.isKinematic = true;
+    //    else _rb.isKinematic = false;
+    //}
 }

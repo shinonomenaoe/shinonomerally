@@ -4,20 +4,17 @@ using UnityEngine;
 public class HomeChecker : MonoBehaviour
 {
     string _nowSceneName;
-    public bool _isHome;
-    void Start()
+    public bool isHome;
+    void Awake()
     {
         _nowSceneName = SceneManager.GetActiveScene().name;
-    }
-    void Update()
-    {
         if (_nowSceneName == "Home")
         {
-            _isHome = true;
+            isHome = true;
         }
         else
         {
-            _isHome = false;
+            isHome = false;
         }
     }
     private void OnEnable()
@@ -30,8 +27,16 @@ public class HomeChecker : MonoBehaviour
         SceneManager.sceneLoaded -= TakeSceneName;
     }
 
-    private void TakeSceneName(Scene scene,LoadSceneMode mode)
+    private void TakeSceneName(Scene scene, LoadSceneMode mode)
     {
         _nowSceneName = SceneManager.GetActiveScene().name;
+        if (_nowSceneName == "Home")
+        {
+            isHome = true;
+        }
+        else
+        {
+            isHome = false;
+        }
     }
 }
