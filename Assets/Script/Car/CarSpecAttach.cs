@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class CarSpecAttach : MonoBehaviour
 {
-    [SerializeField]
-    private CarSpecINF _carSpecINF;
+    [SerializeField] private CarSpecINF _carSpecINF;
     private CarSpec _carSpec;
+    [SerializeField] private CarTuneINF _carTuneINF;
+    private CarTune _carTuneSpec;
     private Rigidbody _carRb;
     private CarEngenAndGearBox _carEngenAndGearBox;
     private WheelsController _wheelsController;
@@ -15,6 +16,7 @@ public class CarSpecAttach : MonoBehaviour
         _wheelsController = GetComponent<WheelsController>();
         _carEngenAndGearBox = GetComponent<CarEngenAndGearBox>();
         _carSpec = _carSpecINF.carspec;
+        _carTuneSpec = _carTuneINF.carTuneSpec;
         Attach();
     }
 

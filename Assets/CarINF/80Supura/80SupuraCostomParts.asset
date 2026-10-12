@@ -12,6 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3310163af20c0b4f8112ac28500f1c5, type: 3}
   m_Name: 80SupuraCostomParts
   m_EditorClassIdentifier: 
-  turboPartsDatas: []
-  tirePartsDatas: []
-  costomWeightDatas: []

@@ -5,6 +5,7 @@ public class TurboPartsData : ScriptableObject
 {
     public string partName;
     public int price;
+    public bool canUse;
     public AnimationCurve costomTorqueCurve;
     public float moreTorqueBonus;
 }
