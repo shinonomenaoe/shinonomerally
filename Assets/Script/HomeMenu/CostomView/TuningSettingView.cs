@@ -14,8 +14,11 @@ public class TuningSetUP : MonoBehaviour
     [SerializeField] Text _customTurboBuyText;
     [SerializeField] Dropdown _customECUDropDown;
     [SerializeField] Text _customECUBuyText;
+    [SerializeField] Dropdown _tireDropDown;
+    [SerializeField] Text _tireBuyText;
     private string[] _turboDropDownName;
     private string[] _customECUDropdownName;
+    private string[] _tiredropDownName;
 
     private void Awake()
     {
@@ -42,6 +45,7 @@ public class TuningSetUP : MonoBehaviour
     {
         _customTurboDropDown.ClearOptions();
         _customECUDropDown.ClearOptions();
+        _tireDropDown.ClearOptions();
     }
 
     private void AttachDropDownName()
@@ -50,8 +54,8 @@ public class TuningSetUP : MonoBehaviour
         _customTurboDropDown.AddOptions(new List<string>(_turboDropDownName));
         _customECUDropdownName = _carSpecAttach.carTuneSpec.customECUDatas.Select(data => data != null ? data.partName : "None").ToArray();
         _customECUDropDown.AddOptions(new List<string>(_customECUDropdownName));
-
-
+        _tiredropDownName = _carSpecAttach.carTuneSpec.tirePartsDatas.Select(data => data != null ? data.partName : "None").ToArray();
+        _tireDropDown.AddOptions(new List<string>(_tiredropDownName));
     }
 
     private void ChengeDropDownToStart()
@@ -62,6 +66,9 @@ public class TuningSetUP : MonoBehaviour
         _customECUDropDown.value = _carSpecAttach.customSettingNam.nowCustomEcuNam;
         if (_carSpecAttach.carTuneSpec.customECUDatas[_customECUDropDown.value].canUse) _customECUBuyText.text = "購入済み";
         else _customECUBuyText.text = "未購入";
+        _tireDropDown.value = _carSpecAttach.customSettingNam.nowTireNam;
+        if (_carSpecAttach.carTuneSpec.tirePartsDatas[_tireDropDown.value].canUse) _tireBuyText.text = "購入済み";
+        else _tireBuyText.text = "未購入";
 
     }
 
@@ -69,6 +76,7 @@ public class TuningSetUP : MonoBehaviour
     {
         _customTurboDropDown.onValueChanged.AddListener(ChengeTurbo);
         _customECUDropDown.onValueChanged.AddListener(ChengeECU);
+        _tireDropDown.onValueChanged.AddListener(ChengeTire);
     }
 
     //以降各変更時のプログラム
@@ -109,4 +117,26 @@ public class TuningSetUP : MonoBehaviour
     {
         _wheelsController.moreTorque = _wheelsController.moreTorque + _carSpecAttach.carTuneSpec.customECUDatas[index].addTorquePow;
     }
+    private void ChengeTire(int index)
+    {
+        if (_carSpecAttach.carTuneSpec.tirePartsDatas[index].canUse)
+        {
+            _tireBuyText.text = "購入済み";
+            _carSpecAttach.customSettingNam.nowTireNam = index;
+            AttachTire(index);
+        }
+        else
+        {
+            _tireBuyText.text = "未購入";
+        }
+    }
+    private void AttachTire(int index)
+    {
+        foreach(var wheel in _wheelsController.wheels)
+        {
+            wheel.collider.forwardFriction = _carSpecAttach.carTuneSpec.tirePartsDatas[index].forwardFriction.ToWheelFrictionCurve();
+            wheel.collider.sidewaysFriction = _carSpecAttach.carTuneSpec.tirePartsDatas[index].sidewayFriction.ToWheelFrictionCurve();
+        }
+    }
+
 }
