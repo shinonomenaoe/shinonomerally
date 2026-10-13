@@ -15,4 +15,4 @@ MonoBehaviour:
   partName: "\u7D14\u6B63"
   prace: 0
   canUse: 1
-  addTorqueRate: 0
+  addTorquePow: 0

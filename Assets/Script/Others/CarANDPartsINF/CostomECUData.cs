@@ -6,5 +6,5 @@ public class CostomECUData : ScriptableObject
     public string partName;
     public int prace;
     public bool canUse;
-    public float addTorqueRate;
+    public float addTorquePow;
 }

@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carTuneSpec:
     turboPartsDatas:
-    - {fileID: 11400000, guid: 9faeb6108fd63e54d9202f5fc6d51f35, type: 2}
+    - {fileID: 11400000, guid: 72fb90f99a8811848a49d7ccfd75fd24, type: 2}
     - {fileID: 11400000, guid: 9faeb6108fd63e54d9202f5fc6d51f35, type: 2}
     customECUDatas:
     - {fileID: 11400000, guid: 56b5069a6ad08b34faf381940e618608, type: 2}
+    - {fileID: 11400000, guid: f38c16da66349c84487be95199a905a2, type: 2}
     tirePartsDatas:
     - {fileID: 11400000, guid: e1daee5b840c1a446aaa253fa5f1474d, type: 2}
     customWeightDatas:
