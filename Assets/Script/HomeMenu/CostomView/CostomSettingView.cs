@@ -53,6 +53,10 @@ public class CostomSettingView : MonoBehaviour
         }
         _sasText.text = $"{rate:F2}";
     }
+    public void ChengeLSDMode(bool isOn)
+    {
+        _wheelsController.isLSD = isOn;
+    }
     void ChengeLSDRate(float rate)
     {
         _wheelsController.lSDLockLate = rate;
@@ -122,8 +126,5 @@ public class CostomSettingView : MonoBehaviour
         _stabilizerRatioSlider.onValueChanged.AddListener(ChengeStabilizer);
     }
 
-    public void ChengeLSDMode(bool isOn)
-    {
-        _wheelsController.isLSD = isOn;
-    }
+
 }

@@ -1,22 +1,23 @@
+using System;
 using UnityEngine;
 
-public class CarSpecAttach : MonoBehaviour
+public class CarSpecAttachAndCostomINF : MonoBehaviour
 {
     [SerializeField] private CarSpecINF _carSpecINF;
-    private CarSpec _carSpec;
+    public CarSpec _carSpec;
     [SerializeField] private CarTuneINF _carTuneINF;
-    private CarTune _carTuneSpec;
+    public CarTune carTuneSpec;
+    public CostomSettingNam customSettingNam;
     private Rigidbody _carRb;
     private CarEngenAndGearBox _carEngenAndGearBox;
     private WheelsController _wheelsController;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         _carRb = GetComponent<Rigidbody>();
         _wheelsController = GetComponent<WheelsController>();
         _carEngenAndGearBox = GetComponent<CarEngenAndGearBox>();
         _carSpec = _carSpecINF.carspec;
-        _carTuneSpec = _carTuneINF.carTuneSpec;
+        carTuneSpec = _carTuneINF.carTuneSpec;
         Attach();
     }
 
@@ -42,6 +43,12 @@ public class CarSpecAttach : MonoBehaviour
             wheel.collider.suspensionDistance = _carSpec.suspensionDistance;
         }
     }
-
-
+    [Serializable]
+    public struct CostomSettingNam
+    {
+        public int nowTurboNam;
+        public int nowCustomEcuNam;
+        public int nowTireNam;
+        public int nowWeightNam;
+    }
 }
