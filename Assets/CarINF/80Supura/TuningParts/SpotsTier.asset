@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9462ed1c574ae04cbac05180b16664e, type: 3}
   m_Name: SpotsTier
   m_EditorClassIdentifier: 
-  partName: 
+  partName: "\u30B9\u30DD\u30FC\u30C4"
   price: 0
   canUse: 1
   forwardWardFriction:

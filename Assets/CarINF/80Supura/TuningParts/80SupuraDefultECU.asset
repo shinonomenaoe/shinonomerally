@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3676eeaea17204eb274fa4b9661126, type: 3}
   m_Name: 80SupuraDefultECU
   m_EditorClassIdentifier: 
-  partName: 
+  partName: "\u7D14\u6B63"
   prace: 0
   canUse: 1
   addTorqueRate: 0

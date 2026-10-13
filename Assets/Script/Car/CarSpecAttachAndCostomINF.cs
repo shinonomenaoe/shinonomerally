@@ -4,9 +4,9 @@ using UnityEngine;
 public class CarSpecAttachAndCostomINF : MonoBehaviour
 {
     [SerializeField] private CarSpecINF _carSpecINF;
-    public CarSpec _carSpec;
+    [HideInInspector]public CarSpec _carSpec;
     [SerializeField] private CarTuneINF _carTuneINF;
-    public CarTune carTuneSpec;
+    [HideInInspector]public CarTune carTuneSpec;
     public CostomSettingNam customSettingNam;
     private Rigidbody _carRb;
     private CarEngenAndGearBox _carEngenAndGearBox;

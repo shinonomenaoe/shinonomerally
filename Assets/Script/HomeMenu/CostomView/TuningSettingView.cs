@@ -13,7 +13,7 @@ public class TuningSetUP : MonoBehaviour
     [SerializeField] Dropdown _customTurboDropDown;
     [SerializeField] Text _customTurboText;
     [SerializeField] Text _customTurboBuyText;
-    public string[] turboDropDownName;
+    [HideInInspector]public string[] turboDropDownName;
 
     private void Awake()
     {
@@ -44,9 +44,8 @@ public class TuningSetUP : MonoBehaviour
     }
 
     private void ChengeDropDownToStart()
-    {
+    { 
         _customTurboDropDown.value = _carSpecAttach.customSettingNam.nowTurboNam;
-        _customTurboText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[_customTurboDropDown.value].partName;
     }
 
     private void AddUIMesod()
@@ -56,9 +55,17 @@ public class TuningSetUP : MonoBehaviour
 
     private void ChengeTurbo(int index)
     {
-        _carSpecAttach.customSettingNam.nowTurboNam = index;
-        _customTurboText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[index].partName;
-        AttachTurbo(index);
+        if (_carSpecAttach.carTuneSpec.turboPartsDatas[index].canUse)
+        {
+            _customTurboBuyText.text = "購入済み";
+            _carSpecAttach.customSettingNam.nowTurboNam = index;
+            AttachTurbo(index);
+        }
+        else
+        {
+            _customTurboBuyText.text = "未購入";
+        }
+
     }
     private void AttachTurbo(int index)
     {

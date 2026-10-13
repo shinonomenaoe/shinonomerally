@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2438b61a1080fb74c8f8a3f50df3ebb9, type: 3}
   m_Name: 80SupuraDefultWight
   m_EditorClassIdentifier: 
-  partName: 
+  partName: "\u8EFD\u91CF\u30EC\u30D9\u30EB\uFF10"
   price: 0
   canUse: 1
   CutWeight: 0

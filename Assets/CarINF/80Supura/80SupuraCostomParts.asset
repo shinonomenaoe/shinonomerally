@@ -12,3 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3310163af20c0b4f8112ac28500f1c5, type: 3}
   m_Name: 80SupuraCostomParts
   m_EditorClassIdentifier: 
+  carTuneSpec:
+    turboPartsDatas:
+    - {fileID: 11400000, guid: 9faeb6108fd63e54d9202f5fc6d51f35, type: 2}
+    - {fileID: 11400000, guid: 9faeb6108fd63e54d9202f5fc6d51f35, type: 2}
+    customECUDatas:
+    - {fileID: 11400000, guid: 56b5069a6ad08b34faf381940e618608, type: 2}
+    tirePartsDatas:
+    - {fileID: 11400000, guid: e1daee5b840c1a446aaa253fa5f1474d, type: 2}
+    customWeightDatas:
+    - {fileID: 11400000, guid: 2f2e56d07c26ba044bcf1dce2ee9cee6, type: 2}
