@@ -44,8 +44,11 @@ public class TuningSetUP : MonoBehaviour
     }
 
     private void ChengeDropDownToStart()
-    { 
+    {
         _customTurboDropDown.value = _carSpecAttach.customSettingNam.nowTurboNam;
+        if (_carSpecAttach.carTuneSpec.turboPartsDatas[_customTurboDropDown.value].canUse) _customTurboBuyText.text = "購入済み";
+        else _customTurboBuyText.text = "未購入";
+
     }
 
     private void AddUIMesod()
