@@ -15,15 +15,15 @@ MonoBehaviour:
   partName: "\u30B9\u30DD\u30FC\u30C4"
   price: 0
   canUse: 1
-  forwardWardFriction:
-    extremumSlip: 0.2
+  forwardFriction:
+    extremumSlip: 0.3
+    extremumValue: 1.1
+    asymptoteSlip: 0.5
+    asymptoteValue: 0.8
+    stiffness: 3
+  sidewayFriction:
+    extremumSlip: 0.4
     extremumValue: 1
     asymptoteSlip: 0.5
-    asymptoteValue: 0.75
-    stiffness: 1
-  sideWardFriction:
-    extremumSlip: 0.2
-    extremumValue: 1
-    asymptoteSlip: 0.5
-    asymptoteValue: 0.75
-    stiffness: 1
+    asymptoteValue: 1
+    stiffness: 1.5

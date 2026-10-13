@@ -6,5 +6,5 @@ public class CostomWeightData : ScriptableObject
     public string partName;
     public int price;
     public bool canUse;
-    public float CutWeight;
+    public float cutWeight;
 }

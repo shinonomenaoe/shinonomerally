@@ -125,6 +125,4 @@ public class CostomSettingView : MonoBehaviour
         _missionDropDown.onValueChanged.AddListener(ChengeMission);
         _stabilizerRatioSlider.onValueChanged.AddListener(ChengeStabilizer);
     }
-
-
 }

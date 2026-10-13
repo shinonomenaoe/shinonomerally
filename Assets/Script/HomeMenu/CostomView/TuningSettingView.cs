@@ -9,6 +9,7 @@ public class TuningSetUP : MonoBehaviour
     GameObject _playerCar;
     CarEngenAndGearBox _carEngenAndGearBox;
     WheelsController _wheelsController;
+    Rigidbody _rb;
     CarSpecAttachAndCostomINF _carSpecAttach;
     [SerializeField] Dropdown _customTurboDropDown;
     [SerializeField] Text _customTurboBuyText;
@@ -16,9 +17,12 @@ public class TuningSetUP : MonoBehaviour
     [SerializeField] Text _customECUBuyText;
     [SerializeField] Dropdown _tireDropDown;
     [SerializeField] Text _tireBuyText;
+    [SerializeField] Dropdown _customWightDropDown;
+    [SerializeField] Text _customWightBuyText;
     private string[] _turboDropDownName;
-    private string[] _customECUDropdownName;
-    private string[] _tiredropDownName;
+    private string[] _customECUDropDownName;
+    private string[] _tireDropDownName;
+    private string[] _customWightDropDownName;
 
     private void Awake()
     {
@@ -31,6 +35,7 @@ public class TuningSetUP : MonoBehaviour
         _carEngenAndGearBox = _playerCar.GetComponent<CarEngenAndGearBox>();
         _wheelsController = _playerCar.GetComponent<WheelsController>();
         _carSpecAttach = _playerCar.GetComponent<CarSpecAttachAndCostomINF>();
+        _rb = _playerCar.GetComponent<Rigidbody>();
         StartDropDown();
     }
 
@@ -46,16 +51,20 @@ public class TuningSetUP : MonoBehaviour
         _customTurboDropDown.ClearOptions();
         _customECUDropDown.ClearOptions();
         _tireDropDown.ClearOptions();
+        _customWightDropDown.ClearOptions();
     }
 
     private void AttachDropDownName()
     {
         _turboDropDownName = _carSpecAttach.carTuneSpec.turboPartsDatas.Select(data => data != null ? data.partName : "None").ToArray();
         _customTurboDropDown.AddOptions(new List<string>(_turboDropDownName));
-        _customECUDropdownName = _carSpecAttach.carTuneSpec.customECUDatas.Select(data => data != null ? data.partName : "None").ToArray();
-        _customECUDropDown.AddOptions(new List<string>(_customECUDropdownName));
-        _tiredropDownName = _carSpecAttach.carTuneSpec.tirePartsDatas.Select(data => data != null ? data.partName : "None").ToArray();
-        _tireDropDown.AddOptions(new List<string>(_tiredropDownName));
+        _customECUDropDownName = _carSpecAttach.carTuneSpec.customECUDatas.Select(data => data != null ? data.partName : "None").ToArray();
+        _customECUDropDown.AddOptions(new List<string>(_customECUDropDownName));
+        _tireDropDownName = _carSpecAttach.carTuneSpec.tirePartsDatas.Select(data => data != null ? data.partName : "None").ToArray();
+        _tireDropDown.AddOptions(new List<string>(_tireDropDownName));
+        _customWightDropDownName = _carSpecAttach.carTuneSpec.customWeightDatas.Select(data => data != null ? data.partName : "None").ToArray();
+        _customWightDropDown.AddOptions(new List<string>(_customWightDropDownName));
+
     }
 
     private void ChengeDropDownToStart()
@@ -69,7 +78,9 @@ public class TuningSetUP : MonoBehaviour
         _tireDropDown.value = _carSpecAttach.customSettingNam.nowTireNam;
         if (_carSpecAttach.carTuneSpec.tirePartsDatas[_tireDropDown.value].canUse) _tireBuyText.text = "購入済み";
         else _tireBuyText.text = "未購入";
-
+        _customWightDropDown.value = _carSpecAttach.customSettingNam.nowWeightNam;
+        if (_carSpecAttach.carTuneSpec.customWeightDatas[_customWightDropDown.value].canUse) _customWightBuyText.text = "購入済み";
+        else _customWightBuyText.text = "未購入";
     }
 
     private void AddUIMesod()
@@ -77,6 +88,7 @@ public class TuningSetUP : MonoBehaviour
         _customTurboDropDown.onValueChanged.AddListener(ChengeTurbo);
         _customECUDropDown.onValueChanged.AddListener(ChengeECU);
         _tireDropDown.onValueChanged.AddListener(ChengeTire);
+        _customWightDropDown.onValueChanged.AddListener(ChengeWight);
     }
 
     //以降各変更時のプログラム
@@ -138,5 +150,22 @@ public class TuningSetUP : MonoBehaviour
             wheel.collider.sidewaysFriction = _carSpecAttach.carTuneSpec.tirePartsDatas[index].sidewayFriction.ToWheelFrictionCurve();
         }
     }
+    private void ChengeWight(int index)
+    {
+        if (_carSpecAttach.carTuneSpec.customWeightDatas[index].canUse)
+        {
+            _customWightBuyText.text = "購入済み";
+            _carSpecAttach.customSettingNam.nowWeightNam = index;
+            AttachCustomWight(index);
 
+        }
+        else 
+        {
+            _customWightBuyText.text = "未購入";
+        } 
+    }
+    private void AttachCustomWight(int index)
+    {
+        _rb.mass = _carSpecAttach._carSpec.mass - _carSpecAttach.carTuneSpec.customWeightDatas[index].cutWeight;
+    }
 }

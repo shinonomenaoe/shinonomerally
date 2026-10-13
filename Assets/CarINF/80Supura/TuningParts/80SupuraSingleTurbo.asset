@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: "\u30B7\u30F3\u30B0\u30EB\u30BF\u30FC\u30DC"
   price: 10000
-  canUse: 1
+  canUse: 0
   customTorqueCurve:
     serializedVersion: 2
     m_Curve:

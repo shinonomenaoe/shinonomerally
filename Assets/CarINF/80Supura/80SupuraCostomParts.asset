@@ -23,3 +23,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e1daee5b840c1a446aaa253fa5f1474d, type: 2}
     customWeightDatas:
     - {fileID: 11400000, guid: 2f2e56d07c26ba044bcf1dce2ee9cee6, type: 2}
+    - {fileID: 11400000, guid: 0a1051d7d6c720140bf0ab5000f7d219, type: 2}
+    - {fileID: 11400000, guid: 4aaf67597d77981479a6a4db169f1fa6, type: 2}
+    - {fileID: 11400000, guid: d545d09f745d24f40a0a65eb0697b759, type: 2}

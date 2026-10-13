@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: "\u30AB\u30B9\u30BF\u30E0ECU"
   prace: 15000
-  canUse: 1
+  canUse: 0
   addTorquePow: 30
