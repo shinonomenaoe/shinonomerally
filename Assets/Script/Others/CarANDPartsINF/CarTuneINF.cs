@@ -11,7 +11,7 @@ public class CarTuneINF : ScriptableObject
 public struct CarTune
 {
     public TurboPartsData[] turboPartsDatas;
-    public CostomECUData[] customECUDatas;
+    public CustomECUData[] customECUDatas;
     public TirePartData[] tirePartsDatas;
-    public CostomWeightData[] customWeightDatas;
+    public CustomWeightData[] customWeightDatas;
 }

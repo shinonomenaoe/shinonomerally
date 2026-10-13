@@ -11,6 +11,9 @@ public class TuningSetUP : MonoBehaviour
     WheelsController _wheelsController;
     Rigidbody _rb;
     CarSpecAttachAndCostomINF _carSpecAttach;
+    [SerializeField] GameObject buyWindow;
+    [SerializeField] Text buyWindwPartNameText;
+    [SerializeField] Text buyWindwPricetext;
     [SerializeField] Dropdown _customTurboDropDown;
     [SerializeField] Text _customTurboBuyText;
     [SerializeField] Dropdown _customECUDropDown;

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: "\u8EFD\u91CF\u53161"
   price: 10000
-  canUse: 0
+  canUse: 1
   cutWeight: 100

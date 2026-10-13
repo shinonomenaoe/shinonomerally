@@ -14,6 +14,7 @@ public class PlayINF : MonoBehaviour
     [SerializeField] Text _TimeText;
     [SerializeField] Transform[] _startPos;
     [SerializeField] Transform[] _goalPos;
+    public int money = 100000;
 
     private void Awake()
     {

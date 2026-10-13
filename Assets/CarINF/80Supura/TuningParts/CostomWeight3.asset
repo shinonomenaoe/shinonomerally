@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CostomWeight3
   m_EditorClassIdentifier: 
   partName: "\u8EFD\u91CF\u53163"
-  price: 30000
-  canUse: 0
+  price: 50000
+  canUse: 1
   cutWeight: 300

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 80SupuraCustomECU
   m_EditorClassIdentifier: 
   partName: "\u30AB\u30B9\u30BF\u30E0ECU"
-  prace: 15000
-  canUse: 0
+  price: 10000
+  canUse: 1
   addTorquePow: 30
