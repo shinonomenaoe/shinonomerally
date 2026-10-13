@@ -19924,6 +19924,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carSpecINF: {fileID: 11400000, guid: 16188758afedb74478d66c6935b519c0, type: 2}
+  _carSpec:
+    carName: 
+    mass: 0
+    torqueCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    moreTorque: 0
+    idleRPM: 0
+    maxRPM: 0
+    enginqResponse: 0
+    fRR: 0
+    brakeTorque: 0
+    maxSteerAngle: 0
+    suspensionSpring: 0
+    suspensionDamper: 0
+    suspensionDistance: 0
+    targetPosition: 0
+    downForce: 0
+  _carTuneINF: {fileID: 11400000, guid: 8b016263a8c127841ae7252f5bddd424, type: 2}
+  carTuneSpec:
+    turboPartsDatas:
+    - {fileID: 11400000, guid: 72fb90f99a8811848a49d7ccfd75fd24, type: 2}
+    customECUDatas: []
+    tirePartsDatas: []
+    customWeightDatas: []
+  customSettingNam:
+    nowTurboNam: 0
+    nowCustomEcuNam: 0
+    nowTireNam: 0
+    nowWeightNam: 0
 --- !u!114 &7759717359138912902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19936,8 +19969,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d164d577784a1a240b93b4dcc1be65c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  antiRollForce: 2000
-  yawDamping: 12
+  antiRollForce: 1500
+  yawDamping: 10
   stabilizerRate: 0.2
   _isStabilaize: 1
 --- !u!114 &7938842114980725627

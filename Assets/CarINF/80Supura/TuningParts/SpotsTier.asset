@@ -14,3 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: 
   price: 0
+  canUse: 1
+  forwardWardFriction:
+    extremumSlip: 0.2
+    extremumValue: 1
+    asymptoteSlip: 0.5
+    asymptoteValue: 0.75
+    stiffness: 1
+  sideWardFriction:
+    extremumSlip: 0.2
+    extremumValue: 1
+    asymptoteSlip: 0.5
+    asymptoteValue: 0.75
+    stiffness: 1
