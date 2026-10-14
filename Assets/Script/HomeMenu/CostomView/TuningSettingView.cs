@@ -11,9 +11,9 @@ public class TuningSetUP : MonoBehaviour
     WheelsController _wheelsController;
     Rigidbody _rb;
     CarSpecAttachAndCostomINF _carSpecAttach;
-    [SerializeField] GameObject buyWindow;
-    [SerializeField] Text buyWindwPartNameText;
-    [SerializeField] Text buyWindwPricetext;
+    //[SerializeField] GameObject buyWindow;
+    //[SerializeField] Text buyWindwPartNameText;
+    //[SerializeField] Text buyWindwPricetext;
     [SerializeField] Dropdown _customTurboDropDown;
     [SerializeField] Text _customTurboBuyText;
     [SerializeField] Dropdown _customECUDropDown;
@@ -27,9 +27,13 @@ public class TuningSetUP : MonoBehaviour
     private string[] _customECUDropDownName;
     private string[] _tireDropDownName;
     private string[] _customWightDropDownName;
+    AudioSource _audioSource;
+    [SerializeField] AudioClip _canChengeSound;
+    [SerializeField] AudioClip _cantChengeSound;
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         AddUIMesod();
     }
 
@@ -105,13 +109,15 @@ public class TuningSetUP : MonoBehaviour
             _customTurboBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowTurboNam = index;
             AttachTurbo(index);
+            _audioSource.PlayOneShot(_canChengeSound);
         }
         else
         {
             _customTurboBuyText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[index].price.ToString();
+            _audioSource.PlayOneShot(_cantChengeSound);
         }
         _partsSpecText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[index].explanatoryText;
-
+        
     }
     private void AttachTurbo(int index)
     {
@@ -125,10 +131,12 @@ public class TuningSetUP : MonoBehaviour
             _customECUBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowCustomEcuNam = index;
             AttachECU(index);
+            _audioSource.PlayOneShot(_canChengeSound);
         }
         else
         {
             _customECUBuyText.text = _carSpecAttach.carTuneSpec.customECUDatas[index].price.ToString();
+            _audioSource.PlayOneShot(_cantChengeSound);
         }
         _partsSpecText.text = _carSpecAttach.carTuneSpec.customECUDatas[index].explanatoryText;
     }
@@ -143,10 +151,12 @@ public class TuningSetUP : MonoBehaviour
             _tireBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowTireNam = index;
             AttachTire(index);
+            _audioSource.PlayOneShot(_canChengeSound);
         }
         else
         {
             _tireBuyText.text = _carSpecAttach.carTuneSpec.tirePartsDatas[index].price.ToString();
+            _audioSource.PlayOneShot(_cantChengeSound);
         }
         _partsSpecText.text = _carSpecAttach.carTuneSpec.tirePartsDatas[index].explanatoryText;
     }
@@ -165,10 +175,12 @@ public class TuningSetUP : MonoBehaviour
             _customWightBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowWeightNam = index;
             AttachCustomWight(index);
+            _audioSource.PlayOneShot(_canChengeSound);
         }
         else 
         {
             _customWightBuyText.text = _carSpecAttach.carTuneSpec.customWeightDatas[index].price.ToString();
+            _audioSource.PlayOneShot(_cantChengeSound);
         }
         _partsSpecText.text = _carSpecAttach.carTuneSpec.customWeightDatas[index].explanatoryText;
     }

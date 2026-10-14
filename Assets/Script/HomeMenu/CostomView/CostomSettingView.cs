@@ -21,11 +21,14 @@ public class CostomSettingView : MonoBehaviour
     [SerializeField] Dropdown _missionDropDown;
     [SerializeField] Text _stabilizerRatioText;
     [SerializeField] Slider _stabilizerRatioSlider;
-
+    AudioSource _audioSource;
+    [SerializeField] AudioClip _cangeDropDownSound;
+    [SerializeField] AudioClip _ChengeSound;
     private void Awake()
     {
         SetUpSliders();
         AddUIMesod();
+        _audioSource = GetComponent<AudioSource>();
     }
     private void OnEnable()
     {
@@ -72,6 +75,7 @@ public class CostomSettingView : MonoBehaviour
     void ChengeMission(int index)
     {
         _carEngenAndGearBox.mission = (CarEngenAndGearBox.Mission)index;
+        _audioSource.PlayOneShot(_cangeDropDownSound);
     }
 
     void ChengeStabilizer(float rate)
