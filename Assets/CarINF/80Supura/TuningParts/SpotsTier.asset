@@ -15,6 +15,7 @@ MonoBehaviour:
   partName: "\u30B9\u30DD\u30FC\u30C4"
   price: 0
   canUse: 1
+  explanatoryText: "\u30B9\u30DD\u30FC\u30C4\u8D70\u884C\u7528\u306B\u30B0\u30EA\u30C3\u30D7\u529B\u306E\u9AD8\u3081\u3089\u308C\u305F\u30BF\u30A4\u30E4"
   forwardFriction:
     extremumSlip: 0.3
     extremumValue: 1.1

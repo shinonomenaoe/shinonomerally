@@ -15,4 +15,5 @@ MonoBehaviour:
   partName: "\u8EFD\u91CF\u53162"
   price: 30000
   canUse: 1
+  explanatoryText: "\u8ECA\u91CD\u3092200Kg\u8EFD\u91CF\u5316\u3059\u308B"
   cutWeight: 200

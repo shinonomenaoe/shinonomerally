@@ -15,6 +15,7 @@ MonoBehaviour:
   partName: "\u30C4\u30A4\u30F3\u30BF\u30FC\u30DC"
   price: 0
   canUse: 1
+  explanatoryText: "\u4E8C\u3064\u306E\u30BF\u30FC\u30DC\u3092\u4F7F\u7528\u3057\u4E2D\u56DE\u8EE2\u9AD8\u56DE\u8EE2\u30B9\u30AD\u306E\u5C11\u306A\u3044\u30BF\u30FC\u30DC\u30D1\u30FC\u30C4"
   customTorqueCurve:
     serializedVersion: 2
     m_Curve:

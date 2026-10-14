@@ -41,6 +41,7 @@ public class TuningSetUP : MonoBehaviour
         _carSpecAttach = _playerCar.GetComponent<CarSpecAttachAndCostomINF>();
         _rb = _playerCar.GetComponent<Rigidbody>();
         StartDropDown();
+        _partsSpecText.text = null;
     }
 
     private void StartDropDown()
