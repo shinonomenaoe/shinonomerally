@@ -5,6 +5,7 @@ public class HomeButtonScripts : MonoBehaviour
 {
     [SerializeField] GameObject UnderSelectVelt;
     [SerializeField] GameObject[] _views;
+    [SerializeField] GameObject _mainLight;
     GameObject _gameManager;
     GameObject _mainGameManager;
     RaceINF _raceINF;
@@ -48,5 +49,11 @@ public class HomeButtonScripts : MonoBehaviour
     public void ChengeScene()
     {
         SceneManager.LoadScene(_serectSceneName);
+    }
+
+    public void ChengeRight(bool Light)
+    {
+        if(Light)_mainLight.SetActive(true);
+        else _mainLight.SetActive(false);
     }
 }

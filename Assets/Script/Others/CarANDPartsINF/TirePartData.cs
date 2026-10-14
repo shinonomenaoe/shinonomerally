@@ -26,6 +26,7 @@ public class TirePartData : ScriptableObject
     public string partName;
     public int price;
     public bool canUse;
+    public string explanatoryText;
     public FrictionCurveData forwardFriction;
     public FrictionCurveData sidewayFriction;
 }

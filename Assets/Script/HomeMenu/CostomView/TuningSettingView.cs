@@ -22,6 +22,7 @@ public class TuningSetUP : MonoBehaviour
     [SerializeField] Text _tireBuyText;
     [SerializeField] Dropdown _customWightDropDown;
     [SerializeField] Text _customWightBuyText;
+    [SerializeField] Text _partsSpecText;
     private string[] _turboDropDownName;
     private string[] _customECUDropDownName;
     private string[] _tireDropDownName;
@@ -74,16 +75,16 @@ public class TuningSetUP : MonoBehaviour
     {
         _customTurboDropDown.value = _carSpecAttach.customSettingNam.nowTurboNam;
         if (_carSpecAttach.carTuneSpec.turboPartsDatas[_customTurboDropDown.value].canUse) _customTurboBuyText.text = "購入済み";
-        else _customTurboBuyText.text = "未購入";
+        else _customTurboBuyText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[_customTurboDropDown.value].price.ToString();
         _customECUDropDown.value = _carSpecAttach.customSettingNam.nowCustomEcuNam;
         if (_carSpecAttach.carTuneSpec.customECUDatas[_customECUDropDown.value].canUse) _customECUBuyText.text = "購入済み";
-        else _customECUBuyText.text = "未購入";
+        else _customECUBuyText.text = _carSpecAttach.carTuneSpec.customECUDatas[_customECUDropDown.value].price.ToString();
         _tireDropDown.value = _carSpecAttach.customSettingNam.nowTireNam;
         if (_carSpecAttach.carTuneSpec.tirePartsDatas[_tireDropDown.value].canUse) _tireBuyText.text = "購入済み";
-        else _tireBuyText.text = "未購入";
+        else _tireBuyText.text = _carSpecAttach.carTuneSpec.tirePartsDatas[_tireDropDown.value].price.ToString();
         _customWightDropDown.value = _carSpecAttach.customSettingNam.nowWeightNam;
         if (_carSpecAttach.carTuneSpec.customWeightDatas[_customWightDropDown.value].canUse) _customWightBuyText.text = "購入済み";
-        else _customWightBuyText.text = "未購入";
+        else _customWightBuyText.text = _carSpecAttach.carTuneSpec.customWeightDatas[_customWightDropDown.value].price.ToString();
     }
 
     private void AddUIMesod()
@@ -106,8 +107,9 @@ public class TuningSetUP : MonoBehaviour
         }
         else
         {
-            _customTurboBuyText.text = "未購入";
+            _customTurboBuyText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[index].price.ToString();
         }
+        _partsSpecText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[index].explanatoryText;
 
     }
     private void AttachTurbo(int index)
@@ -125,8 +127,9 @@ public class TuningSetUP : MonoBehaviour
         }
         else
         {
-            _customECUBuyText.text = "未購入";
+            _customECUBuyText.text = _carSpecAttach.carTuneSpec.customECUDatas[index].price.ToString();
         }
+        _partsSpecText.text = _carSpecAttach.carTuneSpec.customECUDatas[index].explanatoryText;
     }
     private void AttachECU(int index)
     {
@@ -142,8 +145,9 @@ public class TuningSetUP : MonoBehaviour
         }
         else
         {
-            _tireBuyText.text = "未購入";
+            _tireBuyText.text = _carSpecAttach.carTuneSpec.tirePartsDatas[index].price.ToString();
         }
+        _partsSpecText.text = _carSpecAttach.carTuneSpec.tirePartsDatas[index].explanatoryText;
     }
     private void AttachTire(int index)
     {
@@ -160,12 +164,12 @@ public class TuningSetUP : MonoBehaviour
             _customWightBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowWeightNam = index;
             AttachCustomWight(index);
-
         }
         else 
         {
-            _customWightBuyText.text = "未購入";
-        } 
+            _customWightBuyText.text = _carSpecAttach.carTuneSpec.customWeightDatas[index].price.ToString();
+        }
+        _partsSpecText.text = _carSpecAttach.carTuneSpec.customWeightDatas[index].explanatoryText;
     }
     private void AttachCustomWight(int index)
     {
