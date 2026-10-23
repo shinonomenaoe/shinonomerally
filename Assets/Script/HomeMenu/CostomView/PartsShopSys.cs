@@ -3,24 +3,24 @@ using UnityEngine;
 public class PartsShopSys : MonoBehaviour
 {
     GameObject _mGM;
-    PlayINF _playINF;
+    MoneySystem _moneySystem;
     private void Awake()
     {
         _mGM = GameObject.FindGameObjectWithTag("MainGameManager");
-        _playINF = _mGM.GetComponent<PlayINF>();
+        _moneySystem = _mGM.GetComponent<MoneySystem>();
     }
     private void OnEnable()
     {
         _mGM = GameObject.FindGameObjectWithTag("MainGameManager");
-        _playINF = _mGM.GetComponent<PlayINF>();
+        _moneySystem = _mGM.GetComponent<MoneySystem>();
     }
     public void BuyParts(TurboPartsData part)
     {
         if (part.canUse == false)
         {
-            if (_playINF.money > part.price)
+            if (_moneySystem.money > part.price)
             {
-                _playINF.money -= part.price;
+                _moneySystem.money -= part.price;
                 part.canUse = true;
             }
             else
@@ -33,9 +33,9 @@ public class PartsShopSys : MonoBehaviour
     {
         if (part.canUse == false)
         {
-            if (_playINF.money > part.price)
+            if (_moneySystem.money > part.price)
             {
-                _playINF.money -= part.price;
+                _moneySystem.money -= part.price;
                 part.canUse = true;
             }
             else
@@ -48,9 +48,9 @@ public class PartsShopSys : MonoBehaviour
     {
         if (part.canUse == false)
         {
-            if (_playINF.money > part.price)
+            if (_moneySystem.money > part.price)
             {
-                _playINF.money -= part.price;
+                _moneySystem.money -= part.price;
                 part.canUse = true;
             }
             else
@@ -63,9 +63,9 @@ public class PartsShopSys : MonoBehaviour
     {
         if (part.canUse == false)
         {
-            if (_playINF.money > part.price)
+            if (_moneySystem.money > part.price)
             {
-                _playINF.money -= part.price;
+                _moneySystem.money -= part.price;
                 part.canUse = true;
             }
             else
