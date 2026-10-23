@@ -4,6 +4,8 @@ public class MenuCarTransform : MonoBehaviour
 {
     [SerializeField] Transform _playerCarPosHome;
     [SerializeField] Transform _mainCameraHomePos;
+    [SerializeField] Transform _playerCarPosGarage;
+    [SerializeField] Transform _mainCameraPosGarage;
     [SerializeField] Transform _playerCarPosCostom;
     [SerializeField] Transform _mainCameraCostomPos;
     GameObject _mainCamera;
@@ -62,6 +64,10 @@ public class MenuCarTransform : MonoBehaviour
     public void CarMoveGarage()
     {
         _pos = NowPos.Garage;
+        _playerCar.transform.position = _playerCarPosGarage.position;
+        _playerCar.transform.rotation = _playerCarPosGarage.rotation;
+        _mainCamera.transform.position = _mainCameraPosGarage.position;
+        _mainCamera.transform.rotation = _mainCameraPosGarage.rotation;
     }
 
     public void CarMoveCostom()
