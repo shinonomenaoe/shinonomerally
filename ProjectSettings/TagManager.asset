@@ -18,6 +18,7 @@ TagManager:
   - MainMenu
   - AICar
   - CourseLine
+  - Map
   layers:
   - Default
   - TransparentFX

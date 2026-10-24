@@ -1090,7 +1090,7 @@ GameObject:
   - component: {fileID: 360263570}
   m_Layer: 0
   m_Name: Myogi_Track (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8235,7 +8235,7 @@ GameObject:
   - component: {fileID: 602495165}
   m_Layer: 0
   m_Name: Myougiyama
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -8258,7 +8258,7 @@ TerrainCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: 8c3df6970b1124b4f980e72925362cd1, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 86a7c0d95c9f40b4385a6da6eb7ea414, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &602495166
 Terrain:
@@ -8269,7 +8269,7 @@ Terrain:
   m_GameObject: {fileID: 602495164}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 8c3df6970b1124b4f980e72925362cd1, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 86a7c0d95c9f40b4385a6da6eb7ea414, type: 2}
   m_TreeDistance: 100
   m_TreeBillboardDistance: 100
   m_TreeCrossFadeLength: 30
@@ -8691,6 +8691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMyturn: 1
+  maxReward: 10000
+  goalPos: 1
 --- !u!54 &727625071
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14672,7 +14674,7 @@ GameObject:
   - component: {fileID: 1316075937}
   m_Layer: 0
   m_Name: GameLIneAndPos
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16232,7 +16234,7 @@ GameObject:
   - component: {fileID: 1498287362}
   m_Layer: 0
   m_Name: Myogi_Track (1)
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19069,6 +19071,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isMyturn: 1
+  maxReward: 10000
+  goalPos: 1
 --- !u!65 &1665300493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19727,7 +19731,7 @@ GameObject:
   - component: {fileID: 1900637373}
   m_Layer: 0
   m_Name: Stage
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
