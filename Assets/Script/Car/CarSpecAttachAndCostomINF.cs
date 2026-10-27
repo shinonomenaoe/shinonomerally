@@ -1,8 +1,23 @@
 using System;
+using System.IO;
 using UnityEngine;
+using static CarSpecAttachAndCostomINF;
+
+[System.Serializable]
+public class CarSpecJson
+{
+    public CostomSettingNam costomSettingNam;
+    public float fRRSliderRate;
+    public float sasSliderRate;
+    public float lSDSliderRate;
+    public float wheelAngleSliderRate;
+    public CarEngenAndGearBox.Mission mission;
+    public float stabilizerRatioSliderRate;
+}
 
 public class CarSpecAttachAndCostomINF : MonoBehaviour
 {
+    [SerializeField] string _jsonName;
     [SerializeField] private CarSpecINF _carSpecINF;
     [HideInInspector]public CarSpec _carSpec;
     [SerializeField] private CarTuneINF _carTuneINF;
@@ -11,6 +26,8 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
     private Rigidbody _carRb;
     private CarEngenAndGearBox _carEngenAndGearBox;
     private WheelsController _wheelsController;
+    string _filePath => Path.Combine(Application.persistentDataPath, _jsonName);
+    public CarSpecJson carSpecJson = new CarSpecJson();
     private void Awake()
     {
         _carRb = GetComponent<Rigidbody>();
@@ -50,5 +67,26 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         public int nowCustomEcuNam;
         public int nowTireNam;
         public int nowWeightNam;
+    }
+
+    public void LoadJson()
+    {
+        if (File.Exists(_filePath))
+        {
+            string json = File.ReadAllText(_filePath);
+            carSpecJson = JsonUtility.FromJson<CarSpecJson>(json);
+        }
+        else
+        {
+            carSpecJson = new CarSpecJson();
+
+        }
+    }
+
+    public void SaveJson()
+    {
+        if(carSpecJson == null) return;
+        string json = JsonUtility.ToJson(carSpecJson, true);
+        File.WriteAllText(_filePath, json);
     }
 }
