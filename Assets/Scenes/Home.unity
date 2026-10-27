@@ -26649,6 +26649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9f891b677d308499eb9abeff18d851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _jsonName: SupraTestJson
   _carSpecINF: {fileID: 11400000, guid: 16188758afedb74478d66c6935b519c0, type: 2}
   _carSpec:
     carName: 
@@ -26682,6 +26683,24 @@ MonoBehaviour:
     nowCustomEcuNam: 0
     nowTireNam: 0
     nowWeightNam: 0
+  carSpecJson:
+    mass: 0
+    downForce: 0
+    idleRPM: 0
+    maxRPM: 0
+    enginqResponse: 0
+    moreTorque: 0
+    costomSettingNam:
+      nowTurboNam: 0
+      nowCustomEcuNam: 0
+      nowTireNam: 0
+      nowWeightNam: 0
+    fRRSliderRate: 0
+    sasSliderRate: 0
+    lSDSliderRate: 0
+    wheelAngleSliderRate: 0
+    mission: 0
+    stabilizerRatioSliderRate: 0
 --- !u!114 &7759717359138912902
 MonoBehaviour:
   m_ObjectHideFlags: 0
