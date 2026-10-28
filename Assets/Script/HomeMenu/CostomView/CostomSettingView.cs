@@ -8,6 +8,7 @@ public class CostomSettingView : MonoBehaviour
     GameObject _playerCar;
     CarEngenAndGearBox _carEngenAndGearBox;
     WheelsController _wheelsController;
+    CarSpecAttachAndCostomINF _carSpecAttachAndCostomINF;
     Stabilizer _stabilizer;
     [Header("UI")]
     [SerializeField] Slider _fRRSlider;
@@ -36,6 +37,7 @@ public class CostomSettingView : MonoBehaviour
         _carEngenAndGearBox = _playerCar.GetComponent<CarEngenAndGearBox>();
         _wheelsController = _playerCar.GetComponent<WheelsController>();
         _stabilizer = _playerCar.GetComponent<Stabilizer>();
+        _carSpecAttachAndCostomINF = _playerCar.GetComponent<CarSpecAttachAndCostomINF>();
         StartSliderSetUp();
         StartSetUpDropDown();
     }
@@ -128,5 +130,11 @@ public class CostomSettingView : MonoBehaviour
         _wheelAngleSlider.onValueChanged.AddListener(ChengeWheelAngle);
         _missionDropDown.onValueChanged.AddListener(ChengeMission);
         _stabilizerRatioSlider.onValueChanged.AddListener(ChengeStabilizer);
+    }
+
+    public void ChengeJson()
+    {
+        _carSpecAttachAndCostomINF.ChengeAndSaveJson();
+        _carSpecAttachAndCostomINF.LoadJson();
     }
 }

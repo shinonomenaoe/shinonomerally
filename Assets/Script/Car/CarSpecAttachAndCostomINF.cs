@@ -16,6 +16,7 @@ public class CarSettingAndCostomJson
     public CostomSettingNam costomSettingNam;
     public float fRR;
     public float sasSliderRate = 1.5f;
+    public bool isLSD = true;
     public float lSDSliderRate = 0.5f;
     public float wheelAngleSliderRate = 30f;
     public CarEngenAndGearBox.Mission mission = CarEngenAndGearBox.Mission.AT;
@@ -73,6 +74,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         _wheelsController.maxSteerAngle = carSpecJson.wheelAngleSliderRate;
         _carEngenAndGearBox.mission = carSpecJson.mission;
         _stabilizer.stabilizerRate = carSpecJson.stabilizerRatioSliderRate;
+        _wheelsController.isLSD = carSpecJson.isLSD;
     }
     [Serializable]
     public struct CostomSettingNam
@@ -116,7 +118,6 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         carSpecJson.moreTorque = _carSpec.moreTorque;
         carSpecJson.fRR = _carSpec.fRR;
         carSpecJson.brakeTorque = _carSpec.brakeTorque;
-        //carSpecJson.sasSliderRate = _wheelsController.wheels[0].collider.suspensionSpring.spring / _wheelsController._defaultSpring.spring;
     }
 
     public void ChengeAndSaveJson()
@@ -135,6 +136,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         carSpecJson.lSDSliderRate = _wheelsController.lSDLockLate;
         carSpecJson.wheelAngleSliderRate = _wheelsController.maxSteerAngle;
         carSpecJson.mission = _carEngenAndGearBox.mission;
+        carSpecJson.isLSD = _wheelsController.isLSD;
         SaveJson();
     }
 }
