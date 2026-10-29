@@ -108,6 +108,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _customTurboBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowTurboNam = index;
+            _carSpecAttach.carSpecJson.costomSettingNam.nowTurboNam = index;
             AttachTurbo(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
@@ -130,6 +131,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _customECUBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowCustomEcuNam = index;
+            _carSpecAttach.carSpecJson.costomSettingNam.nowCustomEcuNam = index;
             AttachECU(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
@@ -150,6 +152,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _tireBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowTireNam = index;
+            _carSpecAttach.carSpecJson.costomSettingNam.nowTireNam = index;
             AttachTire(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
@@ -174,6 +177,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _customWightBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowWeightNam = index;
+            _carSpecAttach.carSpecJson.costomSettingNam.nowWeightNam = index;
             AttachCustomWight(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
