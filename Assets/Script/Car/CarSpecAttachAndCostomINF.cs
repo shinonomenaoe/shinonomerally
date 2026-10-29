@@ -6,14 +6,12 @@ using static CarSpecAttachAndCostomINF;
 [System.Serializable]
 public class CarSettingAndCostomJson
 {
-    public float mass;
     public float downForce;
     public float idleRPM;
     public float maxRPM;
     public float enginqResponse;
-    public float moreTorque;
     public float brakeTorque;
-    public CostomSettingNam costomSettingNam;
+    public CostomSettingNam customSettingNam;
     public float fRR;
     public float sasSliderRate = 1.5f;
     public bool isLSD = true;
@@ -51,9 +49,9 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
     private void Attach()
     {
         LoadJson();
-        _carRb.mass = carSpecJson.mass;
-        _wheelsController.torqueCurve = _carSpec.torqueCurve;
-        _wheelsController.moreTorque = carSpecJson.moreTorque;
+        _carRb.mass = _carSpec.mass - carTuneSpec.customWeightDatas[carSpecJson.customSettingNam.nowWeightNam].cutWeight;
+        _wheelsController.torqueCurve = carTuneSpec.turboPartsDatas[carSpecJson.customSettingNam.nowTurboNam].customTorqueCurve;
+        _wheelsController.moreTorque = (_carSpec.moreTorque * carTuneSpec.turboPartsDatas[carSpecJson.customSettingNam.nowTurboNam].moreTorqueBonusRate) * carTuneSpec.customECUDatas[carSpecJson.customSettingNam.nowCustomEcuNam].addTorquePowRate;
         _wheelsController.downForce = carSpecJson.downForce;
         _carEngenAndGearBox.idelRPM = carSpecJson.idleRPM;
         _carEngenAndGearBox.maxRPM = carSpecJson.maxRPM;
@@ -69,6 +67,8 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
             spring.targetPosition = _carSpec.targetPosition;
             wheel.collider.suspensionSpring = spring;
             wheel.collider.suspensionDistance = _carSpec.suspensionDistance;
+            wheel.collider.forwardFriction = carTuneSpec.tirePartsDatas[carSpecJson.customSettingNam.nowTireNam].forwardFriction.ToWheelFrictionCurve();
+            wheel.collider.sidewaysFriction = carTuneSpec.tirePartsDatas[carSpecJson.customSettingNam.nowTireNam].sidewayFriction.ToWheelFrictionCurve();
         }
         _wheelsController.lSDLockLate = carSpecJson.lSDSliderRate;
         _wheelsController.maxSteerAngle = carSpecJson.wheelAngleSliderRate;
@@ -110,26 +110,22 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
 
     public void FirstSet()
     {
-        carSpecJson.mass = _carSpec.mass;
         carSpecJson.downForce = _carSpec.downForce;
         carSpecJson.enginqResponse = _carSpec.enginqResponse;
         carSpecJson.idleRPM = _carSpec.idleRPM;
         carSpecJson.maxRPM = _carSpec.maxRPM;
-        carSpecJson.moreTorque = _carSpec.moreTorque;
         carSpecJson.fRR = _carSpec.fRR;
         carSpecJson.brakeTorque = _carSpec.brakeTorque;
     }
 
     public void ChengeAndSaveJson()
     {
-        carSpecJson.mass = _wheelsController._carMass;
         carSpecJson.downForce = _wheelsController.downForce;
         carSpecJson.idleRPM = _carEngenAndGearBox.idelRPM;
         carSpecJson.maxRPM = _carEngenAndGearBox.maxRPM;
         carSpecJson.enginqResponse = _carEngenAndGearBox.engenRespons;
-        carSpecJson.moreTorque = _wheelsController.moreTorque;
         carSpecJson.brakeTorque = _wheelsController.breakeTorque;
-        carSpecJson.costomSettingNam = customSettingNam;
+        carSpecJson.customSettingNam = customSettingNam;
         carSpecJson.fRR = _carEngenAndGearBox.fRR;
         carSpecJson.sasSliderRate = _wheelsController.wheels[0].collider.suspensionSpring.spring / _carSpec.suspensionSpring;
         carSpecJson.stabilizerRatioSliderRate = _stabilizer.stabilizerRate;

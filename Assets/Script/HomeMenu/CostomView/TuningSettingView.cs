@@ -78,16 +78,16 @@ public class TuningSetUP : MonoBehaviour
 
     private void ChengeDropDownToStart()
     {
-        _customTurboDropDown.value = _carSpecAttach.customSettingNam.nowTurboNam;
+        _customTurboDropDown.value = _carSpecAttach.carSpecJson.customSettingNam.nowTurboNam;
         if (_carSpecAttach.carTuneSpec.turboPartsDatas[_customTurboDropDown.value].canUse) _customTurboBuyText.text = "購入済み";
         else _customTurboBuyText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[_customTurboDropDown.value].price.ToString();
-        _customECUDropDown.value = _carSpecAttach.customSettingNam.nowCustomEcuNam;
+        _customECUDropDown.value = _carSpecAttach.carSpecJson.customSettingNam.nowCustomEcuNam;
         if (_carSpecAttach.carTuneSpec.customECUDatas[_customECUDropDown.value].canUse) _customECUBuyText.text = "購入済み";
         else _customECUBuyText.text = _carSpecAttach.carTuneSpec.customECUDatas[_customECUDropDown.value].price.ToString();
-        _tireDropDown.value = _carSpecAttach.customSettingNam.nowTireNam;
+        _tireDropDown.value = _carSpecAttach.carSpecJson.customSettingNam.nowTireNam;
         if (_carSpecAttach.carTuneSpec.tirePartsDatas[_tireDropDown.value].canUse) _tireBuyText.text = "購入済み";
         else _tireBuyText.text = _carSpecAttach.carTuneSpec.tirePartsDatas[_tireDropDown.value].price.ToString();
-        _customWightDropDown.value = _carSpecAttach.customSettingNam.nowWeightNam;
+        _customWightDropDown.value = _carSpecAttach.carSpecJson.customSettingNam.nowWeightNam;
         if (_carSpecAttach.carTuneSpec.customWeightDatas[_customWightDropDown.value].canUse) _customWightBuyText.text = "購入済み";
         else _customWightBuyText.text = _carSpecAttach.carTuneSpec.customWeightDatas[_customWightDropDown.value].price.ToString();
     }
@@ -108,7 +108,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _customTurboBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowTurboNam = index;
-            _carSpecAttach.carSpecJson.costomSettingNam.nowTurboNam = index;
+            _carSpecAttach.carSpecJson.customSettingNam.nowTurboNam = index;
             AttachTurbo(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
@@ -120,7 +120,7 @@ public class TuningSetUP : MonoBehaviour
         _partsSpecText.text = _carSpecAttach.carTuneSpec.turboPartsDatas[index].explanatoryText;
         
     }
-    private void AttachTurbo(int index)
+    public void AttachTurbo(int index)
     {
         _wheelsController.torqueCurve = _carSpecAttach.carTuneSpec.turboPartsDatas[index].customTorqueCurve;
         _wheelsController.moreTorque = _carSpecAttach._carSpec.moreTorque * _carSpecAttach.carTuneSpec.turboPartsDatas[index].moreTorqueBonusRate;
@@ -131,7 +131,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _customECUBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowCustomEcuNam = index;
-            _carSpecAttach.carSpecJson.costomSettingNam.nowCustomEcuNam = index;
+            _carSpecAttach.carSpecJson.customSettingNam.nowCustomEcuNam = index;
             AttachECU(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
@@ -142,9 +142,9 @@ public class TuningSetUP : MonoBehaviour
         }
         _partsSpecText.text = _carSpecAttach.carTuneSpec.customECUDatas[index].explanatoryText;
     }
-    private void AttachECU(int index)
+    public void AttachECU(int index)
     {
-        _wheelsController.moreTorque = _wheelsController.moreTorque + _carSpecAttach.carTuneSpec.customECUDatas[index].addTorquePow;
+        _wheelsController.moreTorque = _wheelsController.moreTorque * _carSpecAttach.carTuneSpec.customECUDatas[index].addTorquePowRate;
     }
     private void ChengeTire(int index)
     {
@@ -152,7 +152,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _tireBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowTireNam = index;
-            _carSpecAttach.carSpecJson.costomSettingNam.nowTireNam = index;
+            _carSpecAttach.carSpecJson.customSettingNam.nowTireNam = index;
             AttachTire(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
@@ -163,7 +163,7 @@ public class TuningSetUP : MonoBehaviour
         }
         _partsSpecText.text = _carSpecAttach.carTuneSpec.tirePartsDatas[index].explanatoryText;
     }
-    private void AttachTire(int index)
+    public void AttachTire(int index)
     {
         foreach(var wheel in _wheelsController.wheels)
         {
@@ -177,7 +177,7 @@ public class TuningSetUP : MonoBehaviour
         {
             _customWightBuyText.text = "購入済み";
             _carSpecAttach.customSettingNam.nowWeightNam = index;
-            _carSpecAttach.carSpecJson.costomSettingNam.nowWeightNam = index;
+            _carSpecAttach.carSpecJson.customSettingNam.nowWeightNam = index;
             AttachCustomWight(index);
             _audioSource.PlayOneShot(_canChengeSound);
         }
@@ -188,8 +188,14 @@ public class TuningSetUP : MonoBehaviour
         }
         _partsSpecText.text = _carSpecAttach.carTuneSpec.customWeightDatas[index].explanatoryText;
     }
-    private void AttachCustomWight(int index)
+    public void AttachCustomWight(int index)
     {
         _rb.mass = _carSpecAttach._carSpec.mass - _carSpecAttach.carTuneSpec.customWeightDatas[index].cutWeight;
+    }
+
+    public void ChengeJson()
+    {
+        _carSpecAttach.ChengeAndSaveJson();
+        _carSpecAttach.LoadJson();
     }
 }

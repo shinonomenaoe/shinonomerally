@@ -7,5 +7,5 @@ public class CustomECUData : ScriptableObject
     public int price;
     public bool canUse;
     public string explanatoryText;
-    public float addTorquePow;
+    public float addTorquePowRate;
 }
