@@ -151,7 +151,7 @@ public class WheelsController : MonoBehaviour
         _nowTorqueRate = torqueCurve.Evaluate(_nowRPMRate);
         float speedKM = _rb.linearVelocity.magnitude * 3.6f;
         float inputMove = Mathf.Abs(verticalInput);
-        if (speedKM > 15 && inputMove > 0.01f)
+        if (speedKM < 15 && inputMove > 0.01f)
         {
             _nowTorqueRate = Mathf.Max(_nowTorqueRate, inputMove * 0.5f);
         }

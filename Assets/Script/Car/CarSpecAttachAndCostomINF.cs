@@ -53,6 +53,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         _wheelsController.torqueCurve = carTuneSpec.turboPartsDatas[carSpecJson.customSettingNam.nowTurboNam].customTorqueCurve;
         _wheelsController.moreTorque = (_carSpec.moreTorque * carTuneSpec.turboPartsDatas[carSpecJson.customSettingNam.nowTurboNam].moreTorqueBonusRate) * carTuneSpec.customECUDatas[carSpecJson.customSettingNam.nowCustomEcuNam].addTorquePowRate;
         _wheelsController.downForce = carSpecJson.downForce;
+        _wheelsController.breakeTorque = carSpecJson.brakeTorque;
         _carEngenAndGearBox.idelRPM = carSpecJson.idleRPM;
         _carEngenAndGearBox.maxRPM = carSpecJson.maxRPM;
         _carEngenAndGearBox.engenRespons = carSpecJson.enginqResponse;
