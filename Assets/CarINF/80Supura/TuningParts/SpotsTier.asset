@@ -17,13 +17,13 @@ MonoBehaviour:
   canUse: 1
   explanatoryText: "\u30B9\u30DD\u30FC\u30C4\u8D70\u884C\u7528\u306B\u30B0\u30EA\u30C3\u30D7\u529B\u306E\u9AD8\u3081\u3089\u308C\u305F\u30BF\u30A4\u30E4"
   forwardFriction:
-    extremumSlip: 0.3
+    extremumSlip: 1
     extremumValue: 1.1
     asymptoteSlip: 0.5
     asymptoteValue: 0.8
     stiffness: 3
   sidewayFriction:
-    extremumSlip: 0.4
+    extremumSlip: 0.7
     extremumValue: 1
     asymptoteSlip: 0.5
     asymptoteValue: 1
