@@ -5,9 +5,10 @@ public class PartsShop : MonoBehaviour
 {
     GameObject _playerCar;
     CarSpecAttachAndCostomINF _carSpecAttachAndCostomINF;
-    [SerializeField]Dropdown _carDropDown;
-    [SerializeField]Dropdown _carPartDropDown;
-    [SerializeField]Dropdown _carpartsDropDown;
+    [SerializeField] Dropdown _carDropDown;
+    [SerializeField] Dropdown _carPartDropDown;
+    [SerializeField] Dropdown _carpartsDropDown;
+    ScriptableObject[]  _carPart;
     string[] _carsName;
     [SerializeField] string[] _carPartName = { "ターボ","カスタムECU","タイヤ","軽量化" };
     string[] _carPartsName;
