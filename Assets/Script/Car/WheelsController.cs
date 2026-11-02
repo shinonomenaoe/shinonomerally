@@ -77,7 +77,7 @@ public class WheelsController : MonoBehaviour
         isBraking = ControllerINF.isBrake;
         float downforcePow = Mathf.Clamp(downForce * _rb.linearVelocity.magnitude * _rb.linearVelocity.magnitude, 0f, _rb.mass * 5f);
         _rb.AddForce(Vector3.down * downforcePow,ForceMode.Force);
-        if (isBraking || _engenAndGearBox.isClutch)//各ギアやブレーキ中クラッチ中によって伝える力をかえている
+        if (ControllerINF.isClutch && CompareTag("PlayerCar"))//各ギアやブレーキ中クラッチ中によって伝える力をかえている
         {
             _nowMotor = 0f;
         }

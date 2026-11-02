@@ -181,17 +181,6 @@ public partial class @CarController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""02a57e86-468b-47cd-9283-0285e73206ea"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Throttle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ab9d6cf1-0832-4519-8345-a34201af4d2f"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -226,7 +215,7 @@ public partial class @CarController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3629f174-cdc1-4d44-8603-4d1fdc99c401"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -292,7 +281,7 @@ public partial class @CarController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6f860677-3e68-4049-ae58-d04952df50fa"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -314,7 +303,7 @@ public partial class @CarController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9d1f330b-f27c-4ffd-89a3-cf7c7d847d3e"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -336,7 +325,7 @@ public partial class @CarController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a070b153-9949-4aeb-abfb-dde58f01a5fc"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

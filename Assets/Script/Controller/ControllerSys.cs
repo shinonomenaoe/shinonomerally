@@ -17,13 +17,13 @@ public class ControllerSys : MonoBehaviour
     {
         if (ControllerINF.controllerMode != ControllerINF.ControllerMode.Button)
         {
-            ControllerINF.varticalInput = _carController.InGameKeyMap.Throttle.ReadValue<float>();
+            ControllerINF.isBrake = _carController.InGameKeyMap.Brake.IsPressed();
+            ControllerINF.varticalInput = _carController.InGameKeyMap.Throttle.ReadValue<float>() - _carController.InGameKeyMap.Brake.ReadValue<float>();
             ControllerINF.horizontalInput = _carController.InGameKeyMap.Steer.ReadValue<float>();
-            ControllerINF.isBrake = _carController.InGameKeyMap.Brake.ReadValue<bool>();
-            ControllerINF.isSideBrake = _carController.InGameKeyMap.SideBrake.ReadValue<bool>();
-            ControllerINF.upGear = _carController.InGameKeyMap.UpGear.ReadValue<bool>();
-            ControllerINF.downGear = _carController.InGameKeyMap.DownGear.ReadValue<bool>();
-            ControllerINF.isClutch = _carController.InGameKeyMap.Clutch.ReadValue<bool>();
+            ControllerINF.isSideBrake = _carController.InGameKeyMap.SideBrake.IsPressed();
+            ControllerINF.upGear = _carController.InGameKeyMap.UpGear.WasPressedThisFrame();
+            ControllerINF.downGear = _carController.InGameKeyMap.DownGear.WasPressedThisFrame();
+            ControllerINF.isClutch = _carController.InGameKeyMap.Clutch.IsPressed();
         }
     }
     private void OnEnable()

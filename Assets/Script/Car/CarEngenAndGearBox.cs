@@ -26,25 +26,22 @@ public class CarEngenAndGearBox : MonoBehaviour
     public int nowGearNam = 2;
     [SerializeField] public int maxGear;
     public float nowGearMaxSpeed;
-    public bool isClutch = false;
     public bool isMT = true;
+    private CarController _carController;
 
-    private void Start()
+    private void Awake()
     {
         _isPlayer = CompareTag("PlayerCar");
         maxGear = gearPow.Length - 1;
         _rb = GetComponent<Rigidbody>();
         if (mission == Mission.MT) isMT = true;
         else isMT = false;
+        _carController = new CarController();
     }
     void Update()
     {
         verticalInput = ControllerINF.varticalInput;
         horizontalInput = ControllerINF.horizontalInput;
-        if (_isPlayer)
-        {
-            Clutch();
-        }
         NowMaxSpeed();
         ChengeGear();
         CalculateRPM();
@@ -54,14 +51,14 @@ public class CarEngenAndGearBox : MonoBehaviour
     {
         if (mission == Mission.MT)
         {
-            if (Input.GetKeyDown(KeyCode.Q) && nowGearNam > 0 && isClutch) nowGearNam--;
-            if (Input.GetKeyDown(KeyCode.E) && nowGearNam < maxGear && isClutch) nowGearNam++;
+            if (ControllerINF.downGear && nowGearNam > 0 && ControllerINF.isClutch) nowGearNam--;
+            if (ControllerINF.upGear && nowGearNam < maxGear && ControllerINF.isClutch) nowGearNam++;
             return;
         }
         if(mission == Mission.AT)
         {
-            if(Input.GetKeyDown(KeyCode.Q))isRevers = true;
-            if(Input.GetKeyDown(KeyCode.E))isRevers = false;
+            if(ControllerINF.downGear) isRevers = true;
+            if(ControllerINF.upGear) isRevers = false;
             float speedKmh = _rb.linearVelocity.magnitude * 3.6f;
             if(isRevers)
             {
@@ -87,7 +84,7 @@ public class CarEngenAndGearBox : MonoBehaviour
 
     void CalculateRPM()//実車のタイヤのサイズと移動している速度を使ってRPMを求める
     {
-        if (isClutch || nowGearNam == 1)
+        if (ControllerINF.isClutch || nowGearNam == 1)
         {
             float throttle = Mathf.Clamp01(verticalInput);
             float targetRPM = Mathf.Lerp(idelRPM, meterMAXRPM, throttle);
@@ -111,12 +108,6 @@ public class CarEngenAndGearBox : MonoBehaviour
         else isHightEngenRoal = false;
     }
 
-    void Clutch()
-    {
-        if (Input.GetKey(KeyCode.LeftShift)) isClutch = true;
-        else isClutch = false;
-    }
-
     public enum Mission
     {
         AT,
@@ -130,5 +121,12 @@ public class CarEngenAndGearBox : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         if (mission == Mission.MT)isMT = true;
         else isMT = false;
+        _carController.InGameKeyMap.UpGear.performed += ctx => ChengeGear();
+        _carController.InGameKeyMap.DownGear.performed += ctx => ChengeGear();
+    }
+    private void OnDisable()
+    {
+        _carController.InGameKeyMap.UpGear.performed -= ctx => ChengeGear();
+        _carController.InGameKeyMap.DownGear.performed -= ctx => ChengeGear();
     }
 }

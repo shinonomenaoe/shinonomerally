@@ -43,7 +43,7 @@ public class SideBrake : MonoBehaviour
 
     public void OnBrales()
     {
-        if (Input.GetMouseButton(0))
+        if (ControllerINF.isSideBrake)
         {
             foreach (WheelCollider wheel in _sideBrakewheels)
             {
