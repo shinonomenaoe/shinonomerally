@@ -8,7 +8,7 @@ public class PartsShop : MonoBehaviour
     [SerializeField] Dropdown _carDropDown;
     [SerializeField] Dropdown _carPartDropDown;
     [SerializeField] Dropdown _carpartsDropDown;
-    ScriptableObject[]  _carPart;
+    ScriptableObject[] _carPart;
     string[] _carsName;
     [SerializeField] string[] _carPartName = { "ターボ","カスタムECU","タイヤ","軽量化" };
     string[] _carPartsName;
@@ -39,7 +39,7 @@ public class PartsShop : MonoBehaviour
 
     private void TakePartsInfoDropDown()
     {
-   
+       
     }
 
 
