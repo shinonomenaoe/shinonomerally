@@ -23,6 +23,8 @@ public class FrictionCurveData
 [CreateAssetMenu(fileName = "TirePart", menuName = "CarSetting/Tuning/Parts/TirePart")]
 public class TirePartData : ScriptableObject
 {
+    private CarPartsName _partsName = CarPartsName.Tire;
+    public CarPartsName GetPartsName => _partsName;
     public string partName;
     public int price;
     public bool canUse;

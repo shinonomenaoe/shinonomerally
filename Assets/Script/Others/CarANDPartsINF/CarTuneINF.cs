@@ -15,3 +15,11 @@ public struct CarTune
     public TirePartData[] tirePartsDatas;
     public CustomWeightData[] customWeightDatas;
 }
+
+public enum CarPartsName
+{
+    Turbo,
+    ECU,
+    Tire,
+    Weight,
+}

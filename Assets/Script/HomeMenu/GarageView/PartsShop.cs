@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +8,13 @@ public class PartsShop : MonoBehaviour
     GameObject _playerCar;
     CarSpecAttachAndCostomINF _carSpecAttachAndCostomINF;
     [SerializeField] Dropdown _carDropDown;
+    private string[] _carName;
     [SerializeField] Dropdown _carPartDropDown;
-    [SerializeField] Dropdown _carpartsDropDown;
+    private string[] _carPartName = Enum.GetNames(typeof(CarPartsName));
+    [SerializeField] Dropdown _carPartsDropDown;
+    private string[] _carPartsName;
     ScriptableObject[] _carPart;
     string[] _carsName;
-    [SerializeField] string[] _carPartName = { "ターボ","カスタムECU","タイヤ","軽量化" };
-    string[] _carPartsName;
     private void Awake()
     {
         AddUIMesod();
@@ -34,12 +37,13 @@ public class PartsShop : MonoBehaviour
     private void ClearDropDown()
     {
         _carDropDown.ClearOptions();
-        _carpartsDropDown.ClearOptions();
+        _carPartsDropDown.ClearOptions();
     }
 
     private void TakePartsInfoDropDown()
     {
-       
+        _carPartDropDown.AddOptions(new List<string>(_carPartsName));
+        //_carPartsDropDown.AddOptions(_carSpecAttachAndCostomINF.carSpecJson.)
     }
 
 
