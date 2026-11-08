@@ -24,7 +24,7 @@ public class FrictionCurveData
 public class TirePartData : ScriptableObject
 {
     private CarPartsName _partsName = CarPartsName.Tire;
-    public CarPartsName GetPartsName => _partsName;
+    public CarPartsName getPartsName => _partsName;
     public string partName;
     public int price;
     public bool canUse;

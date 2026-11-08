@@ -4,7 +4,7 @@ using UnityEngine;
 public class TurboPartsData : ScriptableObject
 {
     private CarPartsName _partsName = CarPartsName.Turbo;
-    public CarPartsName GetPartsName => _partsName;
+    public CarPartsName getPartsName => _partsName;
     public string partName;
     public int price;
     public bool canUse;

@@ -4,7 +4,7 @@ using UnityEngine;
 public class CustomECUData : ScriptableObject
 {
     CarPartsName _partsName = CarPartsName.ECU;
-    public CarPartsName GetPartsName => _partsName;
+    public CarPartsName getPartsName => _partsName;
     public string partName;
     public int price;
     public bool canUse;

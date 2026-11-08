@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using static CarSpecAttachAndCostomINF;
@@ -19,6 +20,7 @@ public class CarSettingAndCostomJson
     public float wheelAngleSliderRate = 30f;
     public CarEngenAndGearBox.Mission mission = CarEngenAndGearBox.Mission.AT;
     public float stabilizerRatioSliderRate = 0.2f;
+    public CarTune canUse = new CarTune();
 }
 
 public class CarSpecAttachAndCostomINF : MonoBehaviour
@@ -76,6 +78,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         _carEngenAndGearBox.mission = carSpecJson.mission;
         _stabilizer.stabilizerRate = carSpecJson.stabilizerRatioSliderRate;
         _wheelsController.isLSD = carSpecJson.isLSD;
+        carTuneSpec = carSpecJson.canUse;
     }
     [Serializable]
     public struct CostomSettingNam
@@ -117,6 +120,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         carSpecJson.maxRPM = _carSpec.maxRPM;
         carSpecJson.fRR = _carSpec.fRR;
         carSpecJson.brakeTorque = _carSpec.brakeTorque;
+        carSpecJson.canUse = carTuneSpec;
     }
 
     public void ChengeAndSaveJson()
