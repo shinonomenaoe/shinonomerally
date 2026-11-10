@@ -53,141 +53,50 @@ public class PartsShop : MonoBehaviour
         //車の指定を後で作る
         //_carDropDown.AddOptions();
         _carPartDropDown.AddOptions(new List<string>(_carPartName));
+        _carPartsDropDown.AddOptions(PartsDropDownSet(_carPartsNamEnum));
         FirstSet();
-        _carPartsDropDown.AddOptions(TuningPartsSelector(_carPartsNamEnum));
         _carPartsDropDown.RefreshShownValue();
     }
 
     private void FirstSet()
     {
         CarPartDropDownFirstSet();
+        CarPartsDropDownFirstSet();
     }
 
     private void CarPartDropDownFirstSet()
     {
         _carPartDropDown.value = 0;
         _carPartsNamEnum = (CarPartsName)_carPartDropDown.value;
-        _explanatoryText.text = TuningPartsTextSelector(_carPartsNamEnum)[0];
-        _priceText.text = TuningPartsPriceSelector(_carPartsNamEnum)[0];
     }
 
-    //パーツの選択時のドロップダウンの表示
-    public List<string> TuningPartsSelector(CarPartsName targetType)
+    private void CarPartsDropDownFirstSet()
     {
-        FieldInfo[] fields = typeof(CarTune).GetFields(BindingFlags.Instance | BindingFlags.Public);
-        List<ScriptableObject> allPartsList = new List<ScriptableObject>();
-        foreach (FieldInfo field in fields)
-        {
-            if (field.FieldType.IsArray)
-            {
-                Array array = field.GetValue(_tune) as Array;
-                if (array == null) continue;
-                foreach (var item in array)
-                {
-                    if (item is ScriptableObject so)
-                    {
-                        allPartsList.Add(so);
-                    }
-                }
-            }
-        }
-         List<string> resultPartName = allPartsList.Where(part =>
-        {
-            if (part == null) return false;
-            PropertyInfo typePropety = part.GetType().GetProperty("getPartsName");
-            if (typePropety != null)
-            {
-                var val = typePropety.GetValue(part);
-                return val != null && (CarPartsName)val == targetType;
-            }
-            return false;
-        })
-        .Select(x =>
-        {
-            FieldInfo typePropety = x.GetType().GetField("partName");
-            return typePropety != null ? (string)typePropety.GetValue(x) : x.name;
-        })    
-        .ToList();
-        return resultPartName;
-    }
-    //パーツ選択時の説明文
-    public List<string> TuningPartsTextSelector(CarPartsName targetType)
-    {
-        FieldInfo[] fields = typeof(CarTune).GetFields(BindingFlags.Instance | BindingFlags.Public);
-        List<ScriptableObject> allPartsList = new List<ScriptableObject>();
-        foreach (FieldInfo field in fields)
-        {
-            if (field.FieldType.IsArray)
-            {
-                Array array = field.GetValue(_tune) as Array;
-                if (array == null) continue;
-                foreach (var item in array)
-                {
-                    if (item is ScriptableObject so)
-                    {
-                        allPartsList.Add(so);
-                    }
-                }
-            }
-        }
-        List<string> resultPartName = allPartsList.Where(part =>
-        {
-            if (part == null) return false;
-            PropertyInfo typePropety = part.GetType().GetProperty("getPartsName");
-            if (typePropety != null)
-            {
-                var val = typePropety.GetValue(part);
-                return val != null && (CarPartsName)val == targetType;
-            }
-            return false;
-        })
-       .Select(x =>
-       {
-           FieldInfo typePropety = x.GetType().GetField("explanatoryText");
-           return typePropety != null ? (string)typePropety.GetValue(x) : x.name;
-       })
-       .ToList();
-        return resultPartName;
+        _carPartsDropDown.value = 0;
+        _explanatoryText.text = PartsTextSet(_carPartsNamEnum)[0];
+        _priceText.text = PartsPriceSet(_carPartsNamEnum)[0];
+        _carPartsDropDown.RefreshShownValue();
     }
 
-    //パーツ選択時の値段表示
-    public List<string> TuningPartsPriceSelector(CarPartsName targetType)
+    private List<string> PartsDropDownSet(CarPartsName partsName)
     {
-        FieldInfo[] fields = typeof(CarTune).GetFields(BindingFlags.Instance | BindingFlags.Public);
-        List<ScriptableObject> allPartsList = new List<ScriptableObject>();
-        foreach (FieldInfo field in fields)
-        {
-            if (field.FieldType.IsArray)
-            {
-                Array array = field.GetValue(_tune) as Array;
-                if (array == null) continue;
-                foreach (var item in array)
-                {
-                    if (item is ScriptableObject so)
-                    {
-                        allPartsList.Add(so);
-                    }
-                }
-            }
-        }
-        List<string> resultPartName = allPartsList.Where(part =>
-        {
-            if (part == null) return false;
-            PropertyInfo typePropety = part.GetType().GetProperty("getPartsName");
-            if (typePropety != null)
-            {
-                var val = typePropety.GetValue(part);
-                return val != null && (CarPartsName)val == targetType;
-            }
-            return false;
-        })
-       .Select(x =>
-       {
-           FieldInfo typePropety = x.GetType().GetField("price"); 
-           return typePropety != null ? typePropety.GetValue(x)?.ToString() ?? "0" : "0";
-       })
-       .ToList();
-        return resultPartName;
+        var list = new List<string>();
+        list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.partName).ToList();
+        return list;
+    }
+
+    private List<string> PartsTextSet(CarPartsName partsName)
+    {
+        var list = new List<string>();
+        list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.explanatoryText).ToList();
+        return list;
+    }
+
+    private List<string> PartsPriceSet(CarPartsName partsName)
+    {
+        var list = new List<string>();
+        list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.price.ToString()).ToList();
+        return list;
     }
     //以下ドロップダウン変更時の処理
     private void ChengeCar()
@@ -199,19 +108,16 @@ public class PartsShop : MonoBehaviour
     {
         _carPartsNamEnum = (CarPartsName)index;
         _carPartsDropDown.ClearOptions();
-        var options = TuningPartsSelector(_carPartsNamEnum);
-        if(options.Count == 0) options.Add("None");
-        _carPartsDropDown.AddOptions(options);
-        _carPartsDropDown.SetValueWithoutNotify(0);
+        _carPartsDropDown.AddOptions(PartsDropDownSet(_carPartsNamEnum));
+        PartsDropDownSet(_carPartsNamEnum);
+        CarPartsDropDownFirstSet();
         _carPartsDropDown.RefreshShownValue();
-        _explanatoryText.text = TuningPartsTextSelector(_carPartsNamEnum)[index];
-        _priceText.text = TuningPartsPriceSelector(_carPartsNamEnum)[index];
     }
 
     private void ChengeParts(int index)
     {
-        _explanatoryText.text = TuningPartsTextSelector(_carPartsNamEnum)[index];
-        _priceText.text = TuningPartsPriceSelector(_carPartsNamEnum)[index];
+        _explanatoryText.text = PartsTextSet(_carPartsNamEnum)[index];
+        _priceText.text = PartsPriceSet(_carPartsNamEnum)[index];
     }
 
     public void BuyParts()
