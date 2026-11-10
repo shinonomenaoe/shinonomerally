@@ -1,13 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CostomWeight", menuName = "CarSetting/Tuning/Parts/CostomWeight")]
-public class CustomWeightData : ScriptableObject
+public class CustomWeightData : CarParts
 {
-    CarPartsName _partsName = CarPartsName.Weight;
-    public CarPartsName getPartsName => _partsName;
-    public string partName;
-    public int price;
-    public bool canUse;
-    public string explanatoryText;
+    public CarPartsName _partsName => carPartsName;
     public float cutWeight;
 }

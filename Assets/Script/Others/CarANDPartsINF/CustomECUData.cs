@@ -1,13 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CostomECU", menuName = "CarSetting/Tuning/Parts/CostomECU")]
-public class CustomECUData : ScriptableObject
+public class CustomECUData : CarParts
 {
-    CarPartsName _partsName = CarPartsName.ECU;
-    public CarPartsName getPartsName => _partsName;
-    public string partName;
-    public int price;
-    public bool canUse;
-    public string explanatoryText;
+    public CarPartsName _partsName => carPartsName;
     public float addTorquePowRate;
 }

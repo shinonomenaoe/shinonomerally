@@ -1,14 +1,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TurboPart", menuName = "CarSetting/Tuning/Parts/Turbo")]
-public class TurboPartsData : ScriptableObject
+public class TurboPartsData : CarParts
 {
-    private CarPartsName _partsName = CarPartsName.Turbo;
-    public CarPartsName getPartsName => _partsName;
-    public string partName;
-    public int price;
-    public bool canUse;
-    public string explanatoryText;
+    public CarPartsName carPartsName => base.carPartsName;
     public AnimationCurve customTorqueCurve;
     public float moreTorqueBonusRate;
 }

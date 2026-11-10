@@ -55,19 +55,20 @@ public class PartsShop : MonoBehaviour
         _carPartDropDown.AddOptions(new List<string>(_carPartName));
         FirstSet();
         _carPartsDropDown.AddOptions(TuningPartsSelector(_carPartsNamEnum));
+        _carPartsDropDown.RefreshShownValue();
     }
 
     private void FirstSet()
     {
         CarPartDropDownFirstSet();
-        _explanatoryText.text = TuningPartsTextSelector(_carPartsNamEnum)[0];
-        _priceText.text = TuningPartsPriceSelector(_carPartsNamEnum)[0];
     }
 
     private void CarPartDropDownFirstSet()
     {
         _carPartDropDown.value = 0;
         _carPartsNamEnum = (CarPartsName)_carPartDropDown.value;
+        _explanatoryText.text = TuningPartsTextSelector(_carPartsNamEnum)[0];
+        _priceText.text = TuningPartsPriceSelector(_carPartsNamEnum)[0];
     }
 
     //パーツの選択時のドロップダウンの表示

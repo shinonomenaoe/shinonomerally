@@ -21,14 +21,9 @@ public class FrictionCurveData
     }
 }
 [CreateAssetMenu(fileName = "TirePart", menuName = "CarSetting/Tuning/Parts/TirePart")]
-public class TirePartData : ScriptableObject
+public class TirePartData : CarParts
 {
-    private CarPartsName _partsName = CarPartsName.Tire;
-    public CarPartsName getPartsName => _partsName;
-    public string partName;
-    public int price;
-    public bool canUse;
-    public string explanatoryText;
+    public CarPartsName _partsName => carPartsName;
     public FrictionCurveData forwardFriction;
     public FrictionCurveData sidewayFriction;
 }
