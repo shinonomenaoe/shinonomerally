@@ -82,6 +82,7 @@ public class PartsShop : MonoBehaviour
     {
         var list = new List<string>();
         list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.partName).ToList();
+        if (list.Count == 0) list.Add("None");
         return list;
     }
 
@@ -89,6 +90,7 @@ public class PartsShop : MonoBehaviour
     {
         var list = new List<string>();
         list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.explanatoryText).ToList();
+        if (list.Count == 0) list.Add("None");
         return list;
     }
 
@@ -96,6 +98,7 @@ public class PartsShop : MonoBehaviour
     {
         var list = new List<string>();
         list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.price.ToString()).ToList();
+        list.Add("None");
         return list;
     }
     //以下ドロップダウン変更時の処理
