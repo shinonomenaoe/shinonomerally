@@ -20,7 +20,7 @@ public class PartsShop : MonoBehaviour
     [SerializeField] Dropdown _carPartsDropDown;
     private string[] _carPartsName;
     string[] _carsName;
-    CarPartsName _carPartsNamEnum = CarPartsName.Turbo;
+    CarPartsName _carPartsNameEnum = CarPartsName.Turbo;
     private void Awake()
     {
         AddUIMesod();
@@ -53,7 +53,7 @@ public class PartsShop : MonoBehaviour
         //車の指定を後で作る
         //_carDropDown.AddOptions();
         _carPartDropDown.AddOptions(new List<string>(_carPartName));
-        _carPartsDropDown.AddOptions(PartsDropDownSet(_carPartsNamEnum));
+        _carPartsDropDown.AddOptions(PartsDropDownSet(_carPartsNameEnum));
         FirstSet();
         _carPartsDropDown.RefreshShownValue();
     }
@@ -67,14 +67,14 @@ public class PartsShop : MonoBehaviour
     private void CarPartDropDownFirstSet()
     {
         _carPartDropDown.value = 0;
-        _carPartsNamEnum = (CarPartsName)_carPartDropDown.value;
+        _carPartsNameEnum = (CarPartsName)_carPartDropDown.value;
     }
 
     private void CarPartsDropDownFirstSet()
     {
         _carPartsDropDown.value = 0;
-        _explanatoryText.text = PartsTextSet(_carPartsNamEnum)[0];
-        _priceText.text = PartsPriceSet(_carPartsNamEnum)[0];
+        _explanatoryText.text = PartsTextSet(_carPartsNameEnum)[0];
+        _priceText.text = PartsPriceSet(_carPartsNameEnum)[0];
         _carPartsDropDown.RefreshShownValue();
     }
 
@@ -109,22 +109,22 @@ public class PartsShop : MonoBehaviour
 
     private void ChengePart(int index)
     {
-        _carPartsNamEnum = (CarPartsName)index;
+        _carPartsNameEnum = (CarPartsName)index;
         _carPartsDropDown.ClearOptions();
-        _carPartsDropDown.AddOptions(PartsDropDownSet(_carPartsNamEnum));
-        PartsDropDownSet(_carPartsNamEnum);
+        _carPartsDropDown.AddOptions(PartsDropDownSet(_carPartsNameEnum));
+        PartsDropDownSet(_carPartsNameEnum);
         CarPartsDropDownFirstSet();
         _carPartsDropDown.RefreshShownValue();
     }
 
     private void ChengeParts(int index)
     {
-        _explanatoryText.text = PartsTextSet(_carPartsNamEnum)[index];
-        _priceText.text = PartsPriceSet(_carPartsNamEnum)[index];
+        _explanatoryText.text = PartsTextSet(_carPartsNameEnum)[index];
+        _priceText.text = PartsPriceSet(_carPartsNameEnum)[index];
     }
 
     public void BuyParts()
     {
-
+        //var customParts = 
     }
 }
