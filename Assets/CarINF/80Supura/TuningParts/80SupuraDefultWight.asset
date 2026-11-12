@@ -1,18 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2438b61a1080fb74c8f8a3f50df3ebb9, type: 3}
-  m_Name: 80SupuraDefultWight
-  m_EditorClassIdentifier: 
-  partName: "\u8EFD\u91CF\u30EC\u30D9\u30EB\uFF10"
-  price: 0
-  canUse: 1
-  CutWeight: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:854a6ca3180c5b399f4cafa51dc2f1200965d62118fb2e97df2700ce5f80b803
+size 536

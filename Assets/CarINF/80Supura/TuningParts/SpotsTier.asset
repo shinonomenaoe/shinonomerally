@@ -1,30 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9462ed1c574ae04cbac05180b16664e, type: 3}
-  m_Name: SpotsTier
-  m_EditorClassIdentifier: 
-  partName: "\u30B9\u30DD\u30FC\u30C4"
-  price: 0
-  canUse: 1
-  explanatoryText: "\u30B9\u30DD\u30FC\u30C4\u8D70\u884C\u7528\u306B\u30B0\u30EA\u30C3\u30D7\u529B\u306E\u9AD8\u3081\u3089\u308C\u305F\u30BF\u30A4\u30E4"
-  forwardFriction:
-    extremumSlip: 1
-    extremumValue: 1.1
-    asymptoteSlip: 0.5
-    asymptoteValue: 0.8
-    stiffness: 3
-  sidewayFriction:
-    extremumSlip: 0.7
-    extremumValue: 1
-    asymptoteSlip: 0.5
-    asymptoteValue: 1
-    stiffness: 1.5
+version https://git-lfs.github.com/spec/v1
+oid sha256:0783e31b1d41b2b38b12e3d8a5b21ba5eb48b04bfda96804708b84b1ef0223ab
+size 885

@@ -7572,42 +7572,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!1 &593472552
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 593472553}
-  m_Layer: 5
-  m_Name: PartsShopView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &593472553
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593472552}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1465995809}
-  m_Father: {fileID: 1996722883}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &597798100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8120,7 +8084,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 634027837}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1665226519}
+        m_TargetAssemblyTypeName: HomeButtonScripts, Assembly-CSharp
+        m_MethodName: ChengeView
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 977367135}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1665226523}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: d463de39aa4337041beed434ee1a00c3, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &634027837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12252,6 +12240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 977367136}
+  - component: {fileID: 977367137}
   m_Layer: 5
   m_Name: partsShop
   m_TagString: Untagged
@@ -12286,6 +12275,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &977367137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977367135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2efde6bfa491be4f824f18826a4bc6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explanatoryText: {fileID: 2028982768}
+  _priceText: {fileID: 1650089012}
+  _carDropDown: {fileID: 123296750}
+  _carPartDropDown: {fileID: 1170350065}
+  _carPartsDropDown: {fileID: 493288262}
 --- !u!1 &987718026
 GameObject:
   m_ObjectHideFlags: 0
@@ -13549,7 +13555,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1036048959}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 977367137}
+        m_TargetAssemblyTypeName: PartsShop, Assembly-CSharp
+        m_MethodName: BuyParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1036048959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18940,81 +18958,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457564947}
   m_CullTransparentMesh: 1
---- !u!1 &1465995808
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1465995809}
-  - component: {fileID: 1465995811}
-  - component: {fileID: 1465995810}
-  m_Layer: 5
-  m_Name: BackGround
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1465995809
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465995808}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 593472553}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 600}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1465995810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465995808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1465995811
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465995808}
-  m_CullTransparentMesh: 1
 --- !u!1 &1470421042
 GameObject:
   m_ObjectHideFlags: 0
@@ -20244,7 +20187,7 @@ GameObject:
   - component: {fileID: 1650089012}
   - component: {fileID: 1650089011}
   m_Layer: 5
-  m_Name: Prace
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25033,12 +24976,11 @@ RectTransform:
   - {fileID: 1965878892}
   - {fileID: 809333206}
   - {fileID: 1024190753}
+  - {fileID: 977367136}
   - {fileID: 873533460}
   - {fileID: 732699588}
   - {fileID: 1713586964}
   - {fileID: 1867882660}
-  - {fileID: 593472553}
-  - {fileID: 977367136}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -30648,7 +30590,6 @@ MonoBehaviour:
   nowGearNam: 2
   maxGear: 0
   nowGearMaxSpeed: 0
-  isClutch: 0
   isMT: 1
 --- !u!20 &6613748438553433072
 Camera:
@@ -30964,6 +30905,11 @@ MonoBehaviour:
     wheelAngleSliderRate: 0
     mission: 0
     stabilizerRatioSliderRate: 0
+    canUse:
+      turboPartsDatas: []
+      customECUDatas: []
+      tirePartsDatas: []
+      customWeightDatas: []
 --- !u!114 &7759717359138912902
 MonoBehaviour:
   m_ObjectHideFlags: 0
