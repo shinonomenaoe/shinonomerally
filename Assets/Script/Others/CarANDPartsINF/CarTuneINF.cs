@@ -108,8 +108,7 @@ public class SaveDataTemp : ISerializationCallbackReceiver
     public struct kvp
     {
         public kvp(string t, CarParts[] a) => (type, array) = (t, a);
-
-        public readonly string type;
+        public string type;
         public CarParts[] array;
     }
 }
