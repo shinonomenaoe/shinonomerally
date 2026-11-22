@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CarTuneINF", menuName = "CarSetting/CarTuneINF")]
 public class CarTuneINF : ScriptableObject
 {
-    public CarTune carTuneSpec;
+    public SaveDataTemp carTuneSpec = new();
 }
 
 [Serializable]

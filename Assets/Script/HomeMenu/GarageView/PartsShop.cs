@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.VolumeComponent;
 
 public class PartsShop : MonoBehaviour
 {
     GameObject _playerCar;
     CarSpecAttachAndCostomINF _carSpecAttachAndCostomINF;
-    CarTune _tune;
+    SaveDataTemp _tune;
     [SerializeField] Text _explanatoryText;
     [SerializeField] Text _priceText;
     [SerializeField] Dropdown _carDropDown;
@@ -81,7 +80,7 @@ public class PartsShop : MonoBehaviour
     private List<string> PartsDropDownSet(CarPartsName partsName)
     {
         var list = new List<string>();
-        list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.partName).ToList();
+        list = _tune.GetAllCustomParts().Where(x => x.carPartsName == partsName && x != null).Select(x => x.partName).ToList();
         if (list.Count == 0) list.Add("None");
         return list;
     }
@@ -89,7 +88,7 @@ public class PartsShop : MonoBehaviour
     private List<string> PartsTextSet(CarPartsName partsName)
     {
         var list = new List<string>();
-        list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.explanatoryText).ToList();
+        list = _tune.GetAllCustomParts().Where(x => x.carPartsName == partsName && x != null).Select(x => x.explanatoryText).ToList();
         if (list.Count == 0) list.Add("None");
         return list;
     }
@@ -97,7 +96,7 @@ public class PartsShop : MonoBehaviour
     private List<string> PartsPriceSet(CarPartsName partsName)
     {
         var list = new List<string>();
-        list = _tune.customParts.Where(x => x.carPartsName == partsName && x != null).Select(x => x.price.ToString()).ToList();
+        list = _tune.GetAllCustomParts().Where(x => x.carPartsName == partsName && x != null).Select(x => x.price.ToString()).ToList();
         list.Add("None");
         return list;
     }
@@ -125,6 +124,20 @@ public class PartsShop : MonoBehaviour
 
     public void BuyParts()
     {
-        //var customParts = 
+        CarParts[] carAllParts = _tune.GetAllCustomParts()
+        .Where(x => x != null && x.carPartsName == _carPartsNameEnum).ToArray();
+
+        int index = _carPartsDropDown.value;
+        if(index >= 0 && index < carAllParts.Length)
+        {
+            CarParts targetPart = carAllParts[index];
+            //所持金システムをかませて設定する
+            if (targetPart != null && !targetPart.canUse)
+            {
+                targetPart.canUse = true;
+                _priceText.text = "購入済み";
+                _carSpecAttachAndCostomINF.SaveJson();
+            }
+        }
     }
 }

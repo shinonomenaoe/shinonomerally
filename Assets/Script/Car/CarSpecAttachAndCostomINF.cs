@@ -20,7 +20,7 @@ public class CarSettingAndCostomJson
     public float wheelAngleSliderRate = 30f;
     public CarEngenAndGearBox.Mission mission = CarEngenAndGearBox.Mission.AT;
     public float stabilizerRatioSliderRate = 0.2f;
-    public CarTune canUse = new CarTune();
+    public SaveDataTemp canUse = new();
 }
 
 public class CarSpecAttachAndCostomINF : MonoBehaviour
@@ -29,7 +29,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
     [SerializeField] private CarSpecINF _carSpecINF;
     [HideInInspector] public CarSpec _carSpec;
     [SerializeField] private CarTuneINF _carTuneINF;
-    [HideInInspector] public CarTune carTuneSpec;
+    [HideInInspector] public SaveDataTemp carTuneSpec;
     public CostomSettingNam customSettingNam;
     private Rigidbody _carRb;
     private CarEngenAndGearBox _carEngenAndGearBox;
@@ -51,9 +51,9 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
     private void Attach()
     {
         LoadJson();
-        _carRb.mass = _carSpec.mass - carTuneSpec.customWeightDatas[carSpecJson.customSettingNam.nowWeightNam].cutWeight;
-        _wheelsController.torqueCurve = carTuneSpec.turboPartsDatas[carSpecJson.customSettingNam.nowTurboNam].customTorqueCurve;
-        _wheelsController.moreTorque = (_carSpec.moreTorque * carTuneSpec.turboPartsDatas[carSpecJson.customSettingNam.nowTurboNam].moreTorqueBonusRate) * carTuneSpec.customECUDatas[carSpecJson.customSettingNam.nowCustomEcuNam].addTorquePowRate;
+        _carRb.mass = _carSpec.mass - carTuneSpec.GetParts<CustomWeightData>()[carSpecJson.customSettingNam.nowWeightNam].cutWeight;
+        _wheelsController.torqueCurve = carTuneSpec.GetParts<TurboPartsData>()[carSpecJson.customSettingNam.nowTurboNam].customTorqueCurve;
+        _wheelsController.moreTorque = (_carSpec.moreTorque * carTuneSpec.GetParts<TurboPartsData>()[carSpecJson.customSettingNam.nowTurboNam].moreTorqueBonusRate * carTuneSpec.GetParts<CustomECUData>()[carSpecJson.customSettingNam.nowCustomEcuNam].addTorquePowRate);
         _wheelsController.downForce = carSpecJson.downForce;
         _wheelsController.breakeTorque = carSpecJson.brakeTorque;
         _carEngenAndGearBox.idelRPM = carSpecJson.idleRPM;
@@ -70,8 +70,8 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
             spring.targetPosition = _carSpec.targetPosition;
             wheel.collider.suspensionSpring = spring;
             wheel.collider.suspensionDistance = _carSpec.suspensionDistance;
-            wheel.collider.forwardFriction = carTuneSpec.tirePartsDatas[carSpecJson.customSettingNam.nowTireNam].forwardFriction.ToWheelFrictionCurve();
-            wheel.collider.sidewaysFriction = carTuneSpec.tirePartsDatas[carSpecJson.customSettingNam.nowTireNam].sidewayFriction.ToWheelFrictionCurve();
+            wheel.collider.forwardFriction = carTuneSpec.GetParts<TirePartData>()[carSpecJson.customSettingNam.nowTireNam].forwardFriction.ToWheelFrictionCurve();
+            wheel.collider.sidewaysFriction = carTuneSpec.GetParts<TirePartData>()[carSpecJson.customSettingNam.nowTireNam].sidewayFriction.ToWheelFrictionCurve();
         }
         _wheelsController.lSDLockLate = carSpecJson.lSDSliderRate;
         _wheelsController.maxSteerAngle = carSpecJson.wheelAngleSliderRate;
@@ -91,7 +91,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
 
     public void LoadJson()
     {
-        if (_filePath == null) throw new NullReferenceException("ファイルの名前が指定されていません");
+        if (string.IsNullOrEmpty(_jsonName)) throw new NullReferenceException("ファイルの名前が指定されていません");
         if (File.Exists(_filePath))
         {
             string json = File.ReadAllText(_filePath);
@@ -120,7 +120,7 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         carSpecJson.maxRPM = _carSpec.maxRPM;
         carSpecJson.fRR = _carSpec.fRR;
         carSpecJson.brakeTorque = _carSpec.brakeTorque;
-        carSpecJson.canUse = carTuneSpec;
+        carSpecJson.canUse = _carTuneINF.carTuneSpec;
     }
 
     public void ChengeAndSaveJson()
