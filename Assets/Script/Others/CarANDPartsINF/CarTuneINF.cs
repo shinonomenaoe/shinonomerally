@@ -37,35 +37,6 @@ public class CarTuneINF : ScriptableObject
     }
 }
 
-//[Serializable]
-//public struct CarTune
-//{
-//    public void Set(CarParts[] parts)
-//    {
-//        SaveDataTemp a = new();
-//        Type t = typeof(TurboPartsData);
-
-//        CarParts[] p = a[t];
-
-//        TurboPartsData[] tb = turboPartsDatas;
-//        tb = a.GetParts<TurboPartsData>();
-//        CarParts[] all = a.GetAllCustomParts();
-//    }
-
-//    public TurboPartsData[] turboPartsDatas;
-//    public CustomECUData[] customECUDatas;
-//    public TirePartData[] tirePartsDatas;
-//    public CustomWeightData[] customWeightDatas;
-//    public CarParts[] customParts => (turboPartsDatas ?? Array.Empty<TurboPartsData>())
-//        .Cast<CarParts>()
-//        .Concat(customECUDatas ?? Array.Empty<CustomECUData>())
-//        .Concat(tirePartsDatas ?? Array.Empty<TirePartData>())
-//        .Concat(customWeightDatas ?? Array.Empty<CustomWeightData>())
-//        .ToArray();
-
-    
-//}
-
 [Serializable]
 public class SaveDataTemp : ISerializationCallbackReceiver
 {
@@ -148,3 +119,32 @@ public enum CarPartsName
     Tire,
     Weight,
 }
+
+//[Serializable]
+//public struct CarTune
+//{
+//    public void Set(CarParts[] parts)
+//    {
+//        SaveDataTemp a = new();
+//        Type t = typeof(TurboPartsData);
+
+//        CarParts[] p = a[t];
+
+//        TurboPartsData[] tb = turboPartsDatas;
+//        tb = a.GetParts<TurboPartsData>();
+//        CarParts[] all = a.GetAllCustomParts();
+//    }
+
+//    public TurboPartsData[] turboPartsDatas;
+//    public CustomECUData[] customECUDatas;
+//    public TirePartData[] tirePartsDatas;
+//    public CustomWeightData[] customWeightDatas;
+//    public CarParts[] customParts => (turboPartsDatas ?? Array.Empty<TurboPartsData>())
+//        .Cast<CarParts>()
+//        .Concat(customECUDatas ?? Array.Empty<CustomECUData>())
+//        .Concat(tirePartsDatas ?? Array.Empty<TirePartData>())
+//        .Concat(customWeightDatas ?? Array.Empty<CustomWeightData>())
+//        .ToArray();
+
+
+//}

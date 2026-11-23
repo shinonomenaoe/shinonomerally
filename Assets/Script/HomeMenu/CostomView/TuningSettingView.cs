@@ -123,7 +123,7 @@ public class TuningSetUP : MonoBehaviour
     public void AttachTurbo(int index)
     {
         _wheelsController.torqueCurve = _carSpecAttach.carTuneSpec.GetParts<TurboPartsData>()[index].customTorqueCurve;
-        _wheelsController.moreTorque = _carSpecAttach._carSpec.moreTorque * _carSpecAttach.carTuneSpec.GetParts<TurboPartsData>()[index].moreTorqueBonusRate;
+        _wheelsController.moreTorque = _carSpecAttach._carSpec.moreTorque * _carSpecAttach.carTuneSpec.GetParts<TurboPartsData>()[index].moreTorqueBonusRate * _carSpecAttach.carTuneSpec.GetParts<CustomECUData>()[_carSpecAttach.carSpecJson.customSettingNam.nowCustomEcuNam].addTorquePowRate;
     }
     private void ChengeECU(int index)
     {
@@ -144,7 +144,7 @@ public class TuningSetUP : MonoBehaviour
     }
     public void AttachECU(int index)
     {
-        _wheelsController.moreTorque = _wheelsController.moreTorque * _carSpecAttach.carTuneSpec.GetParts<CustomECUData>()[index].addTorquePowRate;
+        _wheelsController.moreTorque = _carSpecAttach._carSpec.moreTorque * _carSpecAttach.carTuneSpec.GetParts <TurboPartsData>()[_carSpecAttach.carSpecJson.customSettingNam.nowTurboNam].moreTorqueBonusRate * _carSpecAttach.carTuneSpec.GetParts<CustomECUData>()[index].addTorquePowRate;
     }
     private void ChengeTire(int index)
     {
