@@ -45,6 +45,10 @@ public class CarSpecAttachAndCostomINF : MonoBehaviour
         _stabilizer = GetComponent<Stabilizer>();
         _carSpec = _carSpecINF.carspec;
         carTuneSpec = _carTuneINF.carTuneSpec;
+    }
+
+    private void OnEnable()
+    {
         Attach();
     }
 

@@ -1,42 +1,70 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CarTuneINF", menuName = "CarSetting/CarTuneINF")]
 public class CarTuneINF : ScriptableObject
 {
-    public SaveDataTemp carTuneSpec = new();
-}
-
-[Serializable]
-public struct CarTune
-{
-    public void Set(CarParts[] parts)
-    {
-        SaveDataTemp a = new();
-        Type t = typeof(TurboPartsData);
-
-        CarParts[] p = a[t];
-
-        TurboPartsData[] tb = turboPartsDatas;
-        tb = a.GetParts<TurboPartsData>();
-        CarParts[] all = a.GetAllCustomParts();
-    }
-
+    [HideInInspector] public SaveDataTemp carTuneSpec = new();
     public TurboPartsData[] turboPartsDatas;
     public CustomECUData[] customECUDatas;
-    public TirePartData[] tirePartsDatas;
+    public TirePartData[] tirePartDatas;
     public CustomWeightData[] customWeightDatas;
-    public CarParts[] customParts => (turboPartsDatas ?? Array.Empty<TurboPartsData>())
-        .Cast<CarParts>()
-        .Concat(customECUDatas ?? Array.Empty<CustomECUData>())
-        .Concat(tirePartsDatas ?? Array.Empty<TirePartData>())
-        .Concat(customWeightDatas ?? Array.Empty<CustomWeightData>())
-        .ToArray();
+
+    private void Awake()
+    {
+        SetSaveDataTemp();
+    }
+    private void OnEnable()
+    {
+        SetSaveDataTemp();
+    }
+
+    private void OnDisable()
+    {
+        SetSaveDataTemp();
+    }
+
+    private void SetSaveDataTemp()
+    {
+        carTuneSpec = new SaveDataTemp();
+        carTuneSpec.Add(turboPartsDatas);
+        carTuneSpec.Add(customECUDatas);
+        carTuneSpec.Add(tirePartDatas);
+        carTuneSpec.Add(customWeightDatas);
+    }
+}
+
+//[Serializable]
+//public struct CarTune
+//{
+//    public void Set(CarParts[] parts)
+//    {
+//        SaveDataTemp a = new();
+//        Type t = typeof(TurboPartsData);
+
+//        CarParts[] p = a[t];
+
+//        TurboPartsData[] tb = turboPartsDatas;
+//        tb = a.GetParts<TurboPartsData>();
+//        CarParts[] all = a.GetAllCustomParts();
+//    }
+
+//    public TurboPartsData[] turboPartsDatas;
+//    public CustomECUData[] customECUDatas;
+//    public TirePartData[] tirePartsDatas;
+//    public CustomWeightData[] customWeightDatas;
+//    public CarParts[] customParts => (turboPartsDatas ?? Array.Empty<TurboPartsData>())
+//        .Cast<CarParts>()
+//        .Concat(customECUDatas ?? Array.Empty<CustomECUData>())
+//        .Concat(tirePartsDatas ?? Array.Empty<TirePartData>())
+//        .Concat(customWeightDatas ?? Array.Empty<CustomWeightData>())
+//        .ToArray();
 
     
-}
+//}
 
 [Serializable]
 public class SaveDataTemp : ISerializationCallbackReceiver
@@ -62,7 +90,7 @@ public class SaveDataTemp : ISerializationCallbackReceiver
     {
         if (_inst == null || _inst.Count == 0) { return Array.Empty<CarParts>(); }
 
-        IEnumerable<CarParts> p = Enumerable.Empty<CarParts>();
+        IEnumerable<CarParts> p = Array.Empty<CarParts>();
         foreach (var a in _inst.Values)
         {
             if (a.array != null)
@@ -75,7 +103,7 @@ public class SaveDataTemp : ISerializationCallbackReceiver
 
     public T[] GetParts<T>() where T : CarParts
     {
-        if (_inst != null && _inst.TryGetValue(typeof(T), out var val) && val.array is T[] typedArray)
+        if (_inst != null && _inst.TryGetValue(typeof(T), out var val) && val.array != null)
         {
             return val.array.OfType<T>().ToArray();
         }
