@@ -6073,6 +6073,39 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f089a6a0583ac4042b4294f92828cf60, type: 3}
+--- !u!1 &481008497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 481008498}
+  m_Layer: 0
+  m_Name: CarManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &481008498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481008497}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1424.4772, y: -43.441643, z: 546.3359}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7759717359138912899}
+  - {fileID: 4661374205008208374}
+  m_Father: {fileID: 1047348239861869012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484011171
 GameObject:
   m_ObjectHideFlags: 0
@@ -11008,6 +11041,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e645b8e7d3e3b429bd72c9abae6714, type: 3}
+--- !u!1 &854325045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854325046}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &854325046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854325045}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1424.4772, y: -43.441643, z: 546.3359}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1874870117}
+  m_Father: {fileID: 1047348239861869012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &857582732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 413218, guid: 826b6a0b570e8460990010fa615b5a2a, type: 3}
@@ -19546,6 +19611,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554096307}
   m_CullTransparentMesh: 1
+--- !u!1 &1568162085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1568162086}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1568162086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568162085}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1047348239861869012}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1577467946
 GameObject:
   m_ObjectHideFlags: 0
@@ -23219,7 +23315,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 571591618}
-  m_Father: {fileID: 1047348239861869012}
+  m_Father: {fileID: 854325046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -28769,9 +28865,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7759717359138912899}
-  - {fileID: 4661374205008208374}
-  - {fileID: 1874870117}
+  - {fileID: 1568162086}
+  - {fileID: 481008498}
+  - {fileID: 854325046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1097846911700809194
@@ -30113,7 +30209,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2828930077946166046}
-  m_Father: {fileID: 1047348239861869012}
+  m_Father: {fileID: 481008498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -31069,14 +31165,14 @@ Transform:
   m_GameObject: {fileID: 7314222191202987859}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9449203, z: -0, w: 0.32730055}
-  m_LocalPosition: {x: 1499.62, y: -83.992, z: 593.15}
+  m_LocalPosition: {x: 75.14282, y: -40.550354, z: 46.814148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3703199682674823176}
   - {fileID: 8495260878117729084}
   - {fileID: 5341087669284899899}
-  m_Father: {fileID: 1047348239861869012}
+  m_Father: {fileID: 481008498}
   m_LocalEulerAnglesHint: {x: 0, y: -141.79, z: 0}
 --- !u!114 &7759717359138912900
 MonoBehaviour:
@@ -31102,7 +31198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9f891b677d308499eb9abeff18d851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jsonName: SupraTestJson
+  _jsonName: SupraTest2Json
   _carSpecINF: {fileID: 11400000, guid: 16188758afedb74478d66c6935b519c0, type: 2}
   _carSpec:
     carName: 
@@ -31127,10 +31223,7 @@ MonoBehaviour:
     downForce: 0
   _carTuneINF: {fileID: 11400000, guid: 8b016263a8c127841ae7252f5bddd424, type: 2}
   carTuneSpec:
-    turboPartsDatas: []
-    customECUDatas: []
-    tirePartsDatas: []
-    customWeightDatas: []
+    _arrays: []
   customSettingNam:
     nowTurboNam: 0
     nowCustomEcuNam: 0
@@ -31155,10 +31248,7 @@ MonoBehaviour:
     mission: 0
     stabilizerRatioSliderRate: 0
     canUse:
-      turboPartsDatas: []
-      customECUDatas: []
-      tirePartsDatas: []
-      customWeightDatas: []
+      _arrays: []
 --- !u!114 &7759717359138912902
 MonoBehaviour:
   m_ObjectHideFlags: 0
